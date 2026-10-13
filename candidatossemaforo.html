@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voto Informado Sinaloa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Cliente oficial de Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 antialiased font-sans flex flex-col pb-24">
+
+  <!-- Encabezado Principal -->
+  <header class="bg-slate-900 text-white sticky top-0 z-30 border-b border-slate-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a href="#inicio" class="text-xl font-black tracking-tight text-white flex items-center gap-2 hover:text-indigo-300 transition">
+          Voto Informado Sinaloa
+        </a>
+        <a href="#inicio" class="text-xs text-slate-400 hover:text-white transition hidden md:inline-block border-l border-slate-700 pl-4">
+          Inicio
+        </a>
+        <a href="#catalogo" class="text-xs text-slate-400 hover:text-white transition hidden md:inline-block">
+          Explorar Candidaturas
+        </a>
+      </div>
+
+      <!-- Selector de Cargos -->
+      <div class="inline-flex p-1 bg-slate-800/80 rounded-xl border border-slate-700/60 backdrop-blur-sm gap-1 self-start sm:self-auto">
+        <button 
+          id="tab-alcaldias" 
+          onclick="navegarACargo('alcaldias')" 
+          class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm">
+          Alcaldías
+        </button>
+        <button 
+          id="tab-dip_mr" 
+          onclick="navegarACargo('dip_mr')" 
+          class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white">
+          Diputaciones MR
+        </button>
+        <button 
+          id="tab-dip_rp" 
+          onclick="navegarACargo('dip_rp')" 
+          class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white">
+          Diputaciones RP (Plurinominales)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO DE BIENVENIDA -->
+  <section id="inicio" class="bg-slate-900 text-white border-b border-slate-800 py-16 lg:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-6">
+        Elecciones Sinaloa • Plataforma Cívica Independiente
+      </span>
+
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white max-w-4xl mx-auto">
+        Decide con datos, <br class="hidden sm:inline" /><span class="text-indigo-400">no con promesas.</span>
+      </h2>
+
+      <p class="mt-5 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Centralizamos los perfiles oficiales registrados ante el IEES, sus propuestas clave, formación académica y antecedentes de militancia en un solo lugar. Compara opciones lado a lado y emite tu opinión ciudadana libremente.
+      </p>
+
+      <!-- Botones de Acción Rápida -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <button 
+          onclick="navegarACargo('alcaldias')" 
+          class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg transition transform hover:-translate-y-0.5">
+          Explorar Alcaldías
+        </button>
+        <button 
+          onclick="navegarACargo('dip_mr')" 
+          class="px-6 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition">
+          Ver Diputaciones
+        </button>
+      </div>
+
+      <!-- Métricas del Proyecto -->
+      <div class="mt-12 pt-10 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <span id="statCandidaturas" class="text-2xl sm:text-3xl font-black text-indigo-400 block">...</span>
+          <span class="text-xs text-slate-400">Candidaturas Titulares</span>
+        </div>
+        <div>
+          <span id="statMunicipios" class="text-2xl sm:text-3xl font-black text-white block">...</span>
+          <span class="text-xs text-slate-400">Municipios Evaluados</span>
+        </div>
+        <div>
+          <span id="statDistritos" class="text-2xl sm:text-3xl font-black text-white block">...</span>
+          <span class="text-xs text-slate-400">Distritos Electorales</span>
+        </div>
+        <div>
+          <span class="text-2xl sm:text-3xl font-black text-emerald-400 block">100%</span>
+          <span class="text-xs text-slate-400">Fuente Oficial IEES</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARJETAS DE PILARES CÍVICOS -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl text-xl font-bold shrink-0">🏛️</div>
+        <div>
+          <h3 class="text-xs font-black text-slate-900 uppercase tracking-wide">Datos Oficiales</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Información curricular y propuestas extraídas directamente del sistema Conóceles del IEES.</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+        <div class="p-3 bg-amber-50 text-amber-600 rounded-xl text-xl font-bold shrink-0">🧭</div>
+        <div>
+          <h3 class="text-xs font-black text-slate-900 uppercase tracking-wide">Militancia Histórica</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Rastreo de cargos o filiaciones previas reconocidas en el currículum del propio candidato.</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+        <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl text-xl font-bold shrink-0">⚖️</div>
+        <div>
+          <h3 class="text-xs font-black text-slate-900 uppercase tracking-wide">Comparador Directo</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Selecciona hasta 3 opciones y analiza propuestas, trayectoria y opiniones ciudadanas lado a lado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO PRINCIPAL (Dos Columnas) -->
+  <div id="catalogo" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 flex flex-col md:flex-row gap-6 items-start scroll-mt-20">
+    
+    <!-- Barra Lateral -->
+    <aside class="w-full md:w-72 bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col shrink-0 md:sticky md:top-20 max-h-[calc(100vh-6rem)]">
+      <div class="mb-3">
+        <input 
+          type="text" 
+          id="inputBusqueda" 
+          placeholder="Buscar localidad..." 
+          class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+        />
+      </div>
+
+      <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-1" id="subtituloBarra">
+        Municipios
+      </div>
+
+      <div id="listaLateral" class="flex-1 overflow-y-auto space-y-1 pr-1 max-h-96 md:max-h-none"></div>
+    </aside>
+
+    <!-- Área de Candidatos -->
+    <main class="flex-1 w-full">
+      <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
+        <div>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">ALCALDÍAS</span>
+          <h2 id="tituloVista" class="text-2xl font-black text-slate-900 leading-tight">Cargando...</h2>
+        </div>
+        <span id="totalCandidatos" class="text-xs font-bold px-3 py-1 bg-slate-200 text-slate-700 rounded-full">
+          0 candidaturas
+        </span>
+      </div>
+
+      <div id="gridCandidatos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
+    </main>
+
+  </div>
+
+  <!-- BARRA FLOTANTE DE COMPARACIÓN -->
+  <div id="barraComparador" class="fixed bottom-6 inset-x-0 mx-auto max-w-lg px-4 z-40 hidden">
+    <div class="bg-slate-950 text-white rounded-2xl p-4 shadow-2xl border border-slate-700 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
+        <span class="text-xs font-bold" id="textoContadorComparar">2 seleccionados</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button 
+          onclick="limpiarSeleccionComparador()" 
+          class="text-xs text-slate-400 hover:text-white px-2 py-1 transition">
+          Cancelar
+        </button>
+        <button 
+          onclick="abrirModalComparador()" 
+          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow transition">
+          Comparar ahora ⚖️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL INDIVIDUAL -->
+  <div id="modalDetalle" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl border border-slate-100 overflow-hidden my-8 relative flex flex-col max-h-[90vh]">
+      <button 
+        onclick="cerrarModal('modalDetalle')" 
+        class="absolute top-4 right-4 z-20 bg-slate-900/60 hover:bg-slate-900 text-white rounded-full p-2 backdrop-blur-sm transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div id="modalContenido" class="overflow-y-auto flex-1"></div>
+    </div>
+  </div>
+
+  <!-- MODAL COMPARADOR LADO A LADO -->
+  <div id="modalComparador" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-6xl rounded-3xl shadow-2xl border border-slate-100 overflow-hidden my-auto relative flex flex-col max-h-[95vh]">
+      <div class="p-4 sm:p-6 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+        <div>
+          <h3 class="text-lg font-black tracking-tight">Comparativa de Candidaturas</h3>
+          <p class="text-xs text-slate-400">Contraste directo de trayectorias, propuestas y militancia</p>
+        </div>
+        <button 
+          onclick="cerrarModal('modalComparador')" 
+          class="bg-slate-800 hover:bg-slate-700 text-white rounded-full p-2 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <div id="comparadorContenido" class="overflow-y-auto flex-1 p-4 sm:p-6 bg-slate-50"></div>
+    </div>
+  </div>
+
+  <!-- MODAL SUGERENCIA CIUDADANA -->
+  <div id="modalSugerencia" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-100 p-6 relative">
+      <button onclick="cerrarModal('modalSugerencia')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 p-1">✕</button>
+      <h3 class="text-base font-black text-slate-900 mb-1">Sugerir Partido o Corrección</h3>
+      <p class="text-xs text-slate-500 mb-4" id="subtituloSugerencia">Para el candidato</p>
+
+      <form onsubmit="enviarSugerencia(event)" class="space-y-3 text-xs">
+        <input type="hidden" id="sugCandidatoId" />
+        <input type="hidden" id="sugCandidatoNombre" />
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Partido o Cargo Previo:</label>
+          <input type="text" id="sugPartido" placeholder="Ej. Regidor por el PRI..." required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Periodo aproximado:</label>
+          <input type="text" id="sugPeriodo" placeholder="Ej. 2018 - 2021" required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Fuente comprobable (URL):</label>
+          <input type="url" id="sugFuente" placeholder="https://..." required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="cerrarModal('modalSugerencia')" class="px-3 py-2 text-slate-500 font-semibold">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow transition">Enviar Sugerencia</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // CONFIGURACIÓN DE SUPABASE
+    // ==========================================
+    const SUPABASE_URL = "https://krsodmgsvyfssjtkrdzo.supabase.co"; 
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtyc29kbWdzdnlmc3NqdGtyZHpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4MzcxOTcsImV4cCI6MjEwNzQxMzE5N30.msrw7B1hbXqkqYtrX1U0kK6Wr_SpUziuTUdsqTs1X_0"; 
+
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let todosLosCandidatos = [];
+    let historialPartidos = {};
+    let votosCache = {};
+    let modoActual = 'alcaldias';
+    let filtroActivo = '';
+    let opcionesActuales = [];
+    let seleccionadosParaComparar = [];
+
+    function sanearUrl(url) {
+      if (!url) return '';
+      return url.replace(/\\\//g, '/').trim();
+    }
+
+    function normalizar(texto) {
+      return (texto || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+        .toUpperCase();
+    }
+
+    function clasificarCandidato(c) {
+      const cargo = normalizar(c.cargo);
+      const candidatura = normalizar(c.candidatura);
+
+      if (cargo.includes('PRESIDENCIA') || candidatura.includes('AYUNTAMIENTO')) {
+        return 'alcaldias';
+      }
+      if (cargo.includes('PROPORCIONAL') || cargo.includes('RP') || candidatura.includes('RP')) {
+        return 'dip_rp';
+      }
+      if (cargo.includes('DIPUTACION') || candidatura.includes('DIPUTACION') || cargo.includes('MAYORIA') || cargo.includes('MR')) {
+        return 'dip_mr';
+      }
+      return null;
+    }
+
+    // OPCIÓN A: Identificar si es propietario para excluir suplentes duplicados
+    function esPropietario(c) {
+      const calidad = normalizar(c.calidad || c.tipo_candidatura || c.tipo_formula || '');
+      if (calidad.includes('SUPLENTE')) return false;
+
+      const cargo = normalizar(c.cargo || '');
+      if (cargo.includes('SUPLENTE')) return false;
+
+      return true;
+    }
+
+    // ==========================================
+    // SEMÁFORO DE TRANSPARENCIA (100 PUNTOS)
+    // 25 pts Foto | 40 pts Propuestas (20+20) | 20 pts Formación/Trayectoria | 15 pts Contacto
+    // ==========================================
+    function calcularSemaforoTransparencia(c) {
+      let puntos = 0;
+
+      // 1. Fotografía válida (+25)
+      const foto = sanearUrl(c.fotografia);
+      if (foto && !foto.includes('placehold.co') && !foto.includes('default') && foto.length > 10) {
+        puntos += 25;
+      }
+
+      // 2. Propuestas de campaña (+40 total: 20 pts c/u si tienen texto real)
+      const prop1 = (c.propuesta_1 || '').trim();
+      const prop2 = (c.propuesta_2 || '').trim();
+      if (prop1.length >= 15) puntos += 20;
+      if (prop2.length >= 15) puntos += 20;
+
+      // 3. Formación académica y trayectoria (+20 total: 10 pts c/u)
+      const formacion = (c.formacion || '').trim();
+      const trayectoria = (c.trayectoria || c.historia_profesional || '').trim();
+      if (formacion.length >= 10) puntos += 10;
+      if (trayectoria.length >= 10) puntos += 10;
+
+      // 4. Canales de contacto ciudadano (+15 si dio al menos uno)
+      const contacto = (c.correo_publico || c.telefono_publico || c.pagina_web || '').trim();
+      if (contacto.length >= 5) puntos += 15;
+
+      // Clasificación en Semáforo
+      if (puntos >= 85) {
+        return {
+          puntos,
+          nivel: 'Completo',
+          colorTexto: 'text-emerald-700',
+          colorBg: 'bg-emerald-50',
+          colorBorde: 'border-emerald-200',
+          icono: '🟢'
+        };
+      } else if (puntos >= 50) {
+        return {
+          puntos,
+          nivel: 'Parcial',
+          colorTexto: 'text-amber-700',
+          colorBg: 'bg-amber-50',
+          colorBorde: 'border-amber-200',
+          icono: '🟡'
+        };
+      } else {
+        return {
+          puntos,
+          nivel: 'Incompleto',
+          colorTexto: 'text-rose-700',
+          colorBg: 'bg-rose-50',
+          colorBorde: 'border-rose-200',
+          icono: '🔴'
+        };
+      }
+    }
+
+    async function iniciar() {
+      try {
+        const [resCandidatos, resHistorial] = await Promise.all([
+          fetch('./candidatos.json'),
+          fetch('./historial_partidos.json').catch(() => null)
+        ]);
+
+        todosLosCandidatos = await resCandidatos.json();
+        if (resHistorial && resHistorial.ok) {
+          historialPartidos = await resHistorial.json();
+        }
+
+        calcularMetricasHero();
+        await cargarVotosDesdeNube();
+        actualizarBarraLateral();
+      } catch (err) {
+        console.error('Error cargando datos iniciales:', err);
+      }
+    }
+
+    function calcularMetricasHero() {
+      const propietarios = todosLosCandidatos.filter(esPropietario);
+      const municipios = new Set(
+        propietarios
+          .filter(c => clasificarCandidato(c) === 'alcaldias')
+          .map(c => (c.localidad || '').trim())
+          .filter(Boolean)
+      );
+      const distritos = new Set(
+        propietarios
+          .filter(c => clasificarCandidato(c) === 'dip_mr')
+          .map(c => (c.localidad || '').trim())
+          .filter(Boolean)
+      );
+
+      document.getElementById('statCandidaturas').textContent = propietarios.length || '300+';
+      document.getElementById('statMunicipios').textContent = municipios.size || '20';
+      document.getElementById('statDistritos').textContent = distritos.size || '24';
+    }
+
+    async function cargarVotosDesdeNube() {
+      const respaldoLocal = localStorage.getItem('votos_candidatos_local');
+      if (respaldoLocal) {
+        try { votosCache = JSON.parse(respaldoLocal); } catch (e) {}
+      }
+
+      try {
+        const { data, error } = await supabaseClient
+          .from('candidato_votos')
+          .select('candidato_id, votos_positivos, votos_negativos');
+
+        if (!error && data) {
+          data.forEach(item => {
+            votosCache[item.candidato_id] = {
+              positivos: Number(item.votos_positivos) || 0,
+              negativos: Number(item.votos_negativos) || 0
+            };
+          });
+          localStorage.setItem('votos_candidatos_local', JSON.stringify(votosCache));
+          renderizarTarjetas();
+        }
+      } catch (e) {
+        console.warn('Fallo de lectura en Supabase:', e);
+      }
+    }
+
+    async function emitirVoto(candidatoId, tipo) {
+      const claveVoto = `ya_voto_${candidatoId}`;
+      if (localStorage.getItem(claveVoto)) {
+        alert('Ya has emitido tu valoración para esta candidatura en este navegador.');
+        return;
+      }
+
+      localStorage.setItem(claveVoto, tipo);
+
+      if (!votosCache[candidatoId]) {
+        votosCache[candidatoId] = { positivos: 0, negativos: 0 };
+      }
+
+      if (tipo === 'positivo') votosCache[candidatoId].positivos++;
+      if (tipo === 'negativo') votosCache[candidatoId].negativos++;
+
+      localStorage.setItem('votos_candidatos_local', JSON.stringify(votosCache));
+      renderizarTarjetas();
+
+      const modalDetalle = document.getElementById('modalDetalle');
+      if (!modalDetalle.classList.contains('hidden')) {
+        abrirModal(candidatoId);
+      }
+
+      try {
+        await supabaseClient.from('candidato_votos').upsert({
+          candidato_id: candidatoId,
+          votos_positivos: votosCache[candidatoId].positivos,
+          votos_negativos: votosCache[candidatoId].negativos,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'candidato_id' });
+      } catch (e) {
+        console.error('Error al guardar en Supabase:', e);
+      }
+    }
+
+    function navegarACargo(modo) {
+      setModoEleccion(modo);
+      const catalogo = document.getElementById('catalogo');
+      if (catalogo) {
+        catalogo.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function setModoEleccion(nuevoModo) {
+      modoActual = nuevoModo;
+      filtroActivo = '';
+      limpiarSeleccionComparador();
+      document.getElementById('inputBusqueda').value = '';
+
+      ['alcaldias', 'dip_mr', 'dip_rp'].forEach(m => {
+        const btn = document.getElementById(`tab-${m}`);
+        btn.className = (m === nuevoModo)
+          ? 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm'
+          : 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white';
+      });
+
+      const subtitulo = document.getElementById('subtituloBarra');
+      const etiqueta = document.getElementById('etiquetaCargo');
+
+      if (modoActual === 'alcaldias') {
+        subtitulo.textContent = 'Municipios';
+        etiqueta.textContent = 'ALCALDÍAS';
+      } else if (modoActual === 'dip_mr') {
+        subtitulo.textContent = 'Distritos Electorales';
+        etiqueta.textContent = 'DIPUTACIONES MAYORÍA RELATIVA';
+      } else {
+        subtitulo.textContent = 'Partidos / Listas';
+        etiqueta.textContent = 'DIPUTACIONES PLURINOMINALES';
+      }
+
+      actualizarBarraLateral();
+    }
+
+    function actualizarBarraLateral() {
+      const candidatosDelModo = todosLosCandidatos.filter(c => 
+        clasificarCandidato(c) === modoActual && esPropietario(c)
+      );
+
+      if (modoActual === 'alcaldias') {
+        opcionesActuales = [...new Set(candidatosDelModo.map(c => (c.localidad || '').trim()).filter(Boolean))].sort();
+      } else if (modoActual === 'dip_mr') {
+        opcionesActuales = [...new Set(candidatosDelModo.map(c => (c.localidad || '').trim()).filter(Boolean))]
+          .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+      } else if (modoActual === 'dip_rp') {
+        opcionesActuales = [...new Set(candidatosDelModo.map(c => (c.partido_siglas || c.partido || '').trim()).filter(Boolean))].sort();
+      }
+
+      if (!filtroActivo && opcionesActuales.length > 0) {
+        filtroActivo = opcionesActuales[0];
+      }
+
+      renderizarListaBotones(opcionesActuales);
+      renderizarTarjetas();
+    }
+
+    function renderizarListaBotones(items) {
+      const contenedor = document.getElementById('listaLateral');
+      contenedor.innerHTML = '';
+
+      if (items.length === 0) {
+        contenedor.innerHTML = '<div class="text-xs text-slate-400 p-2">Sin resultados</div>';
+        return;
+      }
+
+      items.forEach(item => {
+        const esActivo = normalizar(item) === normalizar(filtroActivo);
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition flex items-center justify-between ${
+          esActivo
+            ? 'bg-indigo-600 text-white shadow-sm'
+            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+        }`;
+
+        btn.innerHTML = `<span class="truncate">${item}</span>`;
+        btn.onclick = () => {
+          filtroActivo = item;
+          limpiarSeleccionComparador();
+          renderizarListaBotones(items);
+          renderizarTarjetas();
+        };
+
+        contenedor.appendChild(btn);
+      });
+    }
+
+    document.getElementById('inputBusqueda').addEventListener('input', (e) => {
+      const termino = normalizar(e.target.value);
+      const filtradas = opcionesActuales.filter(opt => normalizar(opt).includes(termino));
+      renderizarListaBotones(filtradas);
+    });
+
+    function toggleComparar(id) {
+      const idx = seleccionadosParaComparar.indexOf(id);
+      if (idx > -1) {
+        seleccionadosParaComparar.splice(idx, 1);
+      } else {
+        if (seleccionadosParaComparar.length >= 3) {
+          alert('Puedes comparar un máximo de 3 candidaturas a la vez.');
+          return;
+        }
+        seleccionadosParaComparar.push(id);
+      }
+
+      actualizarBarraComparador();
+      renderizarTarjetas();
+    }
+
+    function actualizarBarraComparador() {
+      const barra = document.getElementById('barraComparador');
+      const texto = document.getElementById('textoContadorComparar');
+
+      if (seleccionadosParaComparar.length >= 2) {
+        texto.textContent = `${seleccionadosParaComparar.length} candidaturas listas para comparar`;
+        barra.classList.remove('hidden');
+      } else {
+        barra.classList.add('hidden');
+      }
+    }
+
+    function limpiarSeleccionComparador() {
+      seleccionadosParaComparar = [];
+      actualizarBarraComparador();
+      renderizarTarjetas();
+    }
+
+    function renderizarTarjetas() {
+      const contenedor = document.getElementById('gridCandidatos');
+      const titulo = document.getElementById('tituloVista');
+      const badgeTotal = document.getElementById('totalCandidatos');
+
+      titulo.textContent = filtroActivo || 'Selecciona una opción';
+
+      let candidatosFiltrados = todosLosCandidatos.filter(c => {
+        if (clasificarCandidato(c) !== modoActual) return false;
+
+        if (modoActual === 'dip_rp') {
+          return normalizar(c.partido_siglas || c.partido) === normalizar(filtroActivo);
+        } else {
+          return normalizar(c.localidad) === normalizar(filtroActivo);
+        }
+      });
+
+      // Filtro estricto Opción A: Solo propietarios y sin duplicados
+      const nombresVistos = new Set();
+      candidatosFiltrados = candidatosFiltrados.filter(c => {
+        if (!esPropietario(c)) return false;
+
+        const clave = `${normalizar(c.nombre_propietario)}_${normalizar(c.partido_siglas || c.partido || '')}_${normalizar(c.localidad || '')}`;
+        if (nombresVistos.has(clave)) {
+          return false;
+        }
+        nombresVistos.add(clave);
+        return true;
+      });
+
+      badgeTotal.textContent = `${candidatosFiltrados.length} candidatura${candidatosFiltrados.length === 1 ? '' : 's'}`;
+
+      if (candidatosFiltrados.length === 0) {
+        contenedor.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-400">
+            No hay registros disponibles para esta selección.
+          </div>`;
+        return;
+      }
+
+      contenedor.innerHTML = candidatosFiltrados.map(c => {
+        const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+        const logoPartido = c.logo ? `<img src="${sanearUrl(c.logo)}" referrerpolicy="no-referrer" alt="Logo" class="h-6 object-contain" />` : '';
+        const partidoTexto = c.partido_siglas || c.partido || 'Independiente';
+        const seleccionado = seleccionadosParaComparar.includes(c.id);
+
+        const hist = historialPartidos[String(c.id)];
+        let badgeHistorial = '';
+
+        if (hist && typeof hist.total_cambios === 'number') {
+          badgeHistorial = (hist.total_cambios === 0)
+            ? `<span class="inline-flex text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">1 solo partido</span>`
+            : `<span class="inline-flex text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200">${hist.total_cambios} cambio${hist.total_cambios > 1 ? 's' : ''} en CV</span>`;
+        }
+
+        // Semáforo de transparencia
+        const semaforo = calcularSemaforoTransparencia(c);
+
+        const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+        const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
+
+        return `
+          <article class="bg-white rounded-3xl overflow-hidden border ${seleccionado ? 'border-indigo-600 ring-2 ring-indigo-500' : 'border-slate-200'} shadow-sm flex flex-col hover:shadow-lg transition relative">
+            
+            <!-- Botón flotante para comparador -->
+            <button 
+              onclick="toggleComparar(${c.id})" 
+              class="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 ${seleccionado ? 'bg-indigo-600 text-white' : 'bg-slate-900/85 hover:bg-slate-900 text-white backdrop-blur-sm'}">
+              <span>${seleccionado ? '✓ Seleccionado' : '+ Comparar'}</span>
+            </button>
+
+            <!-- Cabecera Fotográfica -->
+            <div onclick="abrirModal(${c.id})" class="relative h-64 bg-slate-200 flex items-end overflow-hidden cursor-pointer">
+              <img 
+                src="${foto}" 
+                alt="${c.nombre_propietario}" 
+                referrerpolicy="no-referrer"
+                loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition duration-500"
+                onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+              
+              <div class="absolute top-4 right-4 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl flex items-center gap-1.5 shadow-sm">
+                ${logoPartido}
+                <span class="text-[11px] font-bold text-slate-800">${partidoTexto}</span>
+              </div>
+
+              <div class="relative p-5 text-white">
+                <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-white/20 backdrop-blur-sm inline-block mb-1">
+                  ${c.cargo || 'Candidatura'}
+                </span>
+                <h3 class="text-base font-bold leading-tight hover:text-indigo-200 transition">${c.nombre_propietario}</h3>
+              </div>
+            </div>
+
+            <!-- Cuerpo Informativo -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-3 text-xs text-slate-600">
+              <div class="space-y-2.5 cursor-pointer" onclick="abrirModal(${c.id})">
+                
+                <!-- Insignias: Historial y Semáforo de Transparencia -->
+                <div class="flex flex-wrap items-center gap-1.5">
+                  ${badgeHistorial ? `<div>${badgeHistorial}</div>` : ''}
+
+                  <!-- Insignia Semáforo -->
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md ${semaforo.colorBg} ${semaforo.colorTexto} border ${semaforo.colorBorde}" title="Evaluación de apertura y completitud de perfil ante el IEES">
+                    <span>${semaforo.icono}</span>
+                    <span>Perfil ${semaforo.nivel} (${semaforo.puntos}%)</span>
+                  </span>
+                </div>
+
+                ${c.formacion ? `
+                  <div>
+                    <span class="font-bold text-slate-900 text-[10px] uppercase block">Estudios</span>
+                    <p class="line-clamp-2 text-slate-600 leading-relaxed">${c.formacion}</p>
+                  </div>
+                ` : ''}
+
+                ${c.propuesta_1 ? `
+                  <div>
+                    <span class="font-bold text-slate-900 text-[10px] uppercase block">Propuesta Clave</span>
+                    <p class="line-clamp-2 text-slate-600 leading-snug">${c.propuesta_1}</p>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- MÓDULO DE REACCIÓN / VOTACIÓN CIUDADANA -->
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <button 
+                    onclick="emitirVoto(${c.id}, 'positivo')" 
+                    class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700'}">
+                    👍 <span>${votos.positivos}</span>
+                  </button>
+
+                  <button 
+                    onclick="emitirVoto(${c.id}, 'negativo')" 
+                    class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-rose-700'}">
+                    👎 <span>${votos.negativos}</span>
+                  </button>
+                </div>
+
+                <button onclick="abrirModal(${c.id})" class="text-indigo-600 font-bold text-xs hover:underline">
+                  Ver ficha →
+                </button>
+              </div>
+
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // MODAL DE COMPARACIÓN LADO A LADO
+    function abrirModalComparador() {
+      const candidatosAComparar = todosLosCandidatos.filter(c => seleccionadosParaComparar.includes(c.id));
+      if (candidatosAComparar.length < 2) return;
+
+      const contenedor = document.getElementById('comparadorContenido');
+      const numCols = candidatosAComparar.length;
+
+      contenedor.innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(${numCols}, minmax(0, 1fr)); gap: 1.25rem;">
+          ${candidatosAComparar.map(c => {
+            const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+            const logo = c.logo ? `<img src="${sanearUrl(c.logo)}" referrerpolicy="no-referrer" class="h-6 object-contain" />` : '';
+            const hist = historialPartidos[String(c.id)];
+            const sem = calcularSemaforoTransparencia(c);
+            const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+            const total = votos.positivos + votos.negativos;
+            const pctAprobacion = total > 0 ? Math.round((votos.positivos / total) * 100) : null;
+
+            return `
+              <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="relative h-44 bg-slate-800 flex items-end p-4">
+                    <img 
+                      src="${foto}" 
+                      referrerpolicy="no-referrer" 
+                      class="absolute inset-0 w-full h-full object-cover object-top"
+                      onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+                    <div class="relative text-white z-10">
+                      <div class="flex items-center gap-1.5 mb-1 bg-white/20 backdrop-blur px-2 py-0.5 rounded-lg w-fit">
+                        ${logo}
+                        <span class="text-[10px] font-bold">${c.partido_siglas || c.partido || ''}</span>
+                      </div>
+                      <h4 class="text-sm font-black leading-tight">${c.nombre_propietario}</h4>
+                    </div>
+                  </div>
+
+                  <div class="p-4 space-y-4 text-xs text-slate-600">
+                    
+                    <!-- Semáforo de Transparencia -->
+                    <div class="p-3 ${sem.colorBg} rounded-xl border${sem.colorBorde} flex items-center justify-between">
+                      <div>
+                        <span class="font-bold text-[10px] text-slate-900 uppercase block">Transparencia Curricular</span>
+                        <span class="text-xs font-semibold ${sem.colorTexto}">${sem.icono} Perfil${sem.nivel}</span>
+                      </div>
+                      <span class="text-xs font-black ${sem.colorTexto}">${sem.puntos}/100 pts</span>
+                    </div>
+
+                    <!-- Reseña / Votación -->
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                      <div>
+                        <span class="font-bold text-[10px] text-slate-900 uppercase block">Reseña Ciudadana</span>
+                        <span class="text-xs font-semibold text-slate-700">👍 ${votos.positivos} \vert{} 👎 ${votos.negativos}</span>
+                      </div>
+                      ${pctAprobacion !== null ? `
+                        <span class="text-xs font-black px-2 py-1 rounded-lg ${pctAprobacion >= 50 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                          ${pctAprobacion}% favor
+                        </span>
+                      ` : '<span class="text-[10px] text-slate-400">Sin votos</span>'}
+                    </div>
+
+                    <!-- Militancia -->
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                      <span class="font-bold text-[10px] text-slate-900 uppercase block mb-1">Militancia</span>
+                      <p class="text-xs font-semibold ${hist && hist.total_cambios > 0 ? 'text-amber-700' : 'text-emerald-700'}">
+                        ${hist && hist.total_cambios > 0 ? `⚠️ ${hist.total_cambios} cambio(s) en CV` : '✅ 1 solo partido'}
+                      </p>
+                    </div>
+
+                    ${c.porque_cargo ? `
+                      <div>
+                        <span class="font-bold text-[10px] text-slate-900 uppercase block mb-0.5">¿Por qué aspira?</span>
+                        <p class="italic text-[11px] bg-slate-50 p-2.5 rounded-xl border border-slate-100">"${c.porque_cargo}"</p>
+                      </div>
+                    ` : ''}
+
+                    <div>
+                      <span class="font-bold text-[10px] text-slate-900 uppercase block mb-1">Propuestas Clave</span>
+                      <ul class="space-y-1 text-[11px]">
+                        ${c.propuesta_1 ? `<li class="flex items-start gap-1"><span class="text-indigo-500 font-bold">•</span><span>${c.propuesta_1}</span></li>` : ''}
+                        ${c.propuesta_2 ? `<li class="flex items-start gap-1"><span class="text-indigo-500 font-bold">•</span><span>${c.propuesta_2}</span></li>` : ''}
+                      </ul>
+                    </div>
+
+                    ${c.formacion ? `
+                      <div>
+                        <span class="font-bold text-[10px] text-slate-900 uppercase block mb-0.5">Estudios</span>
+                        <p class="text-[11px] text-slate-600">${c.formacion}</p>
+                      </div>
+                    ` : ''}
+
+                    ${c.trayectoria ? `
+                      <div>
+                        <span class="font-bold text-[10px] text-slate-900 uppercase block mb-0.5">Trayectoria</span>
+                        <p class="text-[11px] text-slate-600">${c.trayectoria}</p>
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+
+                ${c.ficha ? `
+                  <div class="p-3 border-t border-slate-100 bg-slate-50 text-center">
+                    <a href="${sanearUrl(c.ficha)}" target="_blank" class="text-indigo-600 hover:underline font-bold text-[11px]">
+                      Ver PDF oficial
+                    </a>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      document.getElementById('modalComparador').classList.remove('hidden');
+    }
+
+    // MODAL DETALLE INDIVIDUAL
+    function abrirModal(id) {
+      const c = todosLosCandidatos.find(item => item.id === id);
+      if (!c) return;
+
+      const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+      const logoPartido = c.logo ? `<img src="${sanearUrl(c.logo)}" referrerpolicy="no-referrer" class="h-8 object-contain" />` : '';
+      const partidoTexto = c.partido_siglas || c.partido || 'Independiente';
+      const hist = historialPartidos[String(c.id)];
+      const sem = calcularSemaforoTransparencia(c);
+      const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+      const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
+
+      const modal = document.getElementById('modalDetalle');
+      const contenedor = document.getElementById('modalContenido');
+
+      let bloqueTimeline = '';
+      if (hist && hist.historial && hist.historial.length > 0) {
+        bloqueTimeline = `
+          <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-xs font-black uppercase text-slate-900 tracking-wider">Historial Partidista (Declarado en CV)</h4>
+              <button 
+                onclick="abrirModalSugerencia(${c.id}, '${c.nombre_propietario.replace(/'/g, "\\'")}')" 
+                class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1">
+                ✏️ Sugerir corrección / partido previo
+              </button>
+            </div>
+
+            <div class="relative pl-6 space-y-3 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-300">
+              ${hist.historial.map(item => `
+                <div class="relative">
+                  <div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-indigo-600 border-2 border-white"></div>
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="text-xs font-bold text-slate-900">${item.partido}</span>
+                    <span class="text-[10px] font-bold text-slate-500">${item.periodo}</span>
+                  </div>
+                  ${item.nota ? `<p class="text-xs text-slate-600 mt-0.5 leading-snug">${item.nota}</p>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      contenedor.innerHTML = `
+        <div class="relative bg-slate-900 text-white p-6 flex flex-col sm:flex-row items-center sm:items-end gap-6">
+          <img 
+            src="${foto}" 
+            referrerpolicy="no-referrer"
+            class="w-28 h-36 object-cover object-top rounded-2xl border-2 border-white/20 bg-slate-800"
+            onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+          />
+          <div class="text-center sm:text-left flex-1">
+            <div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
+              ${logoPartido}
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-white/10 text-indigo-300">${partidoTexto}</span>
+            </div>
+            <h2 class="text-xl font-black">${c.nombre_propietario}</h2>
+            <p class="text-xs text-slate-300 mt-0.5">${c.cargo || ''} • ${c.localidad || ''}</p>
+            ${c.nombre_suplente ? `<p class="text-xs text-slate-400 mt-1">Suplente: <b class="text-slate-200">${c.nombre_suplente}</b></p>` : ''}
+          </div>
+        </div>
+
+        <div class="p-6 space-y-5 text-xs text-slate-700">
+          
+          <!-- DESGLOSE DEL SEMÁFORO DE TRANSPARENCIA EN EL MODAL -->
+          <div class="p-4 ${sem.colorBg} rounded-2xl border ${sem.colorBorde} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Semáforo de Apertura Curricular</span>
+              <p class="text-[11px] text-slate-600">
+                Calificación basada en foto oficial, propuestas sustanciales, formación y contacto ante el IEES.
+              </p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-base">${sem.icono}</span>
+              <div>
+                <span class="font-black text-xs ${sem.colorTexto} block">Perfil ${sem.nivel}</span>
+                <span class="text-[10px] font-bold text-slate-500 font-mono">${sem.puntos} de 100 puntos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECCIÓN DE CALIFICACIÓN CIUDADANA EN EL MODAL -->
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
+            <div>
+              <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Calificación Ciudadana</span>
+              <p class="text-[11px] text-slate-500">¿Apoyas la postulación de esta persona?</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button 
+                onclick="emitirVoto(${c.id}, 'positivo')" 
+                class="px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-slate-300 hover:bg-emerald-50 hover:text-emerald-700'}">
+                👍 Apoyo (${votos.positivos})
+              </button>
+              <button 
+                onclick="emitirVoto(${c.id}, 'negativo')" 
+                class="px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white border-slate-300 hover:bg-rose-50 hover:text-rose-700'}">
+                👎 No apoyo (${votos.negativos})
+              </button>
+            </div>
+          </div>
+
+          ${c.porque_cargo ? `
+            <div>
+              <span class="text-[10px] font-bold uppercase text-indigo-600 block mb-1">¿Por qué aspira?</span>
+              <p class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">"${c.porque_cargo}"</p>
+            </div>
+          ` : ''}
+
+          ${bloqueTimeline}
+
+          <div>
+            <span class="text-[10px] font-bold uppercase text-slate-900 block mb-2">Propuestas</span>
+            <div class="space-y-2">
+              ${c.propuesta_1 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_1}</div>` : ''}
+              ${c.propuesta_2 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_2}</div>` : ''}
+            </div>
+          </div>
+
+          ${c.formacion ? `
+            <div>
+              <span class="text-[10px] font-bold uppercase text-slate-900 block mb-1">Estudios</span>
+              <p class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.formacion}</p>
+            </div>
+          ` : ''}
+
+          <!-- Medios de Contacto Declarados -->
+          <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+            <div class="flex flex-wrap gap-2">
+              ${c.correo_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">✉ ${c.correo_publico}</span>` : ''}
+              ${c.telefono_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">☎ ${c.telefono_publico}</span>` : ''}
+            </div>
+
+            <div class="flex items-center gap-2">
+              ${c.pagina_web ? `<a href="${sanearUrl(c.pagina_web)}" target="_blank" class="px-3 py-1 bg-indigo-50 text-indigo-700 font-bold rounded-lg hover:bg-indigo-100">Web Oficial</a>` : ''}
+              ${c.ficha ? `<a href="${sanearUrl(c.ficha)}" target="_blank" class="px-3 py-1 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800">Ficha PDF Oficial</a>` : ''}
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function abrirModalSugerencia(id, nombre) {
+      document.getElementById('sugCandidatoId').value = id;
+      document.getElementById('sugCandidatoNombre').value = nombre;
+      document.getElementById('subtituloSugerencia').textContent = `Para: ${nombre}`;
+      document.getElementById('modalSugerencia').classList.remove('hidden');
+    }
+
+    function enviarSugerencia(e) {
+      e.preventDefault();
+      const id = document.getElementById('sugCandidatoId').value;
+      const nombre = document.getElementById('sugCandidatoNombre').value;
+      const partido = document.getElementById('sugPartido').value;
+      const periodo = document.getElementById('sugPeriodo').value;
+      const fuente = document.getElementById('sugFuente').value;
+
+      const asunto = encodeURIComponent(`Sugerencia de Partido - ${nombre} (ID: ${id})`);
+      const cuerpo = encodeURIComponent(
+        `Propuesta de actualización ciudadana:\n\n` +
+        `Candidato: ${nombre} (ID: ${id})\n` +
+        `Partido / Cargo sugerido: ${partido}\n` +
+        `Periodo estimado: ${periodo}\n` +
+        `Fuente o enlace verificable: ${fuente}\n\n` +
+        `Enviado desde Voto Informado Sinaloa.`
+      );
+
+      window.location.href = `mailto:contacto@votoinformado.mx?subject=${asunto}&body=${cuerpo}`;
+      
+      alert('¡Gracias por tu colaboración! Se abrirá tu correo para enviar el reporte con la fuente.');
+      cerrarModal('modalSugerencia');
+      e.target.reset();
+    }
+
+    function cerrarModal(idModal) {
+      document.getElementById(idModal).classList.add('hidden');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        cerrarModal('modalDetalle');
+        cerrarModal('modalComparador');
+        cerrarModal('modalSugerencia');
+      }
+    });
+
+    iniciar();
+  </script>
+</body>
+</html>

@@ -1,0 +1,3794 @@
+{
+  "1": {
+    "nombre": "JAIRO SAMUEL LEYVA SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "JSLS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "2": {
+    "nombre": "VICTOR MANUEL SARMIENTO ARMENTA",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...LACIÓN, \r\nPOR NUEVA INVITACIÓN DEL PAN ACEPTA SER CANDIDATO A LA DIPUTACI...\""
+      },
+      {
+        "partido": "VMSA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "3": {
+    "nombre": "MARTIN ARMENTA GIL",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MAG",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "5": {
+    "nombre": "ALBERTO RIVERA CAMACHO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "6": {
+    "nombre": "YONEIDA VAZQUEZ GAMEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "7": {
+    "nombre": "ANA LILIA BRITO HIDALGO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "8": {
+    "nombre": "MARTHA FELIX LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "9": {
+    "nombre": "LOURDES ERIKA SANCHEZ MARTINEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "11": {
+    "nombre": "JESUS ALBERTO CAMBEROS CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "13": {
+    "nombre": "OLIVIA JACQUELINE OROS GRAVE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "14": {
+    "nombre": "ALBA VIRGEN MONTES ALVAREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "15": {
+    "nombre": "MARIA TERESA MONDACA COTA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "17": {
+    "nombre": "JOSE SILVANO HIGUERA MERAZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "18": {
+    "nombre": "JORGE  ROSARIO BOJORQUEZ BERRELLEZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "19": {
+    "nombre": "ANA GABRIELA LOPEZ QUEVEDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "20": {
+    "nombre": "MARCO ANTONIO LOPEZ GONZALEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "22": {
+    "nombre": "ARLETHE PAOLA COTA TREVIZO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "23": {
+    "nombre": "ARLETHE PAOLA COTA TREVIZO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "24": {
+    "nombre": "MANRIQUE NIELSEN CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "25": {
+    "nombre": "MANRIQUE NIELSEN CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "26": {
+    "nombre": "MARIA ELVIRA VEGA AUDELO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "27": {
+    "nombre": "MARIA ELVIRA VEGA AUDELO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "28": {
+    "nombre": "ELIZABETH CHIA GALAVIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "29": {
+    "nombre": "ELIZABETH CHIA GALAVIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "30": {
+    "nombre": "MARIVEL TEREZA CASTILLO VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "31": {
+    "nombre": "MARIVEL TEREZA CASTILLO VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "32": {
+    "nombre": "AGLAE MYLENE HIGUERA OSUNA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "33": {
+    "nombre": "AGLAE MYLENE HIGUERA OSUNA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "34": {
+    "nombre": "CESAR FRANCISCO ROJO PLASCENCIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "35": {
+    "nombre": "CESAR FRANCISCO ROJO PLASCENCIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "36": {
+    "nombre": "LUIS ANTONIO LOPEZ QUIÑONEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "37": {
+    "nombre": "LUIS ANTONIO LOPEZ QUIÑONEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "40": {
+    "nombre": "ARNOLDO VERDUGO AGUILAR",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "41": {
+    "nombre": "ARNOLDO VERDUGO AGUILAR",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "42": {
+    "nombre": "OSCAR JAVIER VALDEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "43": {
+    "nombre": "OSCAR JAVIER VALDEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "44": {
+    "nombre": "GLADYS LOURDES OBESO AVENDAÑO",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Aprox. 2021",
+        "nota": "Mención en CV oficial: \"...TRITO XIII POR CULIACÁN (PAN, PRD, MC YPAS).\r\n \r\n(2021)\r\nSECRETARIA GENE...\""
+      },
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "45": {
+    "nombre": "GLADYS LOURDES OBESO AVENDAÑO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "46": {
+    "nombre": "LUIS JAVIER DE LA ROCHA ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "47": {
+    "nombre": "LUIS JAVIER DE LA ROCHA ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "48": {
+    "nombre": "SADOL OSORIO PORRAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "49": {
+    "nombre": "SADOL OSORIO PORRAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "50": {
+    "nombre": "EDUARDO BARRANTES VELARDE",
+    "total_cambios": 2,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"..., PAN, PRD, MOVIMIENTO CIUDADANO Y MORENA; ASÍ COMO DE LÍDERES DE LA SOCIEDA...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...RTIDOS, INCLUYENDO: PRI, PAN, PRD, MOVIMIENTO CIUDADANO Y MORENA; ASÍ COMO DE LÍDERES DE L...\""
+      },
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "51": {
+    "nombre": "EDUARDO BARRANTES VELARDE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "52": {
+    "nombre": "LIZBETH CRUZ RIVERA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "53": {
+    "nombre": "LIZBETH CRUZ RIVERA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "54": {
+    "nombre": "GENE RENE BOJORQUEZ RUIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "55": {
+    "nombre": "GENE RENE BOJORQUEZ RUIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "58": {
+    "nombre": "VIRIDIANA CAMACHO MILLAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "59": {
+    "nombre": "VIRIDIANA CAMACHO MILLAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "60": {
+    "nombre": "AMERICA CYNTHIA CARRASCO VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "61": {
+    "nombre": "AMERICA CYNTHIA CARRASCO VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "62": {
+    "nombre": "MARIA DEL ROSARIO OSUNA GUTIERREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "63": {
+    "nombre": "MARIA DEL ROSARIO OSUNA GUTIERREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "64": {
+    "nombre": "JOSE LUIS GOMEZ FLORES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "65": {
+    "nombre": "JOSE LUIS GOMEZ FLORES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "66": {
+    "nombre": "MARTIN PEREZ TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "67": {
+    "nombre": "MARTIN PEREZ TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "68": {
+    "nombre": "REBECA GUADALUPE VELARDE DIAZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "69": {
+    "nombre": "REBECA GUADALUPE VELARDE DIAZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "70": {
+    "nombre": "DORA ALICIA RIVERA GERMAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "72": {
+    "nombre": "ROXANA RUBIO VALDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "73": {
+    "nombre": "ROXANA RUBIO VALDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "74": {
+    "nombre": "JORGE ANTONIO GONZALEZ FLORES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "75": {
+    "nombre": "JORGE ANTONIO GONZALEZ FLORES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "76": {
+    "nombre": "FELICITAS DIAZ MONROY",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "77": {
+    "nombre": "FELICITAS DIAZ MONROY",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "78": {
+    "nombre": "ZENEN AARON XOCHIHUA ENCISO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "79": {
+    "nombre": "ZENEN AARON XOCHIHUA ENCISO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "80": {
+    "nombre": "ROSA LIDIA URIAS SAYAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "81": {
+    "nombre": "ROSA LIDIA URIAS SAYAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "82": {
+    "nombre": "JULIAN LOPEZ ANDRADE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "83": {
+    "nombre": "JULIAN LOPEZ ANDRADE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "84": {
+    "nombre": "MARLENE SALCIDO BAYARDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "85": {
+    "nombre": "MARLENE SALCIDO BAYARDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "86": {
+    "nombre": "GUILLERMO FRANCISCO ANTONIO GALLARDO LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "87": {
+    "nombre": "GUILLERMO FRANCISCO ANTONIO GALLARDO LOPEZ",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Aprox. 2020",
+        "nota": "Mención en CV oficial: \"...RIQUECEDORA.\r\nSEP. 2020-JUL. 2021\r\nPRI SINALOA. TUVE LA OPORTUNIDAD DE PA...\""
+      },
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "88": {
+    "nombre": "MARIA DE JESUS QUEVEDO GONZALEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "89": {
+    "nombre": "MARIA DE JESUS QUEVEDO GONZALEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "90": {
+    "nombre": "SANDRA LUZ OLIVAS MUNOZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "91": {
+    "nombre": "MARIA DEL CARMEN MEZA BERRELLEZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "92": {
+    "nombre": "PAOLA IVETH GARATE VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "93": {
+    "nombre": "PAOLA IVETH GARATE VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "94": {
+    "nombre": "BERNARDINO ANTELO ESPER",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "95": {
+    "nombre": "BERNARDINO ANTELO ESPER",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "96": {
+    "nombre": "IRMA GUADALUPE MORENO OVALLES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "97": {
+    "nombre": "IRMA GUADALUPE MORENO OVALLES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "98": {
+    "nombre": "GOMER MONARREZ LARA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "99": {
+    "nombre": "GOMER MONARREZ LARA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "100": {
+    "nombre": "MARIA GUADALUPE BUITIMEA BUITIMEA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "101": {
+    "nombre": "MARIA GUADALUPE BUITIMEA BUITIMEA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "102": {
+    "nombre": "MIGUEL ANGEL LOPEZ MIRANDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "103": {
+    "nombre": "MIGUEL ANGEL LOPEZ MIRANDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "104": {
+    "nombre": "IRMA LETICIA TIRADO SANDOVAL",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "105": {
+    "nombre": "IRMA LETICIA TIRADO SANDOVAL",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "106": {
+    "nombre": "ALGER URIARTE ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "107": {
+    "nombre": "ALGER URIARTE ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "108": {
+    "nombre": "JESUS MARTINA BELTRAN VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "109": {
+    "nombre": "JESUS MARTINA BELTRAN VALENZUELA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "110": {
+    "nombre": "YARELI ABIGAIL GARATE ARREDONDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "111": {
+    "nombre": "YARELI ABIGAIL GARATE ARREDONDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "112": {
+    "nombre": "MARTHA YUDITH SUBIA BARRAZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "113": {
+    "nombre": "MARTHA YUDITH SUBIA BARRAZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "114": {
+    "nombre": "JOSE GILBERTO ESPINOZA ALVAREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "115": {
+    "nombre": "JOSE GILBERTO ESPINOZA ALVAREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "116": {
+    "nombre": "FATIMA DOLORES CANALES VELASCO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "117": {
+    "nombre": "FATIMA DOLORES CANALES VELASCO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "119": {
+    "nombre": "OSCAR BENITO FLORES DIAZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "120": {
+    "nombre": "AYLIN ELIZABETH ZAZUETA MARTINEZ",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Aprox. 2018",
+        "nota": "Mención en CV oficial: \"...18: LIDER JUVENIL EN CAMPAÑA 2018 (PAS)\r\n2019: LIDER DE MANIFESTACIONES F...\""
+      },
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "121": {
+    "nombre": "AYLIN ELIZABETH ZAZUETA MARTINEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "122": {
+    "nombre": "MARCO ANTONIO BAUTISTA ALTAMIRANO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "134": {
+    "nombre": "DOLORES MARGARITA PAINO VILEGAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "136": {
+    "nombre": "WILLIAN DEMIREL SALAZAR SERRANO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "137": {
+    "nombre": "WENDI ABIGAIL VEGA TAJIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "141": {
+    "nombre": "EDGAR ANTONIO ESTRELLA SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "143": {
+    "nombre": "PEDRO ANTONIO MARTINEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "144": {
+    "nombre": "VICTOR MANUEL DIAZ SIMENTAL",
+    "total_cambios": 2,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...LLO SOCIAL.\r\nDIPUTADO LOCAL POR EL PRI\r\nCANDIDATO MC A LA PRESIDENCIA MUN...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Aprox. 2016",
+        "nota": "Mención en CV oficial: \"...PUTADO LOCAL POR EL PRI\r\nCANDIDATO MC A LA PRESIDENCIA MUNICIPAL 2016\r\nC...\""
+      },
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "146": {
+    "nombre": "CARLOS RAMON COTA SANDOVAL",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...BRIÓ LA CASA DEL PARTIDO POLÍTICO “MORENA” EN JUAN JOSÉ RÍOS POR LA CALLE 4,...\""
+      },
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "147": {
+    "nombre": "MARIA JOSE LERMA SARABIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "153": {
+    "nombre": "NADIA LOPEZ BOJORQUEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "158": {
+    "nombre": "JESUS RAMON CRUZ MACIAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "159": {
+    "nombre": "JESUS RAMON CRUZ MACIAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "172": {
+    "nombre": "MARIA DE JESUS VILLEGAS SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "173": {
+    "nombre": "MARIA DE JESUS VILLEGAS SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "174": {
+    "nombre": "MAGDALENA MARISOL ANGULO OCHOA",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Aprox. 2023",
+        "nota": "Mención en CV oficial: \"...OCIÓN DE LA CANDIDATURA INTERNA DE MORENA A FAVOR DE MARCELO EBRARD 2023....\""
+      },
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "175": {
+    "nombre": "MAGDALENA MARISOL ANGULO OCHOA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "182": {
+    "nombre": "BLANCA ANGELICA LORA JUAREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "183": {
+    "nombre": "BLANCA ANGELICA LORA JUAREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "188": {
+    "nombre": "GILBERTO IZABAL ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "190": {
+    "nombre": "ANGELICA GUADALUPE GARCIA MENDOZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "191": {
+    "nombre": "ANGELICA GUADALUPE GARCIA MENDOZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "196": {
+    "nombre": "LUIS GUILLERMO BENITEZ TORRES",
+    "total_cambios": 2,
+    "historial": [
+      {
+        "partido": "PRD",
+        "periodo": "Aprox. 2007",
+        "nota": "Mención en CV oficial: \"...CANDIDATO A SÍNDICO PROCURADOR POR PRD Y PT.\r\n2007\r\n\r\n•\tCOORDINADOR DE  C...\""
+      },
+      {
+        "partido": "MORENA",
+        "periodo": "Aprox. 2010",
+        "nota": "Mención en CV oficial: \"...)\r\n\r\n•\tASAMBLEÍSTA CONFORMACIÓN DE MORENA COMO AC (2010)\r\n\r\n•\tCOORDINADOR ZO...\""
+      },
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "198": {
+    "nombre": "LEODEGARIO GARCIA NORIEGA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "199": {
+    "nombre": "LEODEGARIO GARCIA NORIEGA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "200": {
+    "nombre": "MORENO PRADO RAMON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "201": {
+    "nombre": "MORENO PRADO RAMON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "202": {
+    "nombre": "MONCERRAT LOPEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "203": {
+    "nombre": "MONCERRAT LOPEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "209": {
+    "nombre": "LUIS GUILLERMO BENITEZ TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "214": {
+    "nombre": "ROSA MARGARITA VELAZQUEZ VALDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "216": {
+    "nombre": "RICARDA DEL CARMEN PEREZ ATONDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "430": {
+    "nombre": "CARLA URSULA CORRALES CORRALES",
+    "total_cambios": 2,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...A: LA UAS, CINCO AYUNTAMIENTOS, EL PAN Y EL PT APARECEN CON UNA VERIFICAC...\""
+      },
+      {
+        "partido": "PT",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"..., CINCO AYUNTAMIENTOS, EL PAN Y EL PT APARECEN CON UNA VERIFICACIÓN NO S...\""
+      },
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "220": {
+    "nombre": "JOSE VICENTE PICO ORDUÑO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "224": {
+    "nombre": "NOE MOLINA ORTIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "437": {
+    "nombre": "EVANGELINA LLANES CARREON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "227": {
+    "nombre": "MARCIA YADIRA GUERRERO GONZALEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "228": {
+    "nombre": "MARIA DEL CARMEN NORIEGA RAMOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "230": {
+    "nombre": "LEOBARDO LOPEZ MONTOYA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "231": {
+    "nombre": "ANA BERTHA VARGAS NUÑEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "232": {
+    "nombre": "FRANCIELA VERDUZCO LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "235": {
+    "nombre": "MARIA GUADALUPE ESPARZA MENDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "237": {
+    "nombre": "CLAUDIA MARGARITA GONZALEZ MAGDALENO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "239": {
+    "nombre": "RAUL COTA ARREDONDO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "453": {
+    "nombre": "ANTONIO MENENDEZ DE LLANO BERMUDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "454": {
+    "nombre": "ANTONIO MENENDEZ DE LLANO BERMUDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "243": {
+    "nombre": "BRYAN SADIEL ZAZUETA QUIROZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "457": {
+    "nombre": "JUAN CARLOS VILLA ROMERO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "458": {
+    "nombre": "JUAN CARLOS VILLA ROMERO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "251": {
+    "nombre": "BOGAR GERARDO DIARTE SALAIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "253": {
+    "nombre": "YOLANDA YADIRA CABRERA PERAZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "255": {
+    "nombre": "REBECA ALEJANDRA URIARTE ORDOÑEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "261": {
+    "nombre": "SARAHI PALAZUELOS LARA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "265": {
+    "nombre": "JOSE SANTOS AISPURO CALDERON",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...INCURSIONE DENTRO DEL PRI DEL ESTADO DE MEXICO, DENTRO DEL C...\""
+      },
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "267": {
+    "nombre": "JESUS RAMON MENDOZA FELIX",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "481": {
+    "nombre": "YERALDINE BONILLA VALVERDE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "271": {
+    "nombre": "MARIA CANDELARIA CASTORENA GOVEA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "273": {
+    "nombre": "LEONARDO GERMAN GANDARILLA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "279": {
+    "nombre": "AIDA FERNANDA OCEGUERA BURQUES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "287": {
+    "nombre": "JOSE ALFONSO GARCIA CALDERON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "291": {
+    "nombre": "CARLOS ALBERTO CORONA LEON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "295": {
+    "nombre": "JUAN MANUEL ALVARADO FELIX",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "301": {
+    "nombre": "MARIEL GUADALUPE LIZARRAGA NAVA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "303": {
+    "nombre": "DANIEL ALEJANDRO FIGUEROA BUSTAMANTE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "312": {
+    "nombre": "HECTOR ALVAREZ ORTIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "313": {
+    "nombre": "ISMAEL ANGULO MEZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "314": {
+    "nombre": "FAUSTO JESUS GARCIA MEZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "315": {
+    "nombre": "PAULITA VEGA GOMEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "316": {
+    "nombre": "ENRIQUE VELAZQUEZ LUJAN",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PVEM",
+        "periodo": "Aprox. 1997",
+        "nota": "Mención en CV oficial: \"...1997 AL 2000.\r\n\tCANDIDATO POR EL PVEM A LA ALCALDÍA DE CONCORDIA SINALOA...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "317": {
+    "nombre": "GABINO AGUILAR TRUJILLO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "318": {
+    "nombre": "SANDRA GUADALUPE MARTOS LARA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "319": {
+    "nombre": "ABEL SARMIENTO CARABEO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "320": {
+    "nombre": "JUANA GUADALUPE BARRAZA RIOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "321": {
+    "nombre": "RICHARD MILLAN VAZQUEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "322": {
+    "nombre": "ROMANA JANNET RUBIO GARCIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "323": {
+    "nombre": "GREGORIO HERNANDEZ ROMERO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "324": {
+    "nombre": "LUIS FERNANDO CHINCHILLAS COTA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "325": {
+    "nombre": "MY-LAI QUINTERO BELTRAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "326": {
+    "nombre": "YURIEL KARELY GAMEZ PEÑUÑURI",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "328": {
+    "nombre": "ROSARIO ISABEL CORTEZ BENITEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "329": {
+    "nombre": "EFRAIN DUARTE CAMACHO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "330": {
+    "nombre": "ALEXSANDRA ARANA CASTAÑEDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "331": {
+    "nombre": "IVONNE PARRA AVENDAÑO",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Aprox. 2011",
+        "nota": "Mención en CV oficial: \"...TARIA GENERAL DEL COMITE MUNICIPAL PRI 2011 A 2013\r\nREGIDOR H. AYUNTAMIEN...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "332": {
+    "nombre": "EDER HERNAN RIVERA GUTIERREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "333": {
+    "nombre": "EDER HERNAN RIVERA GUTIERREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "334": {
+    "nombre": "BRISSIA ADELITA ALVAREZ VALDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "336": {
+    "nombre": "CARLOS EDUARDO ECHEVERRIA VILLEGAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "337": {
+    "nombre": "CARLOS EDUARDO ECHEVERRIA VILLEGAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "338": {
+    "nombre": "JUAN CARLOS GABRIEL CARLON MORENO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "339": {
+    "nombre": "JUAN CARLOS GABRIEL CARLON MORENO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "340": {
+    "nombre": "GUADALUPE LOPEZ ONTIVEROS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "341": {
+    "nombre": "GUADALUPE LOPEZ ONTIVEROS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "342": {
+    "nombre": "JEHOVANEHA GUADALUPE LUGO ARAUJO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "343": {
+    "nombre": "JEHOVANEHA GUADALUPE LUGO ARAUJO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "344": {
+    "nombre": "ROSA AMALIA LEYVA CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "345": {
+    "nombre": "ROSA AMALIA LEYVA CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "346": {
+    "nombre": "ARELI FLORES ANGULO",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Aprox. 2018",
+        "nota": "Mención en CV oficial: \"...REPRESENTANTE GENERAL DEL PARTIDO REVOLUCIONARIO INSTITUCIONAL\r\n2018 CANDIDATA SUPLENTE A REGIDOR...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "347": {
+    "nombre": "ARELI FLORES ANGULO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "348": {
+    "nombre": "ALEJANDRA DE JESUS ZAMANO MEJIA",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...LÁTICAS Y TALLERES)\r\nMILITANTE DEL PRI DURANTE 10 AÑOS, PRESIDENTA DE MUJ...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "349": {
+    "nombre": "ALEJANDRA DE JESUS ZAMANO MEJIA",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...MAS VULNERABLES. \r\n\r\nMILITANTE DEL PRI DURANTE 6 AÑOS\r\n\r\nACTUALMENTE SIMP...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "350": {
+    "nombre": "MARGARITA SANTOS GUZMAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "351": {
+    "nombre": "MARGARITA SANTOS GUZMAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "352": {
+    "nombre": "JESUS ADRIAN ZAVALA MIRANDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "353": {
+    "nombre": "JESUS ADRIAN ZAVALA MIRANDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "354": {
+    "nombre": "PALOMA GUADALUPE COVARRUBIAS SALAZAR",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "355": {
+    "nombre": "PALOMA GUADALUPE COVARRUBIAS SALAZAR",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "356": {
+    "nombre": "ANA GABRIELA SALAZAR TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "357": {
+    "nombre": "ANA GABRIELA SALAZAR TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "358": {
+    "nombre": "JOSE MARIA ALARID CORONEL",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "359": {
+    "nombre": "JOSE MARIA ALARID CORONEL",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "360": {
+    "nombre": "LUIS ARMANDO COLOSIO ALARID",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "361": {
+    "nombre": "LUIS ARMANDO COLOSIO ALARID",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "362": {
+    "nombre": "JOSE GUADALUPE SANDOVAL RODRIGUEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "363": {
+    "nombre": "JOSE GUADALUPE SANDOVAL RODRIGUEZ",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...ESTUVE EN APOLLO CUANDO ESTABA EL PAS ESTUVE EN CAMPAÑA CUANDO ESTABA CU...\""
+      },
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "364": {
+    "nombre": "LUIS ANGEL ARMENTA ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "365": {
+    "nombre": "LUIS ANGEL ARMENTA ZAZUETA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "366": {
+    "nombre": "MIRNA VELAZQUEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "367": {
+    "nombre": "MIRNA VELAZQUEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "368": {
+    "nombre": "ALICIA ABIGAIL GUTIERREZ MANCILLAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "369": {
+    "nombre": "ALICIA ABIGAIL GUTIERREZ MANCILLAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "370": {
+    "nombre": "SERGIO ANTONIO LIZARRAGA ITURRALDE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "371": {
+    "nombre": "SERGIO ANTONIO LIZARRAGA ITURRALDE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "372": {
+    "nombre": "DANIELA MORA ORTIZ MONASTERIO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "374": {
+    "nombre": "GLORIA DENISSE TIRADO CARDENAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "375": {
+    "nombre": "GLORIA DENISSE TIRADO CARDENAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "376": {
+    "nombre": "PEDRO RAMIREZ URZUA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "377": {
+    "nombre": "PEDRO RAMIREZ URZUA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "378": {
+    "nombre": "ANA LUISA BAUTISTA GAYOSSO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "379": {
+    "nombre": "ANA LUISA BAUTISTA GAYOSSO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "380": {
+    "nombre": "ELIZABETH RAFAELA MONTOYA OJEDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "381": {
+    "nombre": "ELIZABETH RAFAELA MONTOYA OJEDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "382": {
+    "nombre": "SERGIO TORRES FELIX",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "383": {
+    "nombre": "SERGIO TORRES FELIX",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "384": {
+    "nombre": "ANA GABRIELA SALAZAR TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "385": {
+    "nombre": "ANA GABRIELA SALAZAR TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "386": {
+    "nombre": "JOSE PEÑUELAS TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "387": {
+    "nombre": "JOSE PEÑUELAS TORRES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "388": {
+    "nombre": "MIRIAM ADRIANA BASTIDAS CRISTERNA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "389": {
+    "nombre": "MIRIAM ADRIANA BASTIDAS CRISTERNA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "390": {
+    "nombre": "JORGE CARLOS VALDEZ CARDENAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "391": {
+    "nombre": "JORGE CARLOS VALDEZ CARDENAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "392": {
+    "nombre": "TANIA ENID LOPEZ PEREZ",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Aprox. 2009",
+        "nota": "Mención en CV oficial: \"...EJERA ESTATAL Y MUNICIPAL\r\nPARTIDO REVOLUCIONARIO INSTITUCIONAL \r\n2009-2011\r\n\r\nSECRETARIA DE ORGAN...\""
+      },
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "393": {
+    "nombre": "TANIA YUDITH ORNELAS SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "396": {
+    "nombre": "VICTOR ANTONIO CORRALES BURGUEÑO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "397": {
+    "nombre": "VICTOR ANTONIO CORRALES BURGUEÑO",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...ULAR - COORDINADORA PARLAMENTARIO (PRI) CÁMARA A DIPUTADOS CONGRESO GENER...\""
+      },
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "398": {
+    "nombre": "GUILLERMINA DEL CARMEN VERDUGO ZAVALA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "399": {
+    "nombre": "GUILLERMINA DEL CARMEN VERDUGO ZAVALA",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Aprox. 2010",
+        "nota": "Mención en CV oficial: \"...MITÉ DIRECTIVO ESTATAL DEL PARTIDO ACCIÓN NACIONAL EN SINALOA, ENERO- DICIEMBRE 2010...\""
+      },
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "400": {
+    "nombre": "GENE RENE BOJORQUEZ RUIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "401": {
+    "nombre": "GENE RENE BOJORQUEZ RUIZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "402": {
+    "nombre": "DULCE VALERIA DIAZ HUICHO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "403": {
+    "nombre": "ALVARO ANTONIO RENDON RIVERA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "404": {
+    "nombre": "ALVARO ANTONIO RENDON RIVERA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "405": {
+    "nombre": "RUBY VAZQUEZ MONTGOMERY",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "406": {
+    "nombre": "RUBY VAZQUEZ MONTGOMERY",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "407": {
+    "nombre": "JESUS MORONI ARELLANO OCHOA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "408": {
+    "nombre": "JESUS MORONI ARELLANO OCHOA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "409": {
+    "nombre": "ANGELICA MARIA RABAGO ESPINOZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "410": {
+    "nombre": "ANGELICA MARIA RABAGO ESPINOZA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "411": {
+    "nombre": "JESUS ALBERTO RODRIGUEZ MOLONTZIN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "412": {
+    "nombre": "JESUS ALBERTO RODRIGUEZ MOLONTZIN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "413": {
+    "nombre": "MARIELA GUERRERO AMARILLAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "414": {
+    "nombre": "MARIELA GUERRERO AMARILLAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "415": {
+    "nombre": "RICARDO ADAN PEREZ DURAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "416": {
+    "nombre": "RICARDO ADAN PEREZ DURAN",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "417": {
+    "nombre": "ARACELI RODRIGUEZ URIBE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "418": {
+    "nombre": "ARACELI RODRIGUEZ URIBE",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "419": {
+    "nombre": "JESUS GABRIEL MORENO PEREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "420": {
+    "nombre": "JESUS GABRIEL MORENO PEREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "421": {
+    "nombre": "ROSALBA KARIME FONG ALARCON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "422": {
+    "nombre": "ROSALBA KARIME FONG ALARCON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "423": {
+    "nombre": "REY AURELIANO LEON URIAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "424": {
+    "nombre": "REY AURELIANO LEON URIAS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "425": {
+    "nombre": "GERARDO OCTAVIO VARGAS LANDEROS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "427": {
+    "nombre": "JOSE PAZ LOPEZ ELENES",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRI",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...ES (CNOP) BADIRAGUATO, DEL PARTIDO REVOLUCIONARIO INSTITUCIONAL.\r\n\r\nEN EL ÁMBITO ACADÉMICO Y CIENT...\""
+      },
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "429": {
+    "nombre": "OSCAR ZAMUDIO PEREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "431": {
+    "nombre": "JUAN DE DIOS GAMEZ MENDIVIL",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "432": {
+    "nombre": "GILDARDO LEYVA ORTEGA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "436": {
+    "nombre": "CECILIA RAMIREZ MONTOYA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "439": {
+    "nombre": "ENRIQUE PARRA MELECIO",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRD",
+        "periodo": "Aprox. 1984",
+        "nota": "Mención en CV oficial: \"...1984-1986.\r\n- 2001: MILITANTE DEL PRD Y REGIDOS POR EL H. AYUNTAMIENTO D...\""
+      },
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "440": {
+    "nombre": "MARGOTH URREA PEREZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "443": {
+    "nombre": "LUIS FERNANDO LOAIZA BAÑUELOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "447": {
+    "nombre": "JUANA MINERVA VAZQUEZ GONZALEZ",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRD",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...TICO AL INTERIOR DEL PARTIDO DE LA REVOLUCIÓN DEMOCRÁTICA HA SIDO CONSEJERA NACIONAL, ESTATA...\""
+      },
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "449": {
+    "nombre": "CESAR ISMAEL GUERRERO ALARCON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "451": {
+    "nombre": "GENARO GARCIA CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "452": {
+    "nombre": "GENARO GARCIA CASTRO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "461": {
+    "nombre": "AMBROCIO CHAVEZ CHAVEZ",
+    "total_cambios": 1,
+    "historial": [
+      {
+        "partido": "PRD",
+        "periodo": "Mención en CV",
+        "nota": "Mención en CV oficial: \"...CANDIDATO A DIPUTADO LOCAL POR EL PRD.\r\n•\tCANDIDATO A DIPUTADO LOCAL POR...\""
+      },
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "465": {
+    "nombre": "KRISTIAM ALEXIS ESPINOZA GARCIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "466": {
+    "nombre": "KRISTIAM ALEXIS ESPINOZA GARCIA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "467": {
+    "nombre": "NANCY YADIRA SANTIAGO MARCOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "468": {
+    "nombre": "NANCY YADIRA SANTIAGO MARCOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "471": {
+    "nombre": "STHEFANY REA REATIGA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "473": {
+    "nombre": "ARELY BERENICE RUIZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "475": {
+    "nombre": "PEDRO ALONSO VILLEGAS LOBO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "476": {
+    "nombre": "PEDRO ALONSO VILLEGAS LOBO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "483": {
+    "nombre": "KARLA DANIELA ULLOA RODRIGUEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "484": {
+    "nombre": "KARLA DANIELA ULLOA RODRIGUEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "485": {
+    "nombre": "CARLOS DE JESUS ESCOBAR SANCHEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "487": {
+    "nombre": "RITA FIERRO REYES",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "491": {
+    "nombre": "ROSARIO GUADALUPE SARABIA SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "492": {
+    "nombre": "ROSARIO GUADALUPE SARABIA SOTO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "493": {
+    "nombre": "MARIA TERESA GUERRA OCHOA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "494": {
+    "nombre": "MARIA TERESA GUERRA OCHOA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "495": {
+    "nombre": "ELIGIO LOPEZ PORTILLO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "499": {
+    "nombre": "MANUEL DE JESUS GUERRERO VERDUGO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "500": {
+    "nombre": "MANUEL DE JESUS GUERRERO VERDUGO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "507": {
+    "nombre": "CARLOS MAXIMILIANO ARIAS HIRATA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "509": {
+    "nombre": "DIANA LAURA RODRIGUEZ JIMENEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "510": {
+    "nombre": "DIANA LAURA RODRIGUEZ JIMENEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "511": {
+    "nombre": "JULIO CESAR LOPEZ RAMOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "512": {
+    "nombre": "JULIO CESAR LOPEZ RAMOS",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "513": {
+    "nombre": "ANA SOFIA RAMOS LOZANO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "514": {
+    "nombre": "ANA SOFIA RAMOS LOZANO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "519": {
+    "nombre": "JUAN DANIEL SANCHEZ GASTELUM",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "520": {
+    "nombre": "JUAN DANIEL SANCHEZ GASTELUM",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "601": {
+    "nombre": "URSULA TATIANA DELGADO ARAGON",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "C_PAN_PRI_PRD_PAS",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "602": {
+    "nombre": "YAZMIN ARELLANO VAZQUEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MORENA",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "603": {
+    "nombre": "ABIGAIL BOJORQUEZ LOPEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PAN",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "605": {
+    "nombre": "JESUS LETICIA ROJO ALVARADO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "610": {
+    "nombre": "BRISSIA ADELITA ALVAREZ VALDEZ",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "611": {
+    "nombre": "DANIELA MORA ORTIZ MONASTERIO",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "MC",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "613": {
+    "nombre": "JOSE FRANCISCO MENDOZA SAUCEDA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "614": {
+    "nombre": "ESMERALDA COTA CABRERA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  },
+  "623": {
+    "nombre": "ESMERALDA COTA CABRERA",
+    "total_cambios": 0,
+    "historial": [
+      {
+        "partido": "PT",
+        "periodo": "Elección Actual",
+        "nota": "Postulación oficial registrada en el IEES"
+      }
+    ]
+  }
+}
