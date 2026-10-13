@@ -39,7 +39,7 @@
           id="tab-alcaldias" 
           onclick="navegarACargo('alcaldias')" 
           class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm">
-          Alcaldías
+          Municipios
         </button>
         <button 
           id="tab-dip_mr" 
@@ -85,7 +85,7 @@
         <button 
           onclick="navegarACargo('alcaldias')" 
           class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg transition">
-          Explorar Alcaldías
+          Explorar Municipios
         </button>
         <button 
           onclick="navegarACargo('dip_mr')" 
@@ -170,7 +170,7 @@
     <main class="flex-1 w-full">
       <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
         <div>
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">ALCALDÍAS</span>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">MUNICIPIOS</span>
           <h2 id="tituloVista" class="text-2xl font-black text-slate-900 leading-tight">Cargando...</h2>
         </div>
         <span id="totalCandidatos" class="text-xs font-bold px-3 py-1 bg-slate-200 text-slate-700 rounded-full">
@@ -298,7 +298,7 @@
             <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
               <div class="min-w-0">
                 <span id="fichaCargo" class="text-[9px] font-bold uppercase tracking-wider text-indigo-300 px-1.5 py-0.5 bg-indigo-950/80 backdrop-blur rounded block w-fit mb-1">
-                  ALCALDÍA
+                  MUNICIPIO
                 </span>
                 <h4 id="fichaNombre" class="text-sm font-black leading-tight truncate text-white">Nombre Candidato</h4>
                 <p id="fichaLocalidad" class="text-[10px] text-slate-300">Municipio</p>
@@ -769,7 +769,7 @@
 
       if (modoActual === 'alcaldias') {
         subtitulo.textContent = 'Municipios';
-        etiqueta.textContent = 'ALCALDÍAS';
+        etiqueta.textContent = 'MUNICIPIOS';
       } else if (modoActual === 'dip_mr') {
         subtitulo.textContent = 'Distritos Electorales';
         etiqueta.textContent = 'DIPUTACIONES MAYORÍA RELATIVA';
@@ -1071,7 +1071,7 @@
       const imgFoto = document.getElementById('fichaFoto');
       imgFoto.src = 'https://placehold.co/400x500/e2e8f0/64748b?text=Cargando+Foto...';
 
-      document.getElementById('fichaCargo').textContent = c.cargo || 'CANDIDATURA';
+      document.getElementById('fichaCargo').textContent = c.cargo || 'MUNICIPIO';
       document.getElementById('fichaNombre').textContent = c.nombre_propietario;
       document.getElementById('fichaLocalidad').textContent = `${c.localidad || ''} • ${c.partido_siglas || c.partido || ''}`;
 
@@ -1210,7 +1210,7 @@
                   id="matchBtnAlcaldia"
                   onclick="cambiarCargoMatch('alcaldias')" 
                   class="py-2 px-3 rounded-xl text-xs font-bold border transition ${estadoMatch.cargo === 'alcaldias' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}">
-                  Alcaldías
+                  Municipios
                 </button>
                 <button 
                   type="button"
@@ -1270,7 +1270,7 @@
           <div class="bg-indigo-50/70 border border-indigo-100 p-3.5 rounded-2xl flex items-center justify-between text-xs">
             <div>
               <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider block">Evaluando boleta</span>
-              <span class="font-black text-indigo-950">${estadoMatch.cargo === 'alcaldias' ? 'Alcaldía de' : 'Distrito'} ${estadoMatch.localidad}</span>
+              <span class="font-black text-indigo-950">${estadoMatch.cargo === 'alcaldias' ? 'Municipio de' : 'Distrito'} ${estadoMatch.localidad}</span>
             </div>
             <button onclick="renderizarPasoUbicacionMatch()" class="text-indigo-600 hover:underline font-bold text-[11px]">
               Cambiar zona
@@ -1391,7 +1391,7 @@
           <div class="text-center space-y-1">
             <span class="text-3xl">🎉</span>
             <h4 class="text-lg font-black text-slate-900">Tu Afinidad Electoral Calculada</h4>
-            <p class="text-xs text-slate-500">Candidaturas en ${estadoMatch.cargo === 'alcaldias' ? 'Alcaldía de' : 'Distrito'} <b>${estadoMatch.localidad}</b> con mayor coincidencia temática.</p>
+            <p class="text-xs text-slate-500">Candidaturas en ${estadoMatch.cargo === 'alcaldias' ? 'Municipio de' : 'Distrito'} <b>${estadoMatch.localidad}</b> con mayor coincidencia temática.</p>
           </div>
 
           <div class="space-y-3">
