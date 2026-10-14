@@ -727,7 +727,7 @@
     };
 
     // ==========================================
-    // FUNCIONES DE SEGURIDAD Y FOTOGRAFÍAS
+    // FUNCIONES DE SEGURIDAD, ORDEN Y FOTOS
     // ==========================================
     function escaparHTML(texto) {
       if (texto === null || texto === undefined) return '';
@@ -743,22 +743,29 @@
       if (!url) return '';
       let limpia = String(url).replace(/\\\//g, '/').trim();
       
-      // Ignorar textos vacíos o marcadores de "sin foto" del JSON
       if (!limpia || limpia === 'null' || limpia === 'undefined' || limpia.toLowerCase().includes('sin_foto')) {
         return '';
       }
 
-      // Bloquear únicamente protocolos peligrosos (XSS)
       if (/^(javascript|data|vbscript):/i.test(limpia)) {
         return '';
       }
 
-      // Si empieza con // (protocol-relative), agregar https:
       if (limpia.startsWith('//')) {
         return 'https:' + limpia;
       }
 
       return limpia;
+    }
+
+    // Algoritmo Fisher-Yates para mezclar arreglos de forma 100% imparcial en cada recarga
+    function mezclarAleatoriamente(arreglo) {
+      const copia = [...(arreglo || [])];
+      for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
     }
 
     // Genera un avatar elegante con las iniciales del candidato cuando no hay foto disponible
@@ -967,10 +974,11 @@
         ]);
 
         if (resCandidatos && resCandidatos.ok) {
-          todosLosCandidatos = await resCandidatos.json();
+          const datosCrudos = await resCandidatos.json();
+          todosLosCandidatos = mezclarAleatoriamente(datosCrudos);
         } else {
           console.warn('candidatos.json no disponible; cargando plantilla inicial de 2027.');
-          todosLosCandidatos = DATOS_FALLBACK_2027;
+          todosLosCandidatos = mezclarAleatoriamente(DATOS_FALLBACK_2027);
         }
         
         if (resHistorial && resHistorial.ok) {
@@ -986,7 +994,7 @@
         setModoEleccion('gubernatura');
       } catch (err) {
         console.error('Error crítico al iniciar:', err);
-        todosLosCandidatos = DATOS_FALLBACK_2027;
+        todosLosCandidatos = mezclarAleatoriamente(DATOS_FALLBACK_2027);
         calcularMetricasHero();
         setModoEleccion('gubernatura');
       }
@@ -1147,7 +1155,7 @@
     }
 
     // ========================================================
-    // GUBERNATURA 2027: LECTURA EN TIEMPO REAL DESDE SUPABASE
+    // GUBERNATURA 2027: LECTURA EN TIEMPO REAL Y ORDEN ALEATORIO
     // ========================================================
     async function cargarAspirantesGubernatura() {
       const grid = document.getElementById('gridCandidatos');
@@ -1179,12 +1187,14 @@
         const { data, error } = await supabaseClient
           .from('aspirantes_gubernatura')
           .select('*')
-          .eq('activo', true)
-          .order('nombre', { ascending: true });
+          .eq('activo', true);
 
         if (error) throw error;
 
-        listaAspirantesGubernatura = (data || []).map(a => {
+        // Mezclamos aleatoriamente los aspirantes en cada carga
+        const datosAleatorios = mezclarAleatoriamente(data || []);
+
+        listaAspirantesGubernatura = datosAleatorios.map(a => {
           let estatusNormalizado = a.estatus || 'Activo';
           if (estatusNormalizado.toUpperCase() === 'ACTIVE') {
             estatusNormalizado = 'Activo';
