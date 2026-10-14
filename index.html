@@ -727,7 +727,7 @@
     };
 
     // ==========================================
-    // FUNCIONES DE SEGURIDAD (ANTI-XSS)
+    // FUNCIONES DE SEGURIDAD Y FOTOGRAFÍAS
     // ==========================================
     function escaparHTML(texto) {
       if (texto === null || texto === undefined) return '';
@@ -741,12 +741,39 @@
 
     function sanearUrl(url) {
       if (!url) return '';
-      const limpia = String(url).replace(/\\\//g, '/').trim();
-      // Solo permitir rutas relativas o protocolos http/https seguros
-      if (/^(https?:\/\/|\/)/i.test(limpia)) {
-        return limpia;
+      let limpia = String(url).replace(/\\\//g, '/').trim();
+      
+      // Ignorar textos vacíos o marcadores de "sin foto" del JSON
+      if (!limpia || limpia === 'null' || limpia === 'undefined' || limpia.toLowerCase().includes('sin_foto')) {
+        return '';
       }
-      return '';
+
+      // Bloquear únicamente protocolos peligrosos (XSS)
+      if (/^(javascript|data|vbscript):/i.test(limpia)) {
+        return '';
+      }
+
+      // Si empieza con // (protocol-relative), agregar https:
+      if (limpia.startsWith('//')) {
+        return 'https:' + limpia;
+      }
+
+      return limpia;
+    }
+
+    // Genera un avatar elegante con las iniciales del candidato cuando no hay foto disponible
+    function obtenerAvatarFallback(nombre) {
+      const nombreLimpio = encodeURIComponent((nombre || 'Candidatura').trim());
+      return `https://ui-avatars.com/api/?name=${nombreLimpio}&background=1e293b&color=a5b4fc&size=500&font-size=0.33&bold=true`;
+    }
+
+    // Obtiene la foto válida del candidato o devuelve el avatar con sus iniciales
+    function obtenerFotoCandidato(c) {
+      const url = sanearUrl(c.fotografia || c.foto || c.imagen || c.fotografia_url);
+      if (!url || url.includes('placehold.co')) {
+        return obtenerAvatarFallback(c.nombre_propietario);
+      }
+      return url;
     }
 
     function normalizar(texto) {
@@ -821,8 +848,8 @@
 
     function calcularSemaforoTransparencia(c) {
       let puntos = 0;
-      const foto = sanearUrl(c.fotografia);
-      if (foto && !foto.includes('placehold.co') && !foto.includes('default') && foto.length > 10) {
+      const foto = sanearUrl(c.fotografia || c.foto || c.imagen || c.fotografia_url);
+      if (foto && !foto.includes('placehold.co') && !foto.includes('default') && !foto.includes('ui-avatars.com') && foto.length > 10) {
         puntos += 25;
       }
 
@@ -1051,13 +1078,11 @@
 
       if (supabaseClient) {
         try {
-          // Intentar primero con la función RPC segura (incremento atómico del lado del servidor)
           const { error: rpcError } = await supabaseClient.rpc('registrar_voto_ciudadano', {
             p_candidato_id: String(candidatoId),
             p_tipo: tipo
           });
 
-          // Si aún no has creado la función RPC en Supabase, usar upsert de respaldo
           if (rpcError) {
             await supabaseClient.from('candidato_votos').upsert({
               candidato_id: candidatoId,
@@ -1081,14 +1106,12 @@
     }
 
     function setModoEleccion(nuevoModo) {
-      // Compatibilidad por si algún enlace llama a 'alcaldias'
       if (nuevoModo === 'alcaldias') nuevoModo = 'municipios';
 
       modoActual = nuevoModo;
       filtroActivo = '';
       document.getElementById('inputBusqueda').value = '';
 
-      // Limpiamos la selección del comparador sin disparar renderizado doble
       seleccionadosParaComparar = [];
       actualizarBarraComparador();
 
@@ -1233,7 +1256,8 @@
 
       contenedor.innerHTML = filtrados.map(c => {
         const idSeguro = escaparHTML(c.id);
-        const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+        const avatarFallback = obtenerAvatarFallback(c.nombre_propietario);
+        const foto = obtenerFotoCandidato(c);
         const partidoTexto = escaparHTML(c.partido || 'Independiente');
         const nombreSeguro = escaparHTML(c.nombre_propietario);
         const cargoSeguro = escaparHTML(c.cargo);
@@ -1263,7 +1287,7 @@
                 src="${foto}" 
                 alt="${nombreSeguro}" 
                 class="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition duration-500"
-                onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+                onerror="this.onerror=null; this.src='${avatarFallback}'"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
 
@@ -1493,7 +1517,8 @@
 
       contenedor.innerHTML = candidatosFiltrados.map(c => {
         const idSeguro = escaparHTML(c.id);
-        const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+        const avatarFallback = obtenerAvatarFallback(c.nombre_propietario);
+        const foto = obtenerFotoCandidato(c);
         const logoUrl = sanearUrl(c.logo);
         const logoPartido = logoUrl ? `<img src="${logoUrl}" referrerpolicy="no-referrer" alt="Logo" class="h-6 object-contain" />` : '';
         const partidoTexto = escaparHTML(c.partido_siglas || c.partido || 'Independiente');
@@ -1524,14 +1549,14 @@
               <span>${seleccionado ? '✓ Seleccionado' : '+ Comparar'}</span>
             </button>
 
-            <div onclick="abrirModal('${idSeguro}')" class="relative h-64 bg-slate-200 flex items-end overflow-hidden cursor-pointer">
+            <div onclick="abrirModal('${idSeguro}')" class="relative h-64 bg-slate-800 flex items-end overflow-hidden cursor-pointer">
               <img 
                 src="${foto}" 
                 alt="${nombreSeguro}" 
                 referrerpolicy="no-referrer"
                 loading="lazy"
                 class="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition duration-500"
-                onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+                onerror="this.onerror=null; this.src='${avatarFallback}'"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
               
@@ -1615,7 +1640,7 @@
     // CONVERSIÓN DE IMÁGENES A BASE64 PARA EVITAR ERROR DE CORS
     // ========================================================
     async function obtenerImagenBase64(url) {
-      if (!url || url.includes('placehold.co')) return url;
+      if (!url) return '';
       try {
         const respuesta = await fetch(url, { mode: 'cors' });
         const blob = await respuesta.blob();
@@ -1694,16 +1719,11 @@
 
       document.getElementById('modalFichaCompartir').classList.remove('hidden');
 
-      const fotoUrl = sanearUrl(c.fotografia);
-      if (fotoUrl) {
-        try {
-          const fotoBase64 = await obtenerImagenBase64(fotoUrl);
-          imgFoto.src = fotoBase64;
-        } catch (e) {
-          imgFoto.src = fotoUrl;
-        }
-      } else {
-        imgFoto.src = 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+      const fotoUrl = obtenerFotoCandidato(c);
+      try {
+        imgFoto.src = await obtenerImagenBase64(fotoUrl);
+      } catch (e) {
+        imgFoto.src = obtenerAvatarFallback(c.nombre_propietario);
       }
 
       document.getElementById('mensajeFichaEstado').textContent = '';
@@ -2005,7 +2025,8 @@
             ${ranking.map((item, idx) => {
               const c = item.candidato;
               const idSeguro = escaparHTML(c.id);
-              const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+              const avatarFallback = obtenerAvatarFallback(c.nombre_propietario);
+              const foto = obtenerFotoCandidato(c);
               const logoUrl = sanearUrl(c.logo);
               const logo = logoUrl ? `<img src="${logoUrl}" referrerpolicy="no-referrer" class="h-5 object-contain" />` : '';
               const medalla = medallas[idx] || `#${idx + 1}`;
@@ -2017,8 +2038,8 @@
                     <span class="text-xl font-black shrink-0 w-8 text-center">${medalla}</span>
                     <img 
                       src="${foto}" 
-                      class="w-14 h-16 rounded-xl object-cover object-top border border-slate-200 shrink-0 bg-slate-100" 
-                      onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+                      class="w-14 h-16 rounded-xl object-cover object-top border border-slate-200 shrink-0 bg-slate-800" 
+                      onerror="this.onerror=null; this.src='${avatarFallback}'"
                     />
                     <div class="min-w-0">
                       <div class="flex items-center gap-1.5 mb-0.5">
@@ -2139,7 +2160,8 @@
         <div style="display: grid; grid-template-columns: repeat(${numCols}, minmax(260px, 1fr)); gap: 1.25rem; align-items: start;">
           ${candidatosAComparar.map(c => {
             const idSeguro = escaparHTML(c.id);
-            const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+            const avatarFallback = obtenerAvatarFallback(c.nombre_propietario);
+            const foto = obtenerFotoCandidato(c);
             const logoUrl = sanearUrl(c.logo);
             const logo = logoUrl ? `<img src="${logoUrl}" referrerpolicy="no-referrer" class="h-6 object-contain" />` : '';
             const hist = historialPartidos[String(c.id)];
@@ -2165,7 +2187,7 @@
                       src="${foto}" 
                       referrerpolicy="no-referrer" 
                       class="w-20 h-24 object-cover object-top rounded-2xl border-2 border-white/20 bg-slate-800 shrink-0"
-                      onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+                      onerror="this.onerror=null; this.src='${avatarFallback}'"
                     />
                     <div class="text-center sm:text-left min-w-0 flex-1">
                       <div class="flex items-center justify-center sm:justify-start gap-1.5 mb-1.5">
@@ -2288,7 +2310,8 @@
       if (!c) return;
 
       const idSeguro = escaparHTML(c.id);
-      const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+      const avatarFallback = obtenerAvatarFallback(c.nombre_propietario);
+      const foto = obtenerFotoCandidato(c);
       const logoUrl = sanearUrl(c.logo);
       const logoPartido = logoUrl ? `<img src="${logoUrl}" referrerpolicy="no-referrer" class="h-8 object-contain" />` : '';
       const partidoTexto = escaparHTML(c.partido_siglas || c.partido || 'Independiente');
@@ -2357,7 +2380,7 @@
             src="${foto}" 
             referrerpolicy="no-referrer"
             class="w-28 h-36 object-cover object-top rounded-2xl border-2 border-white/20 bg-slate-800"
-            onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+            onerror="this.onerror=null; this.src='${avatarFallback}'"
           />
           <div class="text-center sm:text-left flex-1">
             <div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
