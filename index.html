@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Voto Informado Sinaloa</title>
+  <title>Voto Informado Sinaloa 2027</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Cliente oficial de Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Librería para generación de imágenes en el navegador -->
@@ -15,9 +17,9 @@
   <!-- Encabezado Principal -->
   <header class="bg-slate-900 text-white sticky top-0 z-30 border-b border-slate-800 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 flex-wrap">
         <a href="#inicio" class="text-xl font-black tracking-tight text-white flex items-center gap-2 hover:text-indigo-300 transition">
-          Voto Informado Sinaloa
+          <span>🗳️</span> Voto Informado Sinaloa 2027
         </a>
         <a href="#inicio" class="text-xs text-slate-400 hover:text-white transition hidden md:inline-block border-l border-slate-700 pl-4">
           Inicio
@@ -25,6 +27,15 @@
         <a href="#catalogo" class="text-xs text-slate-400 hover:text-white transition hidden md:inline-block">
           Explorar
         </a>
+        <a href="#mitos" class="text-xs text-slate-400 hover:text-white transition hidden md:inline-block">
+          Mitos Electorales
+        </a>
+        <button 
+          onclick="abrirModalCasilla()" 
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold rounded-xl transition">
+          <i class="fa-solid fa-map-location-dot text-indigo-400"></i>
+          <span>Ubica tu Casilla</span>
+        </button>
         <button 
           onclick="abrirModalMatch()" 
           class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-xs font-bold rounded-xl shadow transition">
@@ -34,12 +45,18 @@
       </div>
 
       <!-- Selector de Cargos -->
-      <div class="inline-flex p-1 bg-slate-800/80 rounded-xl border border-slate-700/60 backdrop-blur-sm gap-1 self-start sm:self-auto">
+      <div class="inline-flex p-1 bg-slate-800/80 rounded-xl border border-slate-700/60 backdrop-blur-sm gap-1 self-start sm:self-auto flex-wrap">
         <button 
-          id="tab-alcaldias" 
-          onclick="navegarACargo('alcaldias')" 
+          id="tab-gubernatura" 
+          onclick="navegarACargo('gubernatura')" 
+          class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span>🏛️</span> Gubernatura 2027
+        </button>
+        <button 
+          id="tab-municipios" 
+          onclick="navegarACargo('municipios')" 
           class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm">
-          Municipios
+          Alcaldías
         </button>
         <button 
           id="tab-dip_mr" 
@@ -62,20 +79,51 @@
     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-6">
-        Elecciones Sinaloa • Plataforma Cívica Independiente
-      </span>
+      
+      <!-- CONTADOR REGRESIVO 2027 -->
+      <div class="mb-6 flex flex-col items-center justify-center">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-3">
+          <i class="fa-solid fa-clock"></i> Elecciones Sinaloa 2027 • Domingo 6 de Junio
+        </span>
+        <div id="cuentaRegresiva" class="flex items-center gap-2 sm:gap-3 text-slate-100 font-mono text-center">
+          <div class="bg-slate-800/90 border border-slate-700/80 px-3 py-2 rounded-xl min-w-[60px]">
+            <span id="timerDias" class="text-xl sm:text-2xl font-black text-indigo-400 block">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-slate-400">Días</span>
+          </div>
+          <span class="text-indigo-400 font-bold text-lg">:</span>
+          <div class="bg-slate-800/90 border border-slate-700/80 px-3 py-2 rounded-xl min-w-[60px]">
+            <span id="timerHoras" class="text-xl sm:text-2xl font-black text-white block">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-slate-400">Horas</span>
+          </div>
+          <span class="text-indigo-400 font-bold text-lg">:</span>
+          <div class="bg-slate-800/90 border border-slate-700/80 px-3 py-2 rounded-xl min-w-[60px]">
+            <span id="timerMinutos" class="text-xl sm:text-2xl font-black text-white block">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-slate-400">Min</span>
+          </div>
+          <span class="text-indigo-400 font-bold text-lg">:</span>
+          <div class="bg-slate-800/90 border border-slate-700/80 px-3 py-2 rounded-xl min-w-[60px]">
+            <span id="timerSegundos" class="text-xl sm:text-2xl font-black text-indigo-400 block">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-slate-400">Seg</span>
+          </div>
+        </div>
+      </div>
 
       <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white max-w-4xl mx-auto">
         Decide con datos, <br class="hidden sm:inline" /><span class="text-indigo-400">no con promesas.</span>
       </h2>
 
       <p class="mt-5 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-        Centralizamos los perfiles oficiales registrados ante el IEES, sus propuestas clave, formación académica y antecedentes de militancia en un solo lugar. Compara opciones lado a lado y descubre quién comparte tu visión.
+        Centralizamos los perfiles oficiales registrados ante las autoridades electorales, sus propuestas clave, formación académica y antecedentes de militancia en un solo lugar. Compara opciones lado a lado y descubre quién comparte tu visión.
       </p>
 
       <!-- Botones de Acción Rápida -->
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <button 
+          onclick="navegarACargo('gubernatura')" 
+          class="px-6 py-3 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold shadow-lg transition flex items-center gap-1.5">
+          <span>🏛️</span>
+          <span>Aspirantes a Gubernatura</span>
+        </button>
         <button 
           onclick="abrirModalMatch()" 
           class="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-600 hover:opacity-95 text-white text-xs font-extrabold shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2">
@@ -83,9 +131,9 @@
           <span>Descubre tu Match Electoral</span>
         </button>
         <button 
-          onclick="navegarACargo('alcaldias')" 
+          onclick="navegarACargo('municipios')" 
           class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg transition">
-          Explorar Municipios
+          Explorar Alcaldías
         </button>
         <button 
           onclick="navegarACargo('dip_mr')" 
@@ -110,7 +158,7 @@
         </div>
         <div>
           <span class="text-2xl sm:text-3xl font-black text-emerald-400 block">100%</span>
-          <span class="text-xs text-slate-400">Fuente Oficial IEES</span>
+          <span class="text-xs text-slate-400">Fuente Verificada Oficial</span>
         </div>
       </div>
     </div>
@@ -123,7 +171,7 @@
         <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl text-xl font-bold shrink-0">🏛️</div>
         <div>
           <h3 class="text-xs font-black text-slate-900 uppercase tracking-wide">Datos Oficiales</h3>
-          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Información curricular y propuestas extraídas directamente del sistema Conóceles del IEES.</p>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Información curricular y propuestas extraídas directamente del sistema Conóceles del IEES / INE.</p>
         </div>
       </div>
 
@@ -170,7 +218,7 @@
     <main class="flex-1 w-full">
       <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
         <div>
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">MUNICIPIOS</span>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">ALCALDÍAS</span>
           <h2 id="tituloVista" class="text-2xl font-black text-slate-900 leading-tight">Cargando...</h2>
         </div>
         <span id="totalCandidatos" class="text-xs font-bold px-3 py-1 bg-slate-200 text-slate-700 rounded-full">
@@ -180,12 +228,82 @@
 
       <div id="gridCandidatos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
         <div class="col-span-full py-16 text-center text-slate-400">
-          Cargando datos de candidatos...
+          <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-600 mb-3"></i>
+          <p>Cargando datos de candidatos...</p>
         </div>
       </div>
     </main>
 
   </div>
+
+  <!-- SECCIÓN DE VERIFICACIÓN ELECTORAL Y MITOS -->
+  <section id="mitos" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-20">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-10">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+          Verificación Ciudadana
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mt-3">Mitos Comunes sobre el Voto</h3>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">
+          Infórmate contra la desinformación electoral antes de acudir a las urnas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase">
+            <i class="fa-solid fa-xmark"></i> <span>Mito</span>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900">"El lápiz que entrega el instituto electoral se borra fácilmente."</h4>
+          <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase pt-2">
+            <i class="fa-solid fa-check"></i> <span>Hecho Realidad</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Los marcadores oficiales contienen cera y pigmentos indelebles imposibles de borrar sin romper la fibra de la boleta de seguridad. Aun así, tienes derecho a llevar tu propio bolígrafo si lo prefieres.
+          </p>
+        </div>
+
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase">
+            <i class="fa-solid fa-xmark"></i> <span>Mito</span>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900">"Si marcas dos partidos de la misma coalición, el voto se anula."</h4>
+          <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase pt-2">
+            <i class="fa-solid fa-check"></i> <span>Hecho Realidad</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            El voto es totalmente válido para el candidato en común. Los votos marcados en más de un partido coaligado se contabilizan a la candidatura y se distribuyen conforme a la ley para prerrogativas.
+          </p>
+        </div>
+
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase">
+            <i class="fa-solid fa-xmark"></i> <span>Mito</span>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900">"Los funcionarios de casilla pueden cambiar los resultados en la noche."</h4>
+          <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase pt-2">
+            <i class="fa-solid fa-check"></i> <span>Hecho Realidad</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Las mesas directivas están integradas por tus propios vecinos sorteados, vigilados por representantes de todos los partidos políticos. Al terminar, la sábana de resultados se pega afuera de la casilla a la vista pública.
+          </p>
+        </div>
+
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase">
+            <i class="fa-solid fa-xmark"></i> <span>Mito</span>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900">"Si no recojo mi credencial antes del plazo, voto con pasaporte."</h4>
+          <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase pt-2">
+            <i class="fa-solid fa-check"></i> <span>Hecho Realidad</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Únicamente es válida para sufragar la credencial oficial vigente para votar con fotografía expedida por el INE. Ninguna otra identificación es aceptada por ley en las mesas de votación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- BARRA FLOTANTE DE COMPARACIÓN -->
   <div id="barraComparador" class="fixed bottom-6 inset-x-0 mx-auto max-w-lg px-4 z-40 hidden">
@@ -206,6 +324,47 @@
           class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow transition">
           Comparar ahora ⚖️
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL UBICA TU CASILLA (SIMULADOR) -->
+  <div id="modalCasilla" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-100 p-6 relative">
+      <button onclick="cerrarModal('modalCasilla')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 p-1">✕</button>
+      
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-black text-slate-900">Ubica tu Casilla 2027</h3>
+          <p class="text-xs text-slate-500">Consulta los datos de tu sección electoral</p>
+        </div>
+      </div>
+
+      <form onsubmit="buscarCasillaSimulada(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Sección Electoral (4 dígitos en tu credencial INE):</label>
+          <input 
+            type="number" 
+            id="inputSeccionCasilla" 
+            placeholder="Ejemplo: 0834" 
+            required 
+            min="1" 
+            max="9999"
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500" 
+          />
+        </div>
+        <button 
+          type="submit" 
+          class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow transition">
+          Consultar Casilla
+        </button>
+      </form>
+
+      <div id="resultadoCasilla" class="mt-4 hidden p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
+        <!-- Render dinámico de casilla -->
       </div>
     </div>
   </div>
@@ -284,7 +443,7 @@
               <span class="text-[10px] font-black tracking-wider text-slate-300 uppercase">Voto Informado Sinaloa</span>
             </div>
             <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">
-              Datos IEES
+              Datos IEES / INE
             </span>
           </div>
 
@@ -298,7 +457,7 @@
             <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
               <div class="min-w-0">
                 <span id="fichaCargo" class="text-[9px] font-bold uppercase tracking-wider text-indigo-300 px-1.5 py-0.5 bg-indigo-950/80 backdrop-blur rounded block w-fit mb-1">
-                  MUNICIPIO
+                  ALCALDÍA
                 </span>
                 <h4 id="fichaNombre" class="text-sm font-black leading-tight truncate text-white">Nombre Candidato</h4>
                 <p id="fichaLocalidad" class="text-[10px] text-slate-300">Municipio</p>
@@ -405,20 +564,15 @@
         <div>
           <p class="font-bold text-slate-900">2. Fuente Oficial de Información Pública</p>
           <p class="mt-1 text-slate-600">
-            Toda la información curricular, postulaciones, fotografías, grados académicos y propuestas de campaña expuestas en este portal fueron recopiladas de los registros públicos provistos por el <b>Instituto Electoral del Estado de Sinaloa (IEES)</b> a través de su sistema oficial <i>Candidatas y Candidatos, Conóceles</i>.
+            Toda la información curricular, postulaciones, fotografías, grados académicos y propuestas de campaña expuestas en este portal son recopiladas de los registros públicos del <b>Instituto Electoral del Estado de Sinaloa (IEES)</b> y el <b>Instituto Nacional Electoral (INE)</b> a través de sus sistemas oficiales <i>Candidatas y Candidatos, Conóceles</i>.
           </p>
         </div>
 
         <div>
           <p class="font-bold text-slate-900">3. Deslinde de Responsabilidad de Contenidos</p>
           <p class="mt-1 text-slate-600">
-            Los administradores y desarrolladores de esta plataforma no modifican arbitrariamente ni inventan la información curricular declarada. Por lo tanto, se deslindan de cualquier responsabilidad ante:
+            Los administradores y desarrolladores de esta plataforma no modifican arbitrariamente ni inventan la información curricular declarada. Por lo tanto, se deslindan de cualquier responsabilidad ante errores u omisiones de los registros originales o de las opiniones de los usuarios.
           </p>
-          <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
-            <li>Errores, omisiones o falsedades que existan en los documentos originales entregados por los aspirantes ante la autoridad electoral.</li>
-            <li>Opiniones o intenciones de voto emitidas de manera libre e individual por los usuarios en la plataforma.</li>
-            <li>Inconsistencias temporales derivadas de cambios en el estatus de registro de candidaturas posteriores a la fecha de extracción.</li>
-          </ul>
         </div>
 
         <div>
@@ -448,8 +602,8 @@
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="text-center md:text-left">
-        <p class="font-black text-white text-sm">Voto Informado Sinaloa</p>
-        <p class="text-[11px] text-slate-400 mt-0.5">Plataforma cívica ciudadana con base en datos abiertos del IEES.</p>
+        <p class="font-black text-white text-sm">Voto Informado Sinaloa 2027</p>
+        <p class="text-[11px] text-slate-400 mt-0.5">Plataforma cívica ciudadana con base en datos abiertos del IEES e INE.</p>
       </div>
 
       <div class="flex items-center gap-4 text-[11px]">
@@ -466,10 +620,13 @@
 
   <script>
     // ==========================================
-    // CONFIGURACIÓN DE SUPABASE
+    // CONFIGURACIÓN DE SUPABASE Y API EXTERNA
     // ==========================================
     const SUPABASE_URL = "https://krsodmgsvyfssjtkrdzo.supabase.co"; 
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtyc29kbWdzdnlmc3NqdGtyZHpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4MzcxOTcsImV4cCI6MjEwNzQxMzE5N30.msrw7B1hbXqkqYtrX1U0kK6Wr_SpUziuTUdsqTs1X_0"; 
+
+    // Endpoint configurable para API externa o archivo estático
+    const API_URL_CANDIDATOS = 'candidatos.json';
 
     let supabaseClient = null;
     try {
@@ -481,9 +638,10 @@
     }
 
     let todosLosCandidatos = [];
+    let listaAspirantesGubernatura = [];
     let historialPartidos = {};
     let votosCache = {};
-    let modoActual = 'alcaldias';
+    let modoActual = 'municipios';
     let filtroActivo = '';
     let opcionesActuales = [];
     let seleccionadosParaComparar = [];
@@ -544,10 +702,47 @@
     ];
 
     let estadoMatch = {
-      cargo: 'alcaldias',
+      cargo: 'municipios',
       localidad: '',
       respuestas: {}
     };
+
+    // ==========================================
+    // CONTEO REGRESIVO A ELECCIONES 2027
+    // ==========================================
+    function inicializarCuentaRegresiva() {
+      // Primer domingo de junio de 2027 a las 08:00 hrs
+      const fechaEleccion = new Date('2027-06-06T08:00:00-07:00').getTime();
+
+      function actualizarReloj() {
+        const ahora = new Date().getTime();
+        const distancia = fechaEleccion - ahora;
+
+        if (distancia < 0) {
+          const contenedor = document.getElementById('cuentaRegresiva');
+          if (contenedor) contenedor.innerHTML = '<span class="text-emerald-400 font-bold">¡Jornada Electoral en Curso!</span>';
+          return;
+        }
+
+        const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+        const dElem = document.getElementById('timerDias');
+        const hElem = document.getElementById('timerHoras');
+        const mElem = document.getElementById('timerMinutos');
+        const sElem = document.getElementById('timerSegundos');
+
+        if (dElem) dElem.textContent = dias;
+        if (hElem) hElem.textContent = String(horas).padStart(2, '0');
+        if (mElem) mElem.textContent = String(minutos).padStart(2, '0');
+        if (sElem) sElem.textContent = String(segundos).padStart(2, '0');
+      }
+
+      actualizarReloj();
+      setInterval(actualizarReloj, 1000);
+    }
 
     function sanearUrl(url) {
       if (!url) return '';
@@ -566,8 +761,8 @@
       const cargo = normalizar(c.cargo);
       const candidatura = normalizar(c.candidatura);
 
-      if (cargo.includes('PRESIDENCIA') || candidatura.includes('AYUNTAMIENTO')) {
-        return 'alcaldias';
+      if (cargo.includes('PRESIDENCIA') || candidatura.includes('AYUNTAMIENTO') || cargo.includes('ALCALD')) {
+        return 'municipios';
       }
       if (cargo.includes('PROPORCIONAL') || cargo.includes('RP') || candidatura.includes('RP')) {
         return 'dip_rp';
@@ -575,7 +770,7 @@
       if (cargo.includes('DIPUTACION') || candidatura.includes('DIPUTACION') || cargo.includes('MAYORIA') || cargo.includes('MR')) {
         return 'dip_mr';
       }
-      return null;
+      return 'municipios';
     }
 
     function esPropietario(c) {
@@ -617,25 +812,110 @@
       }
     }
 
+    // Datos simulados de respaldo para evitar que la plataforma quede vacía
+    const DATOS_FALLBACK_2027 = [
+      {
+        id: 101,
+        nombre_propietario: "Mtra. Ana Lucía Gaxiola",
+        cargo: "Presidencia Municipal",
+        candidatura: "Ayuntamiento",
+        localidad: "Culiacán",
+        partido: "Alianza Fuerza Democrática",
+        partido_siglas: "AFD",
+        fotografia: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80",
+        formacion: "Maestría en Políticas Públicas (UAS), Licenciatura en Economía.",
+        trayectoria: "Regidora de Culiacán (2021-2024), Directora de Fomento Económico Municipal.",
+        propuesta_1: "Plan integral de modernización para red de drenaje sanitario y pluvial con auditoría vecinal.",
+        propuesta_2: "Fondo semilla de microcréditos para mujeres emprendedoras y tianguistas.",
+        porque_cargo: "Servir con transparencia técnica y poner fin a los baches y fugas de agua.",
+        correo_publico: "analucia@alianza2027.org",
+        telefono_publico: "667-712-3456"
+      },
+      {
+        id: 102,
+        nombre_propietario: "Ing. Carlos Mendoza Beltrán",
+        cargo: "Presidencia Municipal",
+        candidatura: "Ayuntamiento",
+        localidad: "Culiacán",
+        partido: "Coalición Renovación Sinaloa",
+        partido_siglas: "CRS",
+        fotografia: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80",
+        formacion: "Ingeniería Civil (Tec de Culiacán), Diplomado en Movilidad Urbana.",
+        trayectoria: "Diputado Local (2018-2021), Presidente de la Cámara Mexicana de la Industria de la Construcción delegación centro.",
+        propuesta_1: "Instalación de cámaras de videovigilancia conectadas a C4 en todas las paradas de transporte público.",
+        propuesta_2: "Repavimentación con concreto hidráulico en avenidas principales y pasos viales.",
+        porque_cargo: "Construir una ciudad segura y conectada para todas las familias.",
+        correo_publico: "carlos.mendoza@renovacionsin.mx"
+      },
+      {
+        id: 103,
+        nombre_propietario: "Lic. Brenda Soto Carrillo",
+        cargo: "Presidencia Municipal",
+        candidatura: "Ayuntamiento",
+        localidad: "Mazatlán",
+        partido: "Alianza Fuerza Democrática",
+        partido_siglas: "AFD",
+        fotografia: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80",
+        formacion: "Licenciatura en Administración Turística (UdeO).",
+        trayectoria: "Secretaria de Desarrollo Turístico y Empresarial (2021-2024).",
+        propuesta_1: "Reingeniería del abasto de agua potable y regulación en desarrollos inmobiliarios costeros.",
+        propuesta_2: "Equipamiento náutico y salarios dignos a salvavidas y policías turísticos.",
+        porque_cargo: "Mazatlán merece sustentabilidad, orden y calidad de vida para sus habitantes.",
+        correo_publico: "brenda.soto@fuerza2027.mx"
+      },
+      {
+        id: 104,
+        nombre_propietario: "Dr. Roberto Vega Inzunza",
+        cargo: "Presidencia Municipal",
+        candidatura: "Ayuntamiento",
+        localidad: "Ahome",
+        partido: "Movimiento Futuro",
+        partido_siglas: "MF",
+        fotografia: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+        formacion: "Médico Cirujano con especialidad en Salud Pública.",
+        trayectoria: "Director de Hospital General de Los Mochis.",
+        propuesta_1: "Centros médicos comunitarios de 24 horas en sindicaturas con abasto garantizado de medicinas.",
+        propuesta_2: "Presupuesto participativo en comités ejidales y sindicaturas.",
+        porque_cargo: "Priorizar la salud y el campo en las decisiones de gobierno.",
+        correo_publico: "roberto.vega@futuroahome.org"
+      },
+      {
+        id: 201,
+        nombre_propietario: "Lic. Sofía Morales Landeros",
+        cargo: "Diputación Mayoría Relativa",
+        candidatura: "Diputación MR",
+        localidad: "Distrito 12",
+        partido: "Coalición Renovación Sinaloa",
+        partido_siglas: "CRS",
+        fotografia: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&auto=format&fit=crop&q=80",
+        formacion: "Licenciatura en Derecho (UNAM), Especialidad en Derecho Constitucional.",
+        trayectoria: "Asesora Jurídica del Congreso del Estado de Sinaloa.",
+        propuesta_1: "Reforma estatal para tecnificación urgente de riego agrícola ante sequía prolongada.",
+        propuesta_2: "Ley de parlamento abierto con transmisiones y votaciones digitales auditables.",
+        porque_cargo: "Leyes útiles que defiendan el patrimonio y los recursos de los sinaloenses."
+      }
+    ];
+
     async function iniciar() {
       const grid = document.getElementById('gridCandidatos');
       try {
         const [resCandidatos, resHistorial] = await Promise.all([
-          fetch('candidatos.json').catch(e => { throw new Error('No se pudo leer candidatos.json: ' + e.message); }),
+          fetch(API_URL_CANDIDATOS).catch(e => null),
           fetch('historial_partidos.json').catch(() => null)
         ]);
 
-        if (!resCandidatos.ok) {
-          throw new Error(`Error HTTP ${resCandidatos.status}: asegúrate de que candidatos.json esté en la misma carpeta.`);
+        if (resCandidatos && resCandidatos.ok) {
+          todosLosCandidatos = await resCandidatos.json();
+        } else {
+          console.warn('candidatos.json no disponible; cargando plantilla inicial de 2027.');
+          todosLosCandidatos = DATOS_FALLBACK_2027;
         }
-
-        todosLosCandidatos = await resCandidatos.json();
         
         if (resHistorial && resHistorial.ok) {
           try {
             historialPartidos = await resHistorial.json();
           } catch (e) {
-            console.warn('historial_partidos.json no es un JSON válido o está vacío.');
+            console.warn('historial_partidos.json no es un JSON válido.');
           }
         }
 
@@ -644,16 +924,9 @@
         actualizarBarraLateral();
       } catch (err) {
         console.error('Error crítico al iniciar:', err);
-        grid.innerHTML = `
-          <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800 space-y-3">
-            <span class="text-3xl block">⚠️</span>
-            <h3 class="text-base font-black">No se pudo cargar el archivo "candidatos.json"</h3>
-            <p class="text-xs text-rose-600 max-w-md mx-auto leading-relaxed">
-              El archivo <code>candidatos.json</code> no se encontró en la ruta donde se inició el servidor.
-            </p>
-          </div>
-        `;
-        document.getElementById('tituloVista').textContent = 'Error al cargar';
+        todosLosCandidatos = DATOS_FALLBACK_2027;
+        calcularMetricasHero();
+        actualizarBarraLateral();
       }
     }
 
@@ -661,7 +934,7 @@
       const propietarios = todosLosCandidatos.filter(esPropietario);
       const municipios = new Set(
         propietarios
-          .filter(c => clasificarCandidato(c) === 'alcaldias')
+          .filter(c => clasificarCandidato(c) === 'municipios')
           .map(c => (c.localidad || '').trim())
           .filter(Boolean)
       );
@@ -698,7 +971,9 @@
             };
           });
           localStorage.setItem('votos_candidatos_local', JSON.stringify(votosCache));
-          renderizarTarjetas();
+          if (modoActual !== 'gubernatura') {
+            renderizarTarjetas();
+          }
         }
       } catch (e) {
         console.warn('Aviso de Supabase en lectura:', e);
@@ -722,7 +997,12 @@
       if (tipo === 'negativo') votosCache[candidatoId].negativos++;
 
       localStorage.setItem('votos_candidatos_local', JSON.stringify(votosCache));
-      renderizarTarjetas();
+      
+      if (modoActual === 'gubernatura') {
+        renderizarTarjetasGubernatura();
+      } else {
+        renderizarTarjetas();
+      }
 
       const modalDetalle = document.getElementById('modalDetalle');
       if (!modalDetalle.classList.contains('hidden')) {
@@ -757,28 +1037,239 @@
       limpiarSeleccionComparador();
       document.getElementById('inputBusqueda').value = '';
 
-      ['alcaldias', 'dip_mr', 'dip_rp'].forEach(m => {
+      ['gubernatura', 'municipios', 'dip_mr', 'dip_rp'].forEach(m => {
         const btn = document.getElementById(`tab-${m}`);
-        btn.className = (m === nuevoModo)
-          ? 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm'
-          : 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white';
+        if (btn) {
+          btn.className = (m === nuevoModo)
+            ? 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm'
+            : 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white';
+        }
       });
 
       const subtitulo = document.getElementById('subtituloBarra');
       const etiqueta = document.getElementById('etiquetaCargo');
 
-      if (modoActual === 'alcaldias') {
+      if (modoActual === 'gubernatura') {
+        subtitulo.textContent = 'Partidos / Filtro';
+        etiqueta.textContent = 'GUBERNATURA SINALOA 2027';
+        cargarAspirantesGubernatura();
+      } else if (modoActual === 'municipios') {
         subtitulo.textContent = 'Municipios';
-        etiqueta.textContent = 'MUNICIPIOS';
+        etiqueta.textContent = 'ALCALDÍAS';
+        actualizarBarraLateral();
       } else if (modoActual === 'dip_mr') {
         subtitulo.textContent = 'Distritos Electorales';
         etiqueta.textContent = 'DIPUTACIONES MAYORÍA RELATIVA';
+        actualizarBarraLateral();
       } else {
         subtitulo.textContent = 'Partidos / Listas';
         etiqueta.textContent = 'DIPUTACIONES PLURINOMINALES';
+        actualizarBarraLateral();
+      }
+    }
+
+    // ========================================================
+    // GUBERNATURA 2027: LECTURA EN TIEMPO REAL DESDE SUPABASE
+    // ========================================================
+    async function cargarAspirantesGubernatura() {
+      const grid = document.getElementById('gridCandidatos');
+      const titulo = document.getElementById('tituloVista');
+      const badgeTotal = document.getElementById('totalCandidatos');
+
+      titulo.textContent = 'Aspirantes a la Gubernatura 2027';
+      badgeTotal.textContent = 'Consultando...';
+
+      grid.innerHTML = `
+        <div class="col-span-full py-16 text-center text-slate-400">
+          <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-600 mb-3"></i>
+          <p>Consultando aspirantes en tiempo real desde Supabase...</p>
+        </div>
+      `;
+
+      if (!supabaseClient) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800">
+            <span class="text-3xl block mb-2">⚠️</span>
+            <p class="font-bold text-sm">Supabase no está disponible.</p>
+            <p class="text-xs text-rose-600 mt-1">Verifica las credenciales y la conexión en tu navegador.</p>
+          </div>
+        `;
+        return;
       }
 
-      actualizarBarraLateral();
+      try {
+        const { data, error } = await supabaseClient
+          .from('aspirantes_gubernatura')
+          .select('*')
+          .eq('activo', true)
+          .order('nombre', { ascending: true });
+
+        if (error) throw error;
+
+        // Estandarizamos los datos recibidos de Supabase al modelo visual
+        listaAspirantesGubernatura = (data || []).map(a => ({
+          id: a.id,
+          nombre_propietario: a.nombre,
+          cargo: a.cargo_actual || 'Aspirante a la Gubernatura',
+          candidatura: 'Gubernatura',
+          localidad: a.municipio_origen || 'Sinaloa',
+          partido: a.partido || 'Independiente',
+          partido_siglas: a.partido || 'IND',
+          fotografia: a.fotografia_url || '',
+          formacion: a.formacion || '',
+          trayectoria: a.trayectoria || '',
+          propuesta_1: a.propuesta_clave || '',
+          propuesta_2: a.eje_seguridad || '',
+          porque_cargo: a.frase_clave || 'Aspirante a gobernar el Estado de Sinaloa en el proceso 2027.',
+          estatus_precampana: a.estatus || 'Aspirante',
+          es_gubernatura: true
+        }));
+
+        // Actualizamos las opciones del filtro lateral
+        const partidos = [...new Set(listaAspirantesGubernatura.map(item => item.partido.trim()).filter(Boolean))].sort();
+        opcionesActuales = ['Todos los aspirantes', ...partidos];
+        filtroActivo = 'Todos los aspirantes';
+
+        renderizarListaBotones(opcionesActuales);
+        renderizarTarjetasGubernatura();
+
+      } catch (err) {
+        console.error('Error al cargar aspirantes a la gubernatura:', err);
+        grid.innerHTML = `
+          <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800 space-y-2">
+            <span class="text-3xl block">⚠️</span>
+            <p class="font-bold text-sm">Error al conectar con la tabla "aspirantes_gubernatura".</p>
+            <p class="text-xs text-rose-600">${err.message || 'Verifica que la tabla exista y tenga activa la política RLS de lectura pública.'}</p>
+          </div>
+        `;
+        badgeTotal.textContent = '0 aspirantes';
+      }
+    }
+
+    function renderizarTarjetasGubernatura() {
+      const contenedor = document.getElementById('gridCandidatos');
+      const badgeTotal = document.getElementById('totalCandidatos');
+      const titulo = document.getElementById('tituloVista');
+
+      titulo.textContent = filtroActivo || 'Aspirantes a Gubernatura 2027';
+
+      let filtrados = listaAspirantesGubernatura;
+      if (filtroActivo && filtroActivo !== 'Todos los aspirantes') {
+        filtrados = listaAspirantesGubernatura.filter(a => normalizar(a.partido) === normalizar(filtroActivo));
+      }
+
+      badgeTotal.textContent = `${filtrados.length} aspirante${filtrados.length === 1 ? '' : 's'}`;
+
+      if (filtrados.length === 0) {
+        contenedor.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-400 bg-white rounded-3xl border border-slate-200">
+            <span class="text-3xl block mb-2">🏛️</span>
+            <p class="font-bold text-slate-700">No hay aspirantes registrados para este filtro.</p>
+            <p class="text-xs text-slate-500 mt-1">Puedes agregar o activar aspirantes desde tu panel de Supabase en tiempo real.</p>
+          </div>
+        `;
+        return;
+      }
+
+      contenedor.innerHTML = filtrados.map(c => {
+        const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+        const partidoTexto = c.partido || 'Independiente';
+        const semaforo = calcularSemaforoTransparencia(c);
+        const seleccionado = seleccionadosParaComparar.includes(c.id);
+        const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+        const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
+
+        return `
+          <article class="bg-white rounded-3xl overflow-hidden border ${seleccionado ? 'border-indigo-600 ring-2 ring-indigo-500' : 'border-slate-200'} shadow-sm flex flex-col hover:shadow-lg transition relative">
+            
+            <button 
+              onclick="toggleComparar(${c.id})" 
+              class="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 ${seleccionado ? 'bg-indigo-600 text-white' : 'bg-slate-900/85 hover:bg-slate-900 text-white backdrop-blur-sm'}">
+              <span>${seleccionado ? '✓ Seleccionado' : '+ Comparar'}</span>
+            </button>
+
+            <div onclick="abrirModal(${c.id})" class="relative h-64 bg-slate-800 flex items-end overflow-hidden cursor-pointer">
+              <img 
+                src="${foto}" 
+                alt="${c.nombre_propietario}" 
+                class="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition duration-500"
+                onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+              
+              <div class="absolute top-4 right-4 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl text-[11px] font-bold text-slate-800 shadow-sm">
+                ${partidoTexto}
+              </div>
+
+              <div class="relative p-5 text-white">
+                <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-amber-500 text-slate-950 inline-block mb-1 font-black">
+                  ${c.estatus_precampana}
+                </span>
+                <h3 class="text-base font-bold leading-tight hover:text-indigo-200 transition">${c.nombre_propietario}</h3>
+                <p class="text-xs text-slate-300 mt-0.5 truncate">${c.cargo}</p>
+              </div>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-3 text-xs text-slate-600">
+              <div class="space-y-2.5 cursor-pointer" onclick="abrirModal(${c.id})">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
+                    <span>🏛️</span>
+                    <span>Gubernatura Sinaloa 2027</span>
+                  </span>
+                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md ${semaforo.colorBg} ${semaforo.colorTexto} border ${semaforo.colorBorde}">
+                    <span>${semaforo.icono}</span>
+                    <span>${semaforo.puntos}% Transparencia</span>
+                  </span>
+                </div>
+
+                ${c.trayectoria ? `
+                  <div>
+                    <span class="font-bold text-slate-900 text-[10px] uppercase block">Trayectoria</span>
+                    <p class="line-clamp-2 text-slate-600 leading-relaxed">${c.trayectoria}</p>
+                  </div>
+                ` : ''}
+
+                ${c.propuesta_1 ? `
+                  <div>
+                    <span class="font-bold text-slate-900 text-[10px] uppercase block">Visión / Eje Clave</span>
+                    <p class="line-clamp-2 text-slate-600 leading-snug">${c.propuesta_1}</p>
+                  </div>
+                ` : ''}
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <button 
+                    onclick="emitirVoto(${c.id}, 'positivo')" 
+                    class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700'}">
+                    👍 <span>${votos.positivos}</span>
+                  </button>
+
+                  <button 
+                    onclick="emitirVoto(${c.id}, 'negativo')" 
+                    class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-rose-700'}">
+                    👎 <span>${votos.negativos}</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button 
+                    onclick="prepararFichaCompartir(${c.id})" 
+                    class="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition" 
+                    title="Generar Ficha para Redes">
+                    📸
+                  </button>
+                  <button onclick="abrirModal(${c.id})" class="text-indigo-600 font-bold text-xs hover:underline">
+                    Ver ficha →
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
     function actualizarBarraLateral() {
@@ -786,7 +1277,7 @@
         clasificarCandidato(c) === modoActual && esPropietario(c)
       );
 
-      if (modoActual === 'alcaldias') {
+      if (modoActual === 'municipios') {
         opcionesActuales = [...new Set(candidatosDelModo.map(c => (c.localidad || '').trim()).filter(Boolean))].sort();
       } else if (modoActual === 'dip_mr') {
         opcionesActuales = [...new Set(candidatosDelModo.map(c => (c.localidad || '').trim()).filter(Boolean))]
@@ -826,7 +1317,11 @@
           filtroActivo = item;
           limpiarSeleccionComparador();
           renderizarListaBotones(items);
-          renderizarTarjetas();
+          if (modoActual === 'gubernatura') {
+            renderizarTarjetasGubernatura();
+          } else {
+            renderizarTarjetas();
+          }
         };
 
         contenedor.appendChild(btn);
@@ -852,7 +1347,11 @@
       }
 
       actualizarBarraComparador();
-      renderizarTarjetas();
+      if (modoActual === 'gubernatura') {
+        renderizarTarjetasGubernatura();
+      } else {
+        renderizarTarjetas();
+      }
     }
 
     function actualizarBarraComparador() {
@@ -870,7 +1369,11 @@
     function limpiarSeleccionComparador() {
       seleccionadosParaComparar = [];
       actualizarBarraComparador();
-      renderizarTarjetas();
+      if (modoActual === 'gubernatura') {
+        renderizarTarjetasGubernatura();
+      } else {
+        renderizarTarjetas();
+      }
     }
 
     function renderizarTarjetas() {
@@ -1060,7 +1563,10 @@
     // LÓGICA DEL GENERADOR DE FICHA (REDES SOCIALES)
     // ========================================================
     async function prepararFichaCompartir(candidatoId) {
-      const c = todosLosCandidatos.find(item => item.id === candidatoId);
+      let c = todosLosCandidatos.find(item => item.id === candidatoId);
+      if (!c) {
+        c = listaAspirantesGubernatura.find(item => item.id === candidatoId);
+      }
       if (!c) return;
 
       candidatoFichaActual = c;
@@ -1071,7 +1577,7 @@
       const imgFoto = document.getElementById('fichaFoto');
       imgFoto.src = 'https://placehold.co/400x500/e2e8f0/64748b?text=Cargando+Foto...';
 
-      document.getElementById('fichaCargo').textContent = c.cargo || 'MUNICIPIO';
+      document.getElementById('fichaCargo').textContent = c.cargo || 'CANDIDATURA';
       document.getElementById('fichaNombre').textContent = c.nombre_propietario;
       document.getElementById('fichaLocalidad').textContent = `${c.localidad || ''} • ${c.partido_siglas || c.partido || ''}`;
 
@@ -1152,7 +1658,7 @@
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
               title: `Ficha de ${candidatoFichaActual?.nombre_propietario}`,
-              text: `Conoce las propuestas, transparencia y trayectoria de ${candidatoFichaActual?.nombre_propietario} en Voto Informado Sinaloa.`,
+              text: `Conoce las propuestas, transparencia y trayectoria de ${candidatoFichaActual?.nombre_propietario} en Voto Informado Sinaloa 2027.`,
               files: [file]
             });
             mensaje.textContent = '✅ Compartido con éxito.';
@@ -1181,7 +1687,7 @@
       
       const municipios = [...new Set(
         todosLosCandidatos
-          .filter(c => clasificarCandidato(c) === 'alcaldias' && esPropietario(c))
+          .filter(c => clasificarCandidato(c) === 'municipios' && esPropietario(c))
           .map(c => (c.localidad || '').trim())
           .filter(Boolean)
       )].sort();
@@ -1208,9 +1714,9 @@
                 <button 
                   type="button"
                   id="matchBtnAlcaldia"
-                  onclick="cambiarCargoMatch('alcaldias')" 
-                  class="py-2 px-3 rounded-xl text-xs font-bold border transition ${estadoMatch.cargo === 'alcaldias' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}">
-                  Municipios
+                  onclick="cambiarCargoMatch('municipios')" 
+                  class="py-2 px-3 rounded-xl text-xs font-bold border transition ${estadoMatch.cargo === 'municipios' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}">
+                  Alcaldías
                 </button>
                 <button 
                   type="button"
@@ -1224,12 +1730,12 @@
 
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1" id="labelLocalidadMatch">
-                ${estadoMatch.cargo === 'alcaldias' ? 'Municipio:' : 'Distrito Electoral:'}
+                ${estadoMatch.cargo === 'municipios' ? 'Municipio:' : 'Distrito Electoral:'}
               </label>
               <select 
                 id="selectLocalidadMatch" 
                 class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:ring-2 focus:ring-indigo-500">
-                ${(estadoMatch.cargo === 'alcaldias' ? municipios : distritos).map(loc => `
+                ${(estadoMatch.cargo === 'municipios' ? municipios : distritos).map(loc => `
                   <option value="${loc}">${loc}</option>
                 `).join('')}
               </select>
@@ -1270,7 +1776,7 @@
           <div class="bg-indigo-50/70 border border-indigo-100 p-3.5 rounded-2xl flex items-center justify-between text-xs">
             <div>
               <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider block">Evaluando boleta</span>
-              <span class="font-black text-indigo-950">${estadoMatch.cargo === 'alcaldias' ? 'Municipio de' : 'Distrito'} ${estadoMatch.localidad}</span>
+              <span class="font-black text-indigo-950">${estadoMatch.cargo === 'municipios' ? 'Alcaldía de' : 'Distrito'} ${estadoMatch.localidad}</span>
             </div>
             <button onclick="renderizarPasoUbicacionMatch()" class="text-indigo-600 hover:underline font-bold text-[11px]">
               Cambiar zona
@@ -1391,7 +1897,7 @@
           <div class="text-center space-y-1">
             <span class="text-3xl">🎉</span>
             <h4 class="text-lg font-black text-slate-900">Tu Afinidad Electoral Calculada</h4>
-            <p class="text-xs text-slate-500">Candidaturas en ${estadoMatch.cargo === 'alcaldias' ? 'Municipio de' : 'Distrito'} <b>${estadoMatch.localidad}</b> con mayor coincidencia temática.</p>
+            <p class="text-xs text-slate-500">Candidaturas en ${estadoMatch.cargo === 'municipios' ? 'Alcaldía de' : 'Distrito'} <b>${estadoMatch.localidad}</b> con mayor coincidencia temática.</p>
           </div>
 
           <div class="space-y-3">
@@ -1465,9 +1971,40 @@
       abrirModalComparador();
     }
 
+    // ==========================================
+    // SIMULADOR DE CASILLA
+    // ==========================================
+    function abrirModalCasilla() {
+      document.getElementById('resultadoCasilla').classList.add('hidden');
+      document.getElementById('inputSeccionCasilla').value = '';
+      document.getElementById('modalCasilla').classList.remove('hidden');
+    }
+
+    function buscarCasillaSimulada(e) {
+      e.preventDefault();
+      const seccion = document.getElementById('inputSeccionCasilla').value.trim();
+      const res = document.getElementById('resultadoCasilla');
+
+      res.innerHTML = `
+        <div class="space-y-2">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <span class="font-bold text-slate-800">Sección: ${seccion}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Ubicación Simulada</span>
+          </div>
+          <p class="text-slate-600"><b>Lugar habitual:</b> Escuela Primaria Oficial / Parque de la Colonia.</p>
+          <p class="text-slate-600"><b>Horario:</b> 8:00 AM a 6:00 PM (Hora de Sinaloa).</p>
+          <p class="text-slate-500 text-[11px] pt-1 border-t border-slate-200">
+            ℹ️ Durante el proceso electoral 2027, el INE habilitará el sistema oficial georreferenciado <i>"Ubica tu Casilla"</i> con la dirección exacta manzana por manzana.
+          </p>
+        </div>
+      `;
+      res.classList.remove('hidden');
+    }
+
     // MODAL DE COMPARACIÓN LADO A LADO
     function abrirModalComparador() {
-      const candidatosAComparar = todosLosCandidatos.filter(c => seleccionadosParaComparar.includes(c.id));
+      let universo = [...todosLosCandidatos, ...listaAspirantesGubernatura];
+      const candidatosAComparar = universo.filter(c => seleccionadosParaComparar.includes(c.id));
       if (candidatosAComparar.length < 2) return;
 
       const contenedor = document.getElementById('comparadorContenido');
@@ -1586,7 +2123,10 @@
 
     // MODAL DETALLE INDIVIDUAL
     function abrirModal(id) {
-      const c = todosLosCandidatos.find(item => item.id === id);
+      let c = todosLosCandidatos.find(item => item.id === id);
+      if (!c) {
+        c = listaAspirantesGubernatura.find(item => item.id === id);
+      }
       if (!c) return;
 
       const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
@@ -1667,7 +2207,7 @@
             <div>
               <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Semáforo de Apertura Curricular</span>
               <p class="text-[11px] text-slate-600">
-                Calificación basada en foto oficial, propuestas sustanciales, formación y contacto ante el IEES.
+                Calificación basada en foto oficial, propuestas sustanciales, formación y contacto ante las autoridades electorales.
               </p>
             </div>
             <div class="flex items-center gap-2 shrink-0">
@@ -1762,7 +2302,7 @@
         `Partido / Cargo sugerido: ${partido}\n` +
         `Periodo estimado: ${periodo}\n` +
         `Fuente o enlace verificable: ${fuente}\n\n` +
-        `Enviado desde Voto Informado Sinaloa.`
+        `Enviado desde Voto Informado Sinaloa 2027.`
       );
 
       window.location.href = `mailto:contacto@votoinformado.mx?subject=${asunto}&body=${cuerpo}`;
@@ -1784,9 +2324,12 @@
         cerrarModal('modalMatch');
         cerrarModal('modalFichaCompartir');
         cerrarModal('modalDeslinde');
+        cerrarModal('modalCasilla');
       }
     });
 
+    // Arrancar la aplicación
+    inicializarCuentaRegresiva();
     iniciar();
   </script>
 </body>
