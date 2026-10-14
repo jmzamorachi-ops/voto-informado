@@ -2137,123 +2137,132 @@
       document.getElementById('modalCasilla').classList.remove('hidden');
     }
 
-    async function buscarBoletaPorSeccion(e) {
-      e.preventDefault();
-      const seccion = document.getElementById('inputSeccionCasilla').value.trim();
-      const resContenedor = document.getElementById('resultadoCasilla');
-      
-      if (!seccion) return;
+  async function buscarBoletaPorSeccion(e) {
+  e.preventDefault();
+  const rawSeccion = document.getElementById('inputSeccionCasilla').value.trim();
+  const resContenedor = document.getElementById('resultadoCasilla');
+  
+  if (!rawSeccion) return;
 
-      // 1. Obtener la demarcación según la sección electoral
-      let infoZona = MAPA_SECCIONES_SINALOA[parseInt(seccion, 10)] || MAPA_SECCIONES_SINALOA[seccion];
+  // Normalizamos quitando ceros iniciales (ej: "0834" -> 834)
+  const numSeccion = parseInt(rawSeccion, 10);
+  const strSeccion = String(numSeccion);
 
-      // Si no está en el mapa estático, intentamos buscarla en Supabase (si existe la tabla)
-      if (!infoZona && supabaseClient) {
-        try {
-          const { data } = await supabaseClient
-            .from('secciones_electorales')
-            .select('*')
-            .eq('seccion', parseInt(seccion, 10))
-            .single();
-          if (data) {
-            infoZona = {
-              municipio: data.municipio,
-              distrito: data.distrito_local,
-              casilla: data.ubicacion_casilla || 'Ubicación oficial IEES/INE'
-            };
-          }
-        } catch(err) {
-          console.warn("Consulta a tabla secciones falló:", err);
-        }
-      }
+  // 1. Buscar en el diccionario local
+  let infoZona = MAPA_SECCIONES_SINALOA[strSeccion] || MAPA_SECCIONES_SINALOA[rawSeccion];
 
-      // Fallback didáctico para que el usuario siempre vea resultados reales de prueba
-      if (!infoZona) {
+  // 2. Si no está en el diccionario, buscar en Supabase
+  if (!infoZona && supabaseClient) {
+    try {
+      const { data } = await supabaseClient
+        .from('secciones_electorales')
+        .select('*')
+        .eq('seccion', numSeccion)
+        .maybeSingle();
+
+      if (data) {
         infoZona = {
-          municipio: "Culiacán",
-          distrito: "Distrito 12",
-          casilla: `Escuela o inmueble público oficial en la sección ${seccion}`
+          municipio: data.municipio,
+          distrito: data.distrito_local,
+          casilla: data.ubicacion_casilla || 'Ubicación oficial IEES/INE'
         };
       }
-
-      // 2. Filtrar candidatos de Presidencia Municipal y Diputaciones MR que tocan a la persona
-      const candidatosAlcaldia = todosLosCandidatos.filter(c => 
-        clasificarCandidato(c) === 'municipios' && 
-        esPropietario(c) && 
-        normalizar(c.localidad) === normalizar(infoZona.municipio)
-      );
-
-      const candidatosDiputacion = todosLosCandidatos.filter(c => 
-        clasificarCandidato(c) === 'dip_mr' && 
-        esPropietario(c) && 
-        normalizar(c.localidad) === normalizar(infoZona.distrito)
-      );
-
-      // 3. Renderizar las boletas personalizadas
-      resContenedor.innerHTML = `
-        <!-- Resumen de Zona Electoral -->
-        <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div>
-            <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider block">Tu Demarcación Electoral</span>
-            <span class="text-sm font-black text-indigo-950">Sección ${seccion} • ${infoZona.municipio} (${infoZona.distrito})</span>
-            <p class="text-slate-600 text-[11px] mt-0.5"><i class="fa-solid fa-location-dot text-indigo-500 mr-1"></i>Casilla estimada: ${infoZona.casilla}</p>
-          </div>
-          <button type="button" onclick="irACatalogoFiltrado('${infoZona.municipio}')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-[11px] transition">
-            Ver municipio en catálogo →
-          </button>
-        </div>
-
-        <!-- Boleta 1: Gubernatura (Aplica en todo el estado) -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-              <span>🏛️</span> Boleta 1: Gubernatura del Estado
-            </h4>
-            <span class="text-[10px] text-slate-400 font-bold">${listaAspirantesGubernatura.length} aspirantes</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            ${listaAspirantesGubernatura.slice(0, 4).map(c => renderItemBoletaRapida(c)).join('')}
-          </div>
-          ${listaAspirantesGubernatura.length > 4 ? `
-            <button type="button" onclick="cerrarModal('modalCasilla'); navegarACargo('gubernatura')" class="w-full text-center text-xs font-bold text-indigo-600 hover:underline py-1">
-              Ver todos los aspirantes a gobernador →
-            </button>
-          ` : ''}
-        </div>
-
-        <!-- Boleta 2: Presidencia Municipal -->
-        <div class="space-y-2 pt-2 border-t border-slate-100">
-          <div class="flex items-center justify-between">
-            <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-              <span>🏙️</span> Boleta 2: Alcaldía de ${escaparHTML(infoZona.municipio)}
-            </h4>
-            <span class="text-[10px] text-slate-400 font-bold">${candidatosAlcaldia.length} candidaturas</span>
-          </div>
-          ${candidatosAlcaldia.length > 0 ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              ${candidatosAlcaldia.map(c => renderItemBoletaRapida(c)).join('')}
-            </div>
-          ` : `<p class="text-xs text-slate-400 italic">No hay candidatos cargados aún para este municipio.</p>`}
-        </div>
-
-        <!-- Boleta 3: Diputación Local MR -->
-        <div class="space-y-2 pt-2 border-t border-slate-100">
-          <div class="flex items-center justify-between">
-            <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-              <span>📜</span> Boleta 3: Diputación Local (${escaparHTML(infoZona.distrito)})
-            </h4>
-            <span class="text-[10px] text-slate-400 font-bold">${candidatosDiputacion.length} candidaturas</span>
-          </div>
-          ${candidatosDiputacion.length > 0 ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              ${candidatosDiputacion.map(c => renderItemBoletaRapida(c)).join('')}
-            </div>
-          ` : `<p class="text-xs text-slate-400 italic">No hay candidatos cargados aún para este distrito.</p>`}
-        </div>
-      `;
-
-      resContenedor.classList.remove('hidden');
+    } catch(err) {
+      console.warn("Consulta a secciones falló:", err);
     }
+  }
+
+  // 3. Si la sección de verdad no existe ni en local ni en BD, avisar al usuario
+  if (!infoZona) {
+    resContenedor.innerHTML = `
+      <div class="p-5 bg-amber-50 border border-amber-200 rounded-2xl text-amber-900 text-xs space-y-1 text-center">
+        <p class="font-bold text-sm">Sección ${escaparHTML(rawSeccion)} no encontrada</p>
+        <p class="text-amber-700">Esta sección aún no está mapeada en la base de datos de prueba.</p>
+        <p class="text-[11px] text-amber-600 pt-1">Prueba con secciones de muestra: <b>0450</b> (Ahome - Dto 2), <b>0150</b> (Guasave - Dto 7), <b>1205</b> (Mazatlán - Dto 20) o <b>0834</b> (Culiacán - Dto 12).</p>
+      </div>
+    `;
+    resContenedor.classList.remove('hidden');
+    return;
+  }
+
+  // 4. Filtrado por municipio y distrito exacto
+  const candidatosAlcaldia = todosLosCandidatos.filter(c => 
+    clasificarCandidato(c) === 'municipios' && 
+    esPropietario(c) && 
+    normalizar(c.localidad) === normalizar(infoZona.municipio)
+  );
+
+  const candidatosDiputacion = todosLosCandidatos.filter(c => 
+    clasificarCandidato(c) === 'dip_mr' && 
+    esPropietario(c) && 
+    normalizar(c.localidad) === normalizar(infoZona.distrito)
+  );
+
+  // 5. Renderizado de las boletas personalizadas
+  resContenedor.innerHTML = `
+    <!-- Resumen de Zona Electoral -->
+    <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div>
+        <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider block">Tu Demarcación Electoral</span>
+        <span class="text-sm font-black text-indigo-950">Sección ${rawSeccion} • ${infoZona.municipio} (${infoZona.distrito})</span>
+        <p class="text-slate-600 text-[11px] mt-0.5"><i class="fa-solid fa-location-dot text-indigo-500 mr-1"></i>Casilla estimada: ${infoZona.casilla}</p>
+      </div>
+      <button type="button" onclick="irACatalogoFiltrado('${infoZona.municipio}')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-[11px] transition">
+        Ver municipio en catálogo →
+      </button>
+    </div>
+
+    <!-- Boleta 1: Gubernatura -->
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+          <span>🏛️</span> Boleta 1: Gubernatura del Estado
+        </h4>
+        <span class="text-[10px] text-slate-400 font-bold">${listaAspirantesGubernatura.length} aspirantes</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        ${listaAspirantesGubernatura.slice(0, 4).map(c => renderItemBoletaRapida(c)).join('')}
+      </div>
+      ${listaAspirantesGubernatura.length > 4 ? `
+        <button type="button" onclick="cerrarModal('modalCasilla'); navegarACargo('gubernatura')" class="w-full text-center text-xs font-bold text-indigo-600 hover:underline py-1">
+          Ver todos los aspirantes a gobernador →
+        </button>
+      ` : ''}
+    </div>
+
+    <!-- Boleta 2: Presidencia Municipal -->
+    <div class="space-y-2 pt-2 border-t border-slate-100">
+      <div class="flex items-center justify-between">
+        <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+          <span>🏙️</span> Boleta 2: Alcaldía de ${escaparHTML(infoZona.municipio)}
+        </h4>
+        <span class="text-[10px] text-slate-400 font-bold">${candidatosAlcaldia.length} candidaturas</span>
+      </div>
+      ${candidatosAlcaldia.length > 0 ? `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          ${candidatosAlcaldia.map(c => renderItemBoletaRapida(c)).join('')}
+        </div>
+      ` : `<p class="text-xs text-slate-400 italic">No hay candidatos cargados aún para ${escaparHTML(infoZona.municipio)}.</p>`}
+    </div>
+
+    <!-- Boleta 3: Diputación Local MR -->
+    <div class="space-y-2 pt-2 border-t border-slate-100">
+      <div class="flex items-center justify-between">
+        <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+          <span>📜</span> Boleta 3: Diputación Local (${escaparHTML(infoZona.distrito)})
+        </h4>
+        <span class="text-[10px] text-slate-400 font-bold">${candidatosDiputacion.length} candidaturas</span>
+      </div>
+      ${candidatosDiputacion.length > 0 ? `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          ${candidatosDiputacion.map(c => renderItemBoletaRapida(c)).join('')}
+        </div>
+      ` : `<p class="text-xs text-slate-400 italic">No hay candidatos cargados aún para el ${escaparHTML(infoZona.distrito)}.</p>`}
+    </div>
+  `;
+
+  resContenedor.classList.remove('hidden');
+}
 
     // Render de cada tarjeta pequeña dentro del desglose de boleta
     function renderItemBoletaRapida(c) {
