@@ -2126,14 +2126,14 @@ function renderizarTarjetasGubernatura() {
 function abrirModal(id) {
   let c = null;
 
-  // Si estamos viendo gubernatura, buscar primero en los aspirantes de gubernatura
+  // Si estamos en gubernatura, buscar primero en los aspirantes de gubernatura
   if (modoActual === 'gubernatura') {
     c = listaAspirantesGubernatura.find(item => String(item.id) === String(id));
   } else {
     c = todosLosCandidatos.find(item => String(item.id) === String(id));
   }
 
-  // Respaldo de búsqueda si no se encontró en el primer intento
+  // Respaldo de búsqueda general
   if (!c) {
     c = [...listaAspirantesGubernatura, ...todosLosCandidatos].find(item => String(item.id) === String(id));
   }
@@ -2180,7 +2180,7 @@ function abrirModal(id) {
     `;
   }
 
-  // Ocultar semáforo de transparencia si es aspirante a la gubernatura
+  // Ocultar semáforo de transparencia si es gubernatura
   const bloqueTransparencia = c.es_gubernatura ? '' : `
     <div class="p-4 ${sem.colorBg} rounded-2xl border ${sem.colorBorde} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <div>
@@ -2200,7 +2200,8 @@ function abrirModal(id) {
   `;
 
   contenedor.innerHTML = `
-    <div class="relative bg-slate-900 text-white p-6 flex flex-col sm:flex-row items-center sm:items-end gap-6">
+    <!-- Cabecera del Aspirante -->
+    <div class="relative bg-slate-900 text-white p-6 flex flex-col sm:flex-row items-center sm:items-end gap-6 shrink-0">
       <img 
         src="${foto}" 
         referrerpolicy="no-referrer"
@@ -2218,6 +2219,7 @@ function abrirModal(id) {
       </div>
     </div>
 
+    <!-- Cuerpo scrolleable completo -->
     <div class="p-6 space-y-5 text-xs text-slate-700">
       
       <div class="flex items-center justify-between p-3.5 bg-indigo-50 border border-indigo-100 rounded-2xl">
@@ -2254,31 +2256,44 @@ function abrirModal(id) {
         </div>
       </div>
 
+      <!-- TRAYECTORIA COMPLETA (Desde Supabase) -->
+      ${c.trayectoria ? `
+        <div>
+          <span class="text-[10px] font-bold uppercase text-slate-900 block mb-1">Trayectoria y Experiencia</span>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-slate-700 leading-relaxed whitespace-pre-line text-xs">
+            ${c.trayectoria}
+          </div>
+        </div>
+      ` : ''}
+
       ${c.porque_cargo ? `
         <div>
           <span class="text-[10px] font-bold uppercase text-indigo-600 block mb-1">¿Por qué aspira?</span>
-          <p class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">"${c.porque_cargo}"</p>
+          <p class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100 italic">"${c.porque_cargo}"</p>
         </div>
       ` : ''}
 
       ${bloqueTimeline}
 
-      <div>
-        <span class="text-[10px] font-bold uppercase text-slate-900 block mb-2">Propuestas / Visión</span>
-        <div class="space-y-2">
-          ${c.propuesta_1 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_1}</div>` : ''}
-          ${c.propuesta_2 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_2}</div>` : ''}
+      <!-- PROPUESTAS / VISIÓN -->
+      ${(c.propuesta_1 || c.propuesta_2) ? `
+        <div>
+          <span class="text-[10px] font-bold uppercase text-slate-900 block mb-2">Propuestas / Visión</span>
+          <div class="space-y-2">
+            ${c.propuesta_1 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_1}</div>` : ''}
+            ${c.propuesta_2 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_2}</div>` : ''}
+          </div>
         </div>
-      </div>
+      ` : ''}
 
       ${c.formacion ? `
         <div>
-          <span class="text-[10px] font-bold uppercase text-slate-900 block mb-1">Estudios</span>
+          <span class="text-[10px] font-bold uppercase text-slate-900 block mb-1">Estudios y Formación</span>
           <p class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.formacion}</p>
         </div>
       ` : ''}
 
-      <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+      <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs pb-4">
         <div class="flex flex-wrap gap-2">
           ${c.correo_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">✉ ${c.correo_publico}</span>` : ''}
           ${c.telefono_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">☎ ${c.telefono_publico}</span>` : ''}
@@ -2293,6 +2308,8 @@ function abrirModal(id) {
     </div>
   `;
 
+  // Asegurar que el modal inicie arriba al abrirse
+  contenedor.scrollTop = 0;
   modal.classList.remove('hidden');
 }
 
