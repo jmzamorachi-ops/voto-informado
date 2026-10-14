@@ -1071,206 +1071,207 @@
     // ========================================================
     // GUBERNATURA 2027: LECTURA EN TIEMPO REAL DESDE SUPABASE
     // ========================================================
-    async function cargarAspirantesGubernatura() {
-      const grid = document.getElementById('gridCandidatos');
-      const titulo = document.getElementById('tituloVista');
-      const badgeTotal = document.getElementById('totalCandidatos');
+async function cargarAspirantesGubernatura() {
+  const grid = document.getElementById('gridCandidatos');
+  const titulo = document.getElementById('tituloVista');
+  const badgeTotal = document.getElementById('totalCandidatos');
 
-      titulo.textContent = 'Aspirantes a la Gubernatura 2027';
-      badgeTotal.textContent = 'Consultando...';
+  titulo.textContent = 'Aspirantes a la Gubernatura 2027';
+  badgeTotal.textContent = 'Consultando...';
 
-      grid.innerHTML = `
-        <div class="col-span-full py-16 text-center text-slate-400">
-          <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-600 mb-3"></i>
-          <p>Consultando aspirantes en tiempo real desde Supabase...</p>
+  grid.innerHTML = `
+    <div class="col-span-full py-16 text-center text-slate-400">
+      <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-600 mb-3"></i>
+      <p>Consultando aspirantes en tiempo real desde Supabase...</p>
+    </div>
+  `;
+
+  if (!supabaseClient) {
+    grid.innerHTML = `
+      <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800">
+        <span class="text-3xl block mb-2">⚠️</span>
+        <p class="font-bold text-sm">Supabase no está disponible.</p>
+        <p class="text-xs text-rose-600 mt-1">Verifica las credenciales y la conexión en tu navegador.</p>
+      </div>
+    `;
+    return;
+  }
+
+  try {
+    const { data, error } = await supabaseClient
+      .from('aspirantes_gubernatura')
+      .select('*')
+      .eq('activo', true)
+      .order('nombre', { ascending: true });
+
+    if (error) throw error;
+
+    listaAspirantesGubernatura = (data || []).map(a => {
+      // Traducir o normalizar el estatus
+      let estatusNormalizado = a.estatus || 'Activo';
+      if (estatusNormalizado.toUpperCase() === 'ACTIVE') {
+        estatusNormalizado = 'Activo';
+      }
+
+      return {
+        id: a.id,
+        nombre_propietario: a.nombre,
+        cargo: a.cargo_actual || 'Aspirante a la Gubernatura',
+        candidatura: 'Gubernatura',
+        localidad: a.municipio_origen || 'Sinaloa',
+        partido: a.partido || 'Independiente',
+        partido_siglas: a.partido || 'IND',
+        fotografia: a.fotografia_url || '',
+        formacion: a.formacion || '',
+        trayectoria: a.trayectoria || '',
+        propuesta_1: a.propuesta_clave || '',
+        propuesta_2: a.eje_seguridad || '',
+        porque_cargo: a.frase_clave || 'Aspirante a gobernar el Estado de Sinaloa en el proceso 2027.',
+        estatus_precampana: estatusNormalizado,
+        es_gubernatura: true
+      };
+    });
+
+    const partidos = [...new Set(listaAspirantesGubernatura.map(item => item.partido.trim()).filter(Boolean))].sort();
+    opcionesActuales = ['Todos los aspirantes', ...partidos];
+    filtroActivo = 'Todos los aspirantes';
+
+    renderizarListaBotones(opcionesActuales);
+    renderizarTarjetasGubernatura();
+
+  } catch (err) {
+    console.error('Error al cargar aspirantes a la gubernatura:', err);
+    grid.innerHTML = `
+      <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800 space-y-2">
+        <span class="text-3xl block">⚠️</span>
+        <p class="font-bold text-sm">Error al conectar con la tabla "aspirantes_gubernatura".</p>
+        <p class="text-xs text-rose-600">${err.message || 'Verifica que la tabla exista y tenga activa la política RLS de lectura pública.'}</p>
+      </div>
+    `;
+    badgeTotal.textContent = '0 aspirantes';
+  }
+}
+
+function renderizarTarjetasGubernatura() {
+  const contenedor = document.getElementById('gridCandidatos');
+  const badgeTotal = document.getElementById('totalCandidatos');
+  const titulo = document.getElementById('tituloVista');
+
+  titulo.textContent = filtroActivo || 'Aspirantes a Gubernatura 2027';
+
+  let filtrados = listaAspirantesGubernatura;
+  if (filtroActivo && filtroActivo !== 'Todos los aspirantes') {
+    filtrados = listaAspirantesGubernatura.filter(a => normalizar(a.partido) === normalizar(filtroActivo));
+  }
+
+  badgeTotal.textContent = `${filtrados.length} aspirante${filtrados.length === 1 ? '' : 's'}`;
+
+  if (filtrados.length === 0) {
+    contenedor.innerHTML = `
+      <div class="col-span-full py-16 text-center text-slate-400 bg-white rounded-3xl border border-slate-200">
+        <span class="text-3xl block mb-2">🏛️</span>
+        <p class="font-bold text-slate-700">No hay aspirantes registrados para este filtro.</p>
+        <p class="text-xs text-slate-500 mt-1">Puedes agregar o activar aspirantes desde tu panel de Supabase en tiempo real.</p>
+      </div>
+    `;
+    return;
+  }
+
+  contenedor.innerHTML = filtrados.map(c => {
+    const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+    const partidoTexto = c.partido || 'Independiente';
+    const seleccionado = seleccionadosParaComparar.includes(c.id);
+    const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+    const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
+
+    return `
+      <article class="bg-white rounded-3xl overflow-hidden border ${seleccionado ? 'border-indigo-600 ring-2 ring-indigo-500' : 'border-slate-200'} shadow-sm flex flex-col hover:shadow-lg transition relative">
+        
+        <button 
+          onclick="toggleComparar('${c.id}')" 
+          class="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 ${seleccionado ? 'bg-indigo-600 text-white' : 'bg-slate-900/85 hover:bg-slate-900 text-white backdrop-blur-sm'}">
+          <span>${seleccionado ? '✓ Seleccionado' : '+ Comparar'}</span>
+        </button>
+
+        <div onclick="abrirModal('${c.id}')" class="relative h-64 bg-slate-800 flex items-end overflow-hidden cursor-pointer">
+          <img 
+            src="${foto}" 
+            alt="${c.nombre_propietario}" 
+            class="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition duration-500"
+            onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+          
+          <div class="absolute top-4 right-4 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl text-[11px] font-bold text-slate-800 shadow-sm">
+            ${partidoTexto}
+          </div>
+
+          <div class="relative p-5 text-white">
+            <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-emerald-500 text-slate-950 inline-block mb-1 font-black">
+              ${c.estatus_precampana}
+            </span>
+            <h3 class="text-base font-bold leading-tight hover:text-indigo-200 transition">${c.nombre_propietario}</h3>
+            <p class="text-xs text-slate-300 mt-0.5 truncate">${c.cargo}</p>
+          </div>
         </div>
-      `;
 
-      if (!supabaseClient) {
-        grid.innerHTML = `
-          <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800">
-            <span class="text-3xl block mb-2">⚠️</span>
-            <p class="font-bold text-sm">Supabase no está disponible.</p>
-            <p class="text-xs text-rose-600 mt-1">Verifica las credenciales y la conexión en tu navegador.</p>
-          </div>
-        `;
-        return;
-      }
-
-      try {
-        const { data, error } = await supabaseClient
-          .from('aspirantes_gubernatura')
-          .select('*')
-          .eq('activo', true)
-          .order('nombre', { ascending: true });
-
-        if (error) throw error;
-
-        // Estandarizamos los datos recibidos de Supabase al modelo visual
-        listaAspirantesGubernatura = (data || []).map(a => ({
-          id: a.id,
-          nombre_propietario: a.nombre,
-          cargo: a.cargo_actual || 'Aspirante a la Gubernatura',
-          candidatura: 'Gubernatura',
-          localidad: a.municipio_origen || 'Sinaloa',
-          partido: a.partido || 'Independiente',
-          partido_siglas: a.partido || 'IND',
-          fotografia: a.fotografia_url || '',
-          formacion: a.formacion || '',
-          trayectoria: a.trayectoria || '',
-          propuesta_1: a.propuesta_clave || '',
-          propuesta_2: a.eje_seguridad || '',
-          porque_cargo: a.frase_clave || 'Aspirante a gobernar el Estado de Sinaloa en el proceso 2027.',
-          estatus_precampana: a.estatus || 'Aspirante',
-          es_gubernatura: true
-        }));
-
-        // Actualizamos las opciones del filtro lateral
-        const partidos = [...new Set(listaAspirantesGubernatura.map(item => item.partido.trim()).filter(Boolean))].sort();
-        opcionesActuales = ['Todos los aspirantes', ...partidos];
-        filtroActivo = 'Todos los aspirantes';
-
-        renderizarListaBotones(opcionesActuales);
-        renderizarTarjetasGubernatura();
-
-      } catch (err) {
-        console.error('Error al cargar aspirantes a la gubernatura:', err);
-        grid.innerHTML = `
-          <div class="col-span-full bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center text-rose-800 space-y-2">
-            <span class="text-3xl block">⚠️</span>
-            <p class="font-bold text-sm">Error al conectar con la tabla "aspirantes_gubernatura".</p>
-            <p class="text-xs text-rose-600">${err.message || 'Verifica que la tabla exista y tenga activa la política RLS de lectura pública.'}</p>
-          </div>
-        `;
-        badgeTotal.textContent = '0 aspirantes';
-      }
-    }
-
-    function renderizarTarjetasGubernatura() {
-      const contenedor = document.getElementById('gridCandidatos');
-      const badgeTotal = document.getElementById('totalCandidatos');
-      const titulo = document.getElementById('tituloVista');
-
-      titulo.textContent = filtroActivo || 'Aspirantes a Gubernatura 2027';
-
-      let filtrados = listaAspirantesGubernatura;
-      if (filtroActivo && filtroActivo !== 'Todos los aspirantes') {
-        filtrados = listaAspirantesGubernatura.filter(a => normalizar(a.partido) === normalizar(filtroActivo));
-      }
-
-      badgeTotal.textContent = `${filtrados.length} aspirante${filtrados.length === 1 ? '' : 's'}`;
-
-      if (filtrados.length === 0) {
-        contenedor.innerHTML = `
-          <div class="col-span-full py-16 text-center text-slate-400 bg-white rounded-3xl border border-slate-200">
-            <span class="text-3xl block mb-2">🏛️</span>
-            <p class="font-bold text-slate-700">No hay aspirantes registrados para este filtro.</p>
-            <p class="text-xs text-slate-500 mt-1">Puedes agregar o activar aspirantes desde tu panel de Supabase en tiempo real.</p>
-          </div>
-        `;
-        return;
-      }
-
-      contenedor.innerHTML = filtrados.map(c => {
-        const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
-        const partidoTexto = c.partido || 'Independiente';
-        const semaforo = calcularSemaforoTransparencia(c);
-        const seleccionado = seleccionadosParaComparar.includes(c.id);
-        const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
-        const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
-
-        return `
-          <article class="bg-white rounded-3xl overflow-hidden border ${seleccionado ? 'border-indigo-600 ring-2 ring-indigo-500' : 'border-slate-200'} shadow-sm flex flex-col hover:shadow-lg transition relative">
-            
-            <button 
-              onclick="toggleComparar(${c.id})" 
-              class="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 ${seleccionado ? 'bg-indigo-600 text-white' : 'bg-slate-900/85 hover:bg-slate-900 text-white backdrop-blur-sm'}">
-              <span>${seleccionado ? '✓ Seleccionado' : '+ Comparar'}</span>
-            </button>
-
-            <div onclick="abrirModal(${c.id})" class="relative h-64 bg-slate-800 flex items-end overflow-hidden cursor-pointer">
-              <img 
-                src="${foto}" 
-                alt="${c.nombre_propietario}" 
-                class="absolute inset-0 w-full h-full object-cover object-top hover:scale-105 transition duration-500"
-                onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
-              
-              <div class="absolute top-4 right-4 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl text-[11px] font-bold text-slate-800 shadow-sm">
-                ${partidoTexto}
-              </div>
-
-              <div class="relative p-5 text-white">
-                <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-amber-500 text-slate-950 inline-block mb-1 font-black">
-                  ${c.estatus_precampana}
-                </span>
-                <h3 class="text-base font-bold leading-tight hover:text-indigo-200 transition">${c.nombre_propietario}</h3>
-                <p class="text-xs text-slate-300 mt-0.5 truncate">${c.cargo}</p>
-              </div>
+        <div class="p-5 flex-1 flex flex-col justify-between space-y-3 text-xs text-slate-600">
+          <div class="space-y-2.5 cursor-pointer" onclick="abrirModal('${c.id}')">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
+                <span>🏛️</span>
+                <span>Gubernatura Sinaloa 2027</span>
+              </span>
             </div>
 
-            <div class="p-5 flex-1 flex flex-col justify-between space-y-3 text-xs text-slate-600">
-              <div class="space-y-2.5 cursor-pointer" onclick="abrirModal(${c.id})">
-                <div class="flex flex-wrap items-center gap-1.5">
-                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
-                    <span>🏛️</span>
-                    <span>Gubernatura Sinaloa 2027</span>
-                  </span>
-                  <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md ${semaforo.colorBg} ${semaforo.colorTexto} border ${semaforo.colorBorde}">
-                    <span>${semaforo.icono}</span>
-                    <span>${semaforo.puntos}% Transparencia</span>
-                  </span>
-                </div>
-
-                ${c.trayectoria ? `
-                  <div>
-                    <span class="font-bold text-slate-900 text-[10px] uppercase block">Trayectoria</span>
-                    <p class="line-clamp-2 text-slate-600 leading-relaxed">${c.trayectoria}</p>
-                  </div>
-                ` : ''}
-
-                ${c.propuesta_1 ? `
-                  <div>
-                    <span class="font-bold text-slate-900 text-[10px] uppercase block">Visión / Eje Clave</span>
-                    <p class="line-clamp-2 text-slate-600 leading-snug">${c.propuesta_1}</p>
-                  </div>
-                ` : ''}
+            ${c.trayectoria ? `
+              <div>
+                <span class="font-bold text-slate-900 text-[10px] uppercase block">Trayectoria</span>
+                <p class="line-clamp-3 text-slate-600 leading-relaxed">${c.trayectoria}</p>
               </div>
+            ` : ''}
 
-              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <button 
-                    onclick="emitirVoto(${c.id}, 'positivo')" 
-                    class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700'}">
-                    👍 <span>${votos.positivos}</span>
-                  </button>
-
-                  <button 
-                    onclick="emitirVoto(${c.id}, 'negativo')" 
-                    class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-rose-700'}">
-                    👎 <span>${votos.negativos}</span>
-                  </button>
-                </div>
-
-                <div class="flex items-center gap-2">
-                  <button 
-                    onclick="prepararFichaCompartir(${c.id})" 
-                    class="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition" 
-                    title="Generar Ficha para Redes">
-                    📸
-                  </button>
-                  <button onclick="abrirModal(${c.id})" class="text-indigo-600 font-bold text-xs hover:underline">
-                    Ver ficha →
-                  </button>
-                </div>
+            ${c.propuesta_1 ? `
+              <div>
+                <span class="font-bold text-slate-900 text-[10px] uppercase block">Visión / Eje Clave</span>
+                <p class="line-clamp-2 text-slate-600 leading-snug">${c.propuesta_1}</p>
               </div>
+            ` : ''}
+          </div>
 
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <button 
+                onclick="emitirVoto('${c.id}', 'positivo')" 
+                class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700'}">
+                👍 <span>${votos.positivos}</span>
+              </button>
+
+              <button 
+                onclick="emitirVoto('${c.id}', 'negativo')" 
+                class="px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-rose-50 hover:text-rose-700'}">
+                👎 <span>${votos.negativos}</span>
+              </button>
             </div>
-          </article>
-        `;
-      }).join('');
-    }
+
+            <div class="flex items-center gap-2">
+              <button 
+                onclick="prepararFichaCompartir('${c.id}')" 
+                class="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition" 
+                title="Generar Ficha para Redes">
+                📸
+              </button>
+              <button onclick="abrirModal('${c.id}')" class="text-indigo-600 font-bold text-xs hover:underline">
+                Ver ficha →
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    `;
+  }).join('');
+}
 
     function actualizarBarraLateral() {
       const candidatosDelModo = todosLosCandidatos.filter(c => 
@@ -2121,164 +2122,179 @@
       document.getElementById('modalComparador').classList.remove('hidden');
     }
 
-    // MODAL DETALLE INDIVIDUAL
-    function abrirModal(id) {
-      let c = todosLosCandidatos.find(item => item.id === id);
-      if (!c) {
-        c = listaAspirantesGubernatura.find(item => item.id === id);
-      }
-      if (!c) return;
+// MODAL DETALLE INDIVIDUAL
+function abrirModal(id) {
+  let c = null;
 
-      const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
-      const logoPartido = c.logo ? `<img src="${sanearUrl(c.logo)}" referrerpolicy="no-referrer" class="h-8 object-contain" />` : '';
-      const partidoTexto = c.partido_siglas || c.partido || 'Independiente';
-      const hist = historialPartidos[String(c.id)];
-      const sem = calcularSemaforoTransparencia(c);
-      const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
-      const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
+  // Si estamos viendo gubernatura, buscar primero en los aspirantes de gubernatura
+  if (modoActual === 'gubernatura') {
+    c = listaAspirantesGubernatura.find(item => String(item.id) === String(id));
+  } else {
+    c = todosLosCandidatos.find(item => String(item.id) === String(id));
+  }
 
-      const modal = document.getElementById('modalDetalle');
-      const contenedor = document.getElementById('modalContenido');
+  // Respaldo de búsqueda si no se encontró en el primer intento
+  if (!c) {
+    c = [...listaAspirantesGubernatura, ...todosLosCandidatos].find(item => String(item.id) === String(id));
+  }
 
-      let bloqueTimeline = '';
-      if (hist && hist.historial && hist.historial.length > 0) {
-        bloqueTimeline = `
-          <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="text-xs font-black uppercase text-slate-900 tracking-wider">Historial Partidista (Declarado en CV)</h4>
-              <button 
-                onclick="abrirModalSugerencia(${c.id}, '${c.nombre_propietario.replace(/'/g, "\\'")}')" 
-                class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1">
-                ✏️ Sugerir corrección / partido previo
-              </button>
-            </div>
+  if (!c) return;
 
-            <div class="relative pl-6 space-y-3 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-300">
-              ${hist.historial.map(item => `
-                <div class="relative">
-                  <div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-indigo-600 border-2 border-white"></div>
-                  <div class="flex items-baseline justify-between gap-2">
-                    <span class="text-xs font-bold text-slate-900">${item.partido}</span>
-                    <span class="text-[10px] font-bold text-slate-500">${item.periodo}</span>
-                  </div>
-                  ${item.nota ? `<p class="text-xs text-slate-600 mt-0.5 leading-snug">${item.nota}</p>` : ''}
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
-      }
+  const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+  const logoPartido = c.logo ? `<img src="${sanearUrl(c.logo)}" referrerpolicy="no-referrer" class="h-8 object-contain" />` : '';
+  const partidoTexto = c.partido_siglas || c.partido || 'Independiente';
+  const hist = historialPartidos[String(c.id)];
+  const sem = calcularSemaforoTransparencia(c);
+  const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+  const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
 
-      contenedor.innerHTML = `
-        <div class="relative bg-slate-900 text-white p-6 flex flex-col sm:flex-row items-center sm:items-end gap-6">
-          <img 
-            src="${foto}" 
-            referrerpolicy="no-referrer"
-            class="w-28 h-36 object-cover object-top rounded-2xl border-2 border-white/20 bg-slate-800"
-            onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
-          />
-          <div class="text-center sm:text-left flex-1">
-            <div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
-              ${logoPartido}
-              <span class="text-xs font-bold px-2 py-0.5 rounded bg-white/10 text-indigo-300">${partidoTexto}</span>
-            </div>
-            <h2 class="text-xl font-black">${c.nombre_propietario}</h2>
-            <p class="text-xs text-slate-300 mt-0.5">${c.cargo || ''} • ${c.localidad || ''}</p>
-            ${c.nombre_suplente ? `<p class="text-xs text-slate-400 mt-1">Suplente: <b class="text-slate-200">${c.nombre_suplente}</b></p>` : ''}
-          </div>
+  const modal = document.getElementById('modalDetalle');
+  const contenedor = document.getElementById('modalContenido');
+
+  let bloqueTimeline = '';
+  if (hist && hist.historial && hist.historial.length > 0) {
+    bloqueTimeline = `
+      <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-xs font-black uppercase text-slate-900 tracking-wider">Historial Partidista (Declarado en CV)</h4>
+          <button 
+            onclick="abrirModalSugerencia('${c.id}', '${c.nombre_propietario.replace(/'/g, "\\'")}')" 
+            class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1">
+            ✏️ Sugerir corrección / partido previo
+          </button>
         </div>
 
-        <div class="p-6 space-y-5 text-xs text-slate-700">
-          
-          <div class="flex items-center justify-between p-3.5 bg-indigo-50 border border-indigo-100 rounded-2xl">
-            <div>
-              <span class="font-bold text-xs text-indigo-950 block">¿Deseas compartir este perfil en redes?</span>
-              <span class="text-[11px] text-indigo-700">Genera una imagen con su propuesta, militancia y transparencia</span>
-            </div>
-            <button 
-              onclick="prepararFichaCompartir(${c.id})" 
-              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow transition text-xs shrink-0 flex items-center gap-1.5">
-              <span>📸</span>
-              <span>Generar Ficha</span>
-            </button>
-          </div>
-
-          <div class="p-4 ${sem.colorBg} rounded-2xl border ${sem.colorBorde} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div>
-              <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Semáforo de Apertura Curricular</span>
-              <p class="text-[11px] text-slate-600">
-                Calificación basada en foto oficial, propuestas sustanciales, formación y contacto ante las autoridades electorales.
-              </p>
-            </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-base">${sem.icono}</span>
-              <div>
-                <span class="font-black text-xs ${sem.colorTexto} block">Perfil ${sem.nivel}</span>
-                <span class="text-[10px] font-bold text-slate-500 font-mono">${sem.puntos} de 100 puntos</span>
+        <div class="relative pl-6 space-y-3 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-300">
+          ${hist.historial.map(item => `
+            <div class="relative">
+              <div class="absolute -left-6 top-1.5 w-2.5 h-2.5 rounded-full bg-indigo-600 border-2 border-white"></div>
+              <div class="flex items-baseline justify-between gap-2">
+                <span class="text-xs font-bold text-slate-900">${item.partido}</span>
+                <span class="text-[10px] font-bold text-slate-500">${item.periodo}</span>
               </div>
+              ${item.nota ? `<p class="text-xs text-slate-600 mt-0.5 leading-snug">${item.nota}</p>` : ''}
             </div>
-          </div>
-
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
-            <div>
-              <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Calificación Ciudadana</span>
-              <p class="text-[11px] text-slate-500">¿Apoyas la postulación de esta persona?</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <button 
-                onclick="emitirVoto(${c.id}, 'positivo')" 
-                class="px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-slate-300 hover:bg-emerald-50 hover:text-emerald-700'}">
-                👍 Apoyo (${votos.positivos})
-              </button>
-              <button 
-                onclick="emitirVoto(${c.id}, 'negativo')" 
-                class="px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white border-slate-300 hover:bg-rose-50 hover:text-rose-700'}">
-                👎 No apoyo (${votos.negativos})
-              </button>
-            </div>
-          </div>
-
-          ${c.porque_cargo ? `
-            <div>
-              <span class="text-[10px] font-bold uppercase text-indigo-600 block mb-1">¿Por qué aspira?</span>
-              <p class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">"${c.porque_cargo}"</p>
-            </div>
-          ` : ''}
-
-          ${bloqueTimeline}
-
-          <div>
-            <span class="text-[10px] font-bold uppercase text-slate-900 block mb-2">Propuestas</span>
-            <div class="space-y-2">
-              ${c.propuesta_1 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_1}</div>` : ''}
-              ${c.propuesta_2 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_2}</div>` : ''}
-            </div>
-          </div>
-
-          ${c.formacion ? `
-            <div>
-              <span class="text-[10px] font-bold uppercase text-slate-900 block mb-1">Estudios</span>
-              <p class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.formacion}</p>
-            </div>
-          ` : ''}
-
-          <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
-            <div class="flex flex-wrap gap-2">
-              ${c.correo_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">✉ ${c.correo_publico}</span>` : ''}
-              ${c.telefono_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">☎ ${c.telefono_publico}</span>` : ''}
-            </div>
-
-            <div class="flex items-center gap-2">
-              ${c.pagina_web ? `<a href="${sanearUrl(c.pagina_web)}" target="_blank" class="px-3 py-1 bg-indigo-50 text-indigo-700 font-bold rounded-lg hover:bg-indigo-100">Web Oficial</a>` : ''}
-              ${c.ficha ? `<a href="${sanearUrl(c.ficha)}" target="_blank" class="px-3 py-1 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800">Ficha PDF Oficial</a>` : ''}
-            </div>
-          </div>
-
+          `).join('')}
         </div>
-      `;
+      </div>
+    `;
+  }
 
-      modal.classList.remove('hidden');
-    }
+  // Ocultar semáforo de transparencia si es aspirante a la gubernatura
+  const bloqueTransparencia = c.es_gubernatura ? '' : `
+    <div class="p-4 ${sem.colorBg} rounded-2xl border ${sem.colorBorde} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div>
+        <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Semáforo de Apertura Curricular</span>
+        <p class="text-[11px] text-slate-600">
+          Calificación basada en foto oficial, propuestas sustanciales, formación y contacto ante las autoridades electorales.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-base">${sem.icono}</span>
+        <div>
+          <span class="font-black text-xs ${sem.colorTexto} block">Perfil ${sem.nivel}</span>
+          <span class="text-[10px] font-bold text-slate-500 font-mono">${sem.puntos} de 100 puntos</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  contenedor.innerHTML = `
+    <div class="relative bg-slate-900 text-white p-6 flex flex-col sm:flex-row items-center sm:items-end gap-6">
+      <img 
+        src="${foto}" 
+        referrerpolicy="no-referrer"
+        class="w-28 h-36 object-cover object-top rounded-2xl border-2 border-white/20 bg-slate-800"
+        onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
+      />
+      <div class="text-center sm:text-left flex-1">
+        <div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
+          ${logoPartido}
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-white/10 text-indigo-300">${partidoTexto}</span>
+        </div>
+        <h2 class="text-xl font-black">${c.nombre_propietario}</h2>
+        <p class="text-xs text-slate-300 mt-0.5">${c.cargo || ''} • ${c.localidad || ''}</p>
+        ${c.nombre_suplente ? `<p class="text-xs text-slate-400 mt-1">Suplente: <b class="text-slate-200">${c.nombre_suplente}</b></p>` : ''}
+      </div>
+    </div>
+
+    <div class="p-6 space-y-5 text-xs text-slate-700">
+      
+      <div class="flex items-center justify-between p-3.5 bg-indigo-50 border border-indigo-100 rounded-2xl">
+        <div>
+          <span class="font-bold text-xs text-indigo-950 block">¿Deseas compartir este perfil en redes?</span>
+          <span class="text-[11px] text-indigo-700">Genera una imagen con su información y propuestas</span>
+        </div>
+        <button 
+          onclick="prepararFichaCompartir('${c.id}')" 
+          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow transition text-xs shrink-0 flex items-center gap-1.5">
+          <span>📸</span>
+          <span>Generar Ficha</span>
+        </button>
+      </div>
+
+      ${bloqueTransparencia}
+
+      <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
+        <div>
+          <span class="font-bold text-[10px] uppercase text-slate-900 block mb-0.5">Calificación Ciudadana</span>
+          <p class="text-[11px] text-slate-500">¿Apoyas la postulación de esta persona?</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button 
+            onclick="emitirVoto('${c.id}', 'positivo')" 
+            class="px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-slate-300 hover:bg-emerald-50 hover:text-emerald-700'}">
+            👍 Apoyo (${votos.positivos})
+          </button>
+          <button 
+            onclick="emitirVoto('${c.id}', 'negativo')" 
+            class="px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white border-slate-300 hover:bg-rose-50 hover:text-rose-700'}">
+            👎 No apoyo (${votos.negativos})
+          </button>
+        </div>
+      </div>
+
+      ${c.porque_cargo ? `
+        <div>
+          <span class="text-[10px] font-bold uppercase text-indigo-600 block mb-1">¿Por qué aspira?</span>
+          <p class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">"${c.porque_cargo}"</p>
+        </div>
+      ` : ''}
+
+      ${bloqueTimeline}
+
+      <div>
+        <span class="text-[10px] font-bold uppercase text-slate-900 block mb-2">Propuestas / Visión</span>
+        <div class="space-y-2">
+          ${c.propuesta_1 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_1}</div>` : ''}
+          ${c.propuesta_2 ? `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.propuesta_2}</div>` : ''}
+        </div>
+      </div>
+
+      ${c.formacion ? `
+        <div>
+          <span class="text-[10px] font-bold uppercase text-slate-900 block mb-1">Estudios</span>
+          <p class="p-3 bg-slate-50 rounded-xl border border-slate-200">${c.formacion}</p>
+        </div>
+      ` : ''}
+
+      <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+        <div class="flex flex-wrap gap-2">
+          ${c.correo_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">✉ ${c.correo_publico}</span>` : ''}
+          ${c.telefono_publico ? `<span class="px-3 py-1 bg-slate-100 rounded-lg text-slate-600">☎ ${c.telefono_publico}</span>` : ''}
+        </div>
+
+        <div class="flex items-center gap-2">
+          ${c.pagina_web ? `<a href="${sanearUrl(c.pagina_web)}" target="_blank" class="px-3 py-1 bg-indigo-50 text-indigo-700 font-bold rounded-lg hover:bg-indigo-100">Web Oficial</a>` : ''}
+          ${c.ficha ? `<a href="${sanearUrl(c.ficha)}" target="_blank" class="px-3 py-1 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800">Ficha PDF Oficial</a>` : ''}
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.remove('hidden');
+}
 
     function abrirModalSugerencia(id, nombre) {
       document.getElementById('sugCandidatoId').value = id;
