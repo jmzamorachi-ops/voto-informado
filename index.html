@@ -56,7 +56,7 @@
           id="tab-municipios" 
           onclick="navegarACargo('municipios')" 
           class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm">
-          Alcaldías
+          Municipios
         </button>
         <button 
           id="tab-dip_mr" 
@@ -133,7 +133,7 @@
         <button 
           onclick="navegarACargo('municipios')" 
           class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg transition">
-          Explorar Alcaldías
+          Explorar Municipios
         </button>
         <button 
           onclick="navegarACargo('dip_mr')" 
@@ -218,7 +218,7 @@
     <main class="flex-1 w-full">
       <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-200">
         <div>
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">ALCALDÍAS</span>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider" id="etiquetaCargo">Municipios</span>
           <h2 id="tituloVista" class="text-2xl font-black text-slate-900 leading-tight">Cargando...</h2>
         </div>
         <span id="totalCandidatos" class="text-xs font-bold px-3 py-1 bg-slate-200 text-slate-700 rounded-full">
@@ -1055,7 +1055,7 @@
         cargarAspirantesGubernatura();
       } else if (modoActual === 'municipios') {
         subtitulo.textContent = 'Municipios';
-        etiqueta.textContent = 'ALCALDÍAS';
+        etiqueta.textContent = 'Municipios';
         actualizarBarraLateral();
       } else if (modoActual === 'dip_mr') {
         subtitulo.textContent = 'Distritos Electorales';
@@ -1716,7 +1716,7 @@
                   id="matchBtnAlcaldia"
                   onclick="cambiarCargoMatch('municipios')" 
                   class="py-2 px-3 rounded-xl text-xs font-bold border transition ${estadoMatch.cargo === 'municipios' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}">
-                  Alcaldías
+                  Municipios
                 </button>
                 <button 
                   type="button"
