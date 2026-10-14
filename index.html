@@ -46,19 +46,19 @@
 
       <!-- Selector de Cargos -->
       <div class="inline-flex p-1 bg-slate-800/80 rounded-xl border border-slate-700/60 backdrop-blur-sm gap-1 self-start sm:self-auto flex-wrap">
-        <button 
-          id="tab-gubernatura" 
-          onclick="navegarACargo('gubernatura')" 
-          class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white flex items-center gap-1.5">
-          <span>🏛️</span> Gubernatura 2027
-        </button>
-        <button 
-          id="tab-municipios" 
-          onclick="navegarACargo('municipios')" 
-          class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm">
-          Municipios
-        </button>
-        <button 
+      <!-- En el menú de botones de cargos -->
+<button 
+  id="tab-gubernatura" 
+  onclick="navegarACargo('gubernatura')" 
+  class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm flex items-center gap-1.5">
+  <span>🏛️</span> Gubernatura 2027
+</button>
+<button 
+  id="tab-alcaldias" 
+  onclick="navegarACargo('alcaldias')" 
+  class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white">
+  Alcaldías
+</button>
           id="tab-dip_mr" 
           onclick="navegarACargo('dip_mr')" 
           class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white">
@@ -641,7 +641,7 @@
     let listaAspirantesGubernatura = [];
     let historialPartidos = {};
     let votosCache = {};
-    let modoActual = 'municipios';
+    let modoActual = 'gubernatura';
     let filtroActivo = '';
     let opcionesActuales = [];
     let seleccionadosParaComparar = [];
@@ -921,12 +921,12 @@
 
         calcularMetricasHero();
         await cargarVotosDesdeNube();
-        actualizarBarraLateral();
+        setModoEleccion('gubernatura');
       } catch (err) {
         console.error('Error crítico al iniciar:', err);
         todosLosCandidatos = DATOS_FALLBACK_2027;
         calcularMetricasHero();
-        actualizarBarraLateral();
+        setModoEleccion('gubernatura');
       }
     }
 
@@ -1058,15 +1058,15 @@
   } else if (modoActual === 'alcaldias') {
     subtitulo.textContent = 'Municipios';
     etiqueta.textContent = 'ALCALDÍAS';
-    actualizarBarraLateral();
+    setModoEleccion('gubernatura');
   } else if (modoActual === 'dip_mr') {
     subtitulo.textContent = 'Distritos Electorales';
     etiqueta.textContent = 'DIPUTACIONES MAYORÍA RELATIVA';
-    actualizarBarraLateral();
+    setModoEleccion('gubernatura');
   } else {
     subtitulo.textContent = 'Partidos / Listas';
     etiqueta.textContent = 'DIPUTACIONES PLURINOMINALES';
-    actualizarBarraLateral();
+    setModoEleccion('gubernatura');
   }
 }
 
