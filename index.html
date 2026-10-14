@@ -1575,57 +1575,79 @@ function toggleComparar(id) {
       }
     }
 
-    // ========================================================
-    // LÓGICA DEL GENERADOR DE FICHA (REDES SOCIALES)
-    // ========================================================
-    async function prepararFichaCompartir(candidatoId) {
-      let c = todosLosCandidatos.find(item => item.id === candidatoId);
-      if (!c) {
-        c = listaAspirantesGubernatura.find(item => item.id === candidatoId);
-      }
-      if (!c) return;
+   // ========================================================
+// LÓGICA DEL GENERADOR DE FICHA (CORREGIDA)
+// ========================================================
+async function prepararFichaCompartir(candidatoId) {
+  // 1. Búsqueda flexible comparando IDs como String
+  const strId = String(candidatoId);
+  let c = listaAspirantesGubernatura.find(item => String(item.id) === strId);
+  if (!c) {
+    c = todosLosCandidatos.find(item => String(item.id) === strId);
+  }
+  if (!c) {
+    console.error("No se encontró el candidato con ID:", candidatoId);
+    alert("No se encontró la información del perfil para generar la ficha.");
+    return;
+  }
 
-      candidatoFichaActual = c;
-      const sem = calcularSemaforoTransparencia(c);
-      const hist = historialPartidos[String(c.id)];
-      const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
+  candidatoFichaActual = c;
+  const sem = calcularSemaforoTransparencia(c);
+  const hist = historialPartidos[String(c.id)];
+  const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
 
-      const imgFoto = document.getElementById('fichaFoto');
-      imgFoto.src = 'https://placehold.co/400x500/e2e8f0/64748b?text=Cargando+Foto...';
+  const imgFoto = document.getElementById('fichaFoto');
+  imgFoto.crossOrigin = 'anonymous';
 
-      document.getElementById('fichaCargo').textContent = c.cargo || 'CANDIDATURA';
-      document.getElementById('fichaNombre').textContent = c.nombre_propietario;
-      document.getElementById('fichaLocalidad').textContent = `${c.localidad || ''} • ${c.partido_siglas || c.partido || ''}`;
+  // Asignar textos
+  document.getElementById('fichaCargo').textContent = c.cargo || 'CANDIDATURA';
+  document.getElementById('fichaNombre').textContent = c.nombre_propietario;
+  document.getElementById('fichaLocalidad').textContent = `${c.localidad || 'Sinaloa'} • ${c.partido_siglas || c.partido || ''}`;
 
-      const logoBox = document.getElementById('fichaLogoBox');
-      if (c.logo) {
-        logoBox.innerHTML = `<img src="${sanearUrl(c.logo)}" class="h-5 object-contain" />`;
-        logoBox.classList.remove('hidden');
-      } else {
-        logoBox.innerHTML = `<span class="text-[9px] font-black text-slate-800">${c.partido_siglas || 'IND'}</span>`;
-        logoBox.classList.remove('hidden');
-      }
+  // Logo o texto del partido
+  const logoBox = document.getElementById('fichaLogoBox');
+  if (c.logo) {
+    logoBox.innerHTML = `<img src="${sanearUrl(c.logo)}" class="h-5 object-contain" />`;
+    logoBox.classList.remove('hidden');
+  } else {
+    logoBox.innerHTML = `<span class="text-[9px] font-black text-slate-800">${c.partido_siglas || c.partido || 'IND'}</span>`;
+    logoBox.classList.remove('hidden');
+  }
 
-      document.getElementById('fichaSemaforoTexto').textContent = `${sem.icono} ${sem.puntos}% (${sem.nivel})`;
-      document.getElementById('fichaMilitanciaTexto').textContent = (hist && hist.total_cambios > 0)
-        ? `⚠️ ${hist.total_cambios} cambio(s)`
-        : '✅ 1 solo partido';
+  // Si es gubernatura, ocultamos el semáforo y mostramos "Perfil Verificado"
+  const semaforoBox = document.getElementById('fichaSemaforoBox');
+  if (c.es_gubernatura) {
+    document.getElementById('fichaSemaforoTexto').textContent = '🏛️ Aspirante 2027';
+  } else {
+    document.getElementById('fichaSemaforoTexto').textContent = `${sem.icono} ${sem.puntos}% (${sem.nivel})`;
+  }
 
-      document.getElementById('fichaPropuesta').textContent = c.propuesta_1 || c.porque_cargo || 'Sin propuesta principal declarada ante el IEES.';
-      document.getElementById('fichaReseñaVotos').textContent = `👍 ${votos.positivos} | 👎 ${votos.negativos} opiniones ciudadanas`;
+  document.getElementById('fichaMilitanciaTexto').textContent = (hist && hist.total_cambios > 0)
+    ? `⚠️ ${hist.total_cambios} cambio(s)`
+    : '✅ 1 solo partido';
 
-      document.getElementById('mensajeFichaEstado').textContent = 'Preparando imagen para exportación...';
-      document.getElementById('modalFichaCompartir').classList.remove('hidden');
+  document.getElementById('fichaPropuesta').textContent = c.propuesta_1 || c.trayectoria || c.porque_cargo || 'Aspirante registrado a la gubernatura de Sinaloa.';
+  document.getElementById('fichaReseñaVotos').textContent = `👍 ${votos.positivos} | 👎 ${votos.negativos} opiniones ciudadanas`;
 
-      const fotoUrl = sanearUrl(c.fotografia);
-      if (fotoUrl) {
-        const fotoBase64 = await obtenerImagenBase64(fotoUrl);
-        imgFoto.src = fotoBase64;
-      } else {
-        imgFoto.src = 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
-      }
-      document.getElementById('mensajeFichaEstado').textContent = '';
+  // Mostrar el modal inmediatamente
+  document.getElementById('modalFichaCompartir').classList.remove('hidden');
+
+  // 2. Cargar fotografía de forma segura sin bloquear el modal
+  const fotoUrl = sanearUrl(c.fotografia);
+  if (fotoUrl) {
+    try {
+      const fotoBase64 = await obtenerImagenBase64(fotoUrl);
+      imgFoto.src = fotoBase64;
+    } catch (e) {
+      console.warn("No se pudo convertir a base64, usando URL directa:", e);
+      imgFoto.src = fotoUrl;
     }
+  } else {
+    imgFoto.src = 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
+  }
+
+  document.getElementById('mensajeFichaEstado').textContent = '';
+}
 
     async function generarCanvasFicha() {
       const elemento = document.getElementById('lienzoFicha');
