@@ -2019,16 +2019,13 @@ function toggleComparar(id) {
 
 // MODAL DE COMPARACIÓN LADO A LADO
 function abrirModalComparador() {
-  // Seleccionar únicamente el banco de datos que corresponde a la vista activa
   let candidatosAComparar = [];
 
   if (modoActual === 'gubernatura') {
-    // Solo aspirantes de la gubernatura
     candidatosAComparar = listaAspirantesGubernatura.filter(c => 
       seleccionadosParaComparar.includes(`gub_${c.id}`)
     );
   } else {
-    // Solo candidatos del proceso local (Alcaldías/Diputaciones)
     candidatosAComparar = todosLosCandidatos.filter(c => 
       seleccionadosParaComparar.includes(`cand_${c.id}`)
     );
@@ -2043,18 +2040,17 @@ function abrirModalComparador() {
   const numCols = candidatosAComparar.length;
 
   contenedor.innerHTML = `
-    <div style="display: grid; grid-template-columns: repeat(${numCols}, minmax(0, 1fr)); gap: 1.25rem;">
+    <div style="display: grid; grid-template-columns: repeat(${numCols}, minmax(0, 1fr)); gap: 1.25rem; align-items: start;">
       ${candidatosAComparar.map(c => {
         const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
         const logo = c.logo ? `<img src="${sanearUrl(c.logo)}" referrerpolicy="no-referrer" class="h-6 object-contain" />` : '';
         const hist = historialPartidos[String(c.id)];
         const sem = calcularSemaforoTransparencia(c);
         const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
-        const total = votos.positivos + votos.negativos;
-        const pctAprobacion = total > 0 ? Math.round((votos.positivos / total) * 100) : null;
+        const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
 
         const bloqueTransparenciaComp = c.es_gubernatura ? '' : `
-          <div class="p-3 ${sem.colorBg} rounded-xl border${sem.colorBorde} flex items-center justify-between">
+          <div class="p-3.5 ${sem.colorBg} rounded-2xl border${sem.colorBorde} flex items-center justify-between">
             <div>
               <span class="font-bold text-[10px] text-slate-900 uppercase block">Transparencia Curricular</span>
               <span class="text-xs font-semibold ${sem.colorTexto}">${sem.icono} Perfil${sem.nivel}</span>
@@ -2064,44 +2060,58 @@ function abrirModalComparador() {
         `;
 
         return `
-          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between">
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between">
             <div>
-              <div class="relative h-44 bg-slate-800 flex items-end p-4">
+              <!-- Cabecera idéntica a la vista individual -->
+              <div class="relative bg-slate-900 text-white p-5 flex flex-col sm:flex-row items-center sm:items-end gap-4">
                 <img 
                   src="${foto}" 
                   referrerpolicy="no-referrer" 
-                  class="absolute inset-0 w-full h-full object-cover object-top"
+                  class="w-20 h-24 object-cover object-top rounded-2xl border-2 border-white/20 bg-slate-800 shrink-0"
                   onerror="this.src='https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto'"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
-                <div class="relative text-white z-10 w-full">
-                  <div class="flex items-center gap-1.5 mb-1 bg-white/20 backdrop-blur px-2 py-0.5 rounded-lg w-fit">
+                <div class="text-center sm:text-left min-w-0 flex-1">
+                  <div class="flex items-center justify-center sm:justify-start gap-1.5 mb-1.5">
                     ${logo}
-                    <span class="text-[10px] font-bold">${c.partido_siglas || c.partido || ''}</span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-indigo-300 truncate">
+                      ${c.partido_siglas || c.partido || 'Independiente'}
+                    </span>
                   </div>
-                  <h4 class="text-sm font-black leading-tight">${c.nombre_propietario}</h4>
-                  <p class="text-[11px] text-slate-300 truncate">${c.cargo || ''}</p>
+                  <h4 class="text-base font-black leading-tight truncate text-white">${c.nombre_propietario}</h4>
+                  <p class="text-[11px] text-slate-300 mt-0.5 truncate">${c.cargo || ''}</p>
                 </div>
               </div>
 
-              <div class="p-4 space-y-4 text-xs text-slate-600">
+              <!-- Contenido con las tarjetas y votos corregidos -->
+              <div class="p-4 sm:p-5 space-y-4 text-xs text-slate-700">
+                
                 ${bloqueTransparenciaComp}
 
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <!-- Calificación Ciudadana sin caracteres raros -->
+                <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between gap-2">
                   <div>
-                    <span class="font-bold text-[10px] text-slate-900 uppercase block">Reseña Ciudadana</span>
-                    <span class="text-xs font-semibold text-slate-700">👍 ${votos.positivos} \vert{} 👎 ${votos.negativos}</span>
+                    <span class="font-bold text-[10px] text-slate-900 uppercase block">Calificación Ciudadana</span>
+                    <span class="text-[11px] text-slate-500">Opiniones</span>
                   </div>
-                  ${pctAprobacion !== null ? `
-                    <span class="text-xs font-black px-2 py-1 rounded-lg ${pctAprobacion >= 50 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                      ${pctAprobacion}% favor
-                    </span>
-                  ` : '<span class="text-[10px] text-slate-400">Sin votos</span>'}
+                  <div class="flex items-center gap-1.5">
+                    <button 
+                      type="button"
+                      onclick="emitirVoto('${c.id}', 'positivo')" 
+                      class="px-2.5 py-1 rounded-xl border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'positivo' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-slate-300 hover:bg-emerald-50 text-slate-700'}">
+                      👍 <span>${votos.positivos}</span>
+                    </button>
+                    <button 
+                      type="button"
+                      onclick="emitirVoto('${c.id}', 'negativo')" 
+                      class="px-2.5 py-1 rounded-xl border text-xs font-bold flex items-center gap-1 transition ${votoEmitido === 'negativo' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white border-slate-300 hover:bg-rose-50 text-slate-700'}">
+                      👎 <span>${votos.negativos}</span>
+                    </button>
+                  </div>
                 </div>
 
                 ${hist ? `
-                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                    <span class="font-bold text-[10px] text-slate-900 uppercase block mb-1">Militancia</span>
+                  <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <span class="font-bold text-[10px] text-slate-900 uppercase block mb-0.5">Militancia</span>
                     <p class="text-xs font-semibold ${hist.total_cambios > 0 ? 'text-amber-700' : 'text-emerald-700'}">
                       ${hist.total_cambios > 0 ? `⚠️ ${hist.total_cambios} cambio(s) en CV` : '✅ 1 solo partido'}
                     </p>
@@ -2110,18 +2120,27 @@ function abrirModalComparador() {
 
                 ${c.trayectoria ? `
                   <div>
-                    <span class="font-bold text-[10px] text-slate-900 uppercase block mb-0.5">Trayectoria</span>
-                    <p class="text-[11px] text-slate-600 line-clamp-4 leading-relaxed">${c.trayectoria}</p>
+                    <span class="font-bold text-[10px] text-slate-900 uppercase block mb-1">Trayectoria y Experiencia</span>
+                    <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 text-slate-700 leading-relaxed whitespace-pre-line text-[11px] max-h-48 overflow-y-auto">
+                      ${c.trayectoria}
+                    </div>
+                  </div>
+                ` : ''}
+
+                ${c.porque_cargo ? `
+                  <div>
+                    <span class="font-bold text-[10px] text-indigo-600 uppercase block mb-1">¿Por qué aspira?</span>
+                    <p class="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100 italic text-[11px]">"${c.porque_cargo}"</p>
                   </div>
                 ` : ''}
 
                 ${(c.propuesta_1 || c.propuesta_2) ? `
                   <div>
                     <span class="font-bold text-[10px] text-slate-900 uppercase block mb-1">Propuestas / Visión</span>
-                    <ul class="space-y-1 text-[11px]">
-                      ${c.propuesta_1 ? `<li class="flex items-start gap-1"><span class="text-indigo-500 font-bold">•</span><span>${c.propuesta_1}</span></li>` : ''}
-                      ${c.propuesta_2 ? `<li class="flex items-start gap-1"><span class="text-indigo-500 font-bold">•</span><span>${c.propuesta_2}</span></li>` : ''}
-                    </ul>
+                    <div class="space-y-1.5 text-[11px]">
+                      ${c.propuesta_1 ? `<div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 leading-snug">${c.propuesta_1}</div>` : ''}
+                      ${c.propuesta_2 ? `<div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 leading-snug">${c.propuesta_2}</div>` : ''}
+                    </div>
                   </div>
                 ` : ''}
 
@@ -2134,18 +2153,20 @@ function abrirModalComparador() {
               </div>
             </div>
 
-            <div class="p-3 border-t border-slate-100 bg-slate-50 flex items-center justify-between text-[11px]">
+            <!-- Pie de tarjeta -->
+            <div class="p-3.5 border-t border-slate-100 bg-slate-50 flex items-center justify-between text-xs">
               <button 
                 type="button"
                 onclick="prepararFichaCompartir('${c.id}')" 
-                class="text-indigo-600 hover:text-indigo-800 font-bold">
-                📸 Ficha Compartible
+                class="text-indigo-600 hover:text-indigo-800 font-bold flex items-center gap-1">
+                <span>📸</span> <span>Ficha Compartible</span>
               </button>
-              ${c.ficha ? `
-                <a href="${sanearUrl(c.ficha)}" target="_blank" class="text-slate-600 hover:underline font-bold">
-                  PDF Oficial
-                </a>
-              ` : ''}
+              <button 
+                type="button" 
+                onclick="cerrarModal('modalComparador'); abrirModal('${c.id}');" 
+                class="text-slate-600 hover:text-slate-900 font-bold text-xs hover:underline">
+                Ver detalle individual →
+              </button>
             </div>
           </div>
         `;
