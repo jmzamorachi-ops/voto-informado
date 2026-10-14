@@ -1031,42 +1031,44 @@
       }
     }
 
-    function setModoEleccion(nuevoModo) {
-      modoActual = nuevoModo;
-      filtroActivo = '';
-      limpiarSeleccionComparador();
-      document.getElementById('inputBusqueda').value = '';
+  function setModoEleccion(nuevoModo) {
+  // 1. Limpiamos la lista para que no arrastre IDs de la categoría anterior
+  limpiarSeleccionComparador();
 
-      ['gubernatura', 'municipios', 'dip_mr', 'dip_rp'].forEach(m => {
-        const btn = document.getElementById(`tab-${m}`);
-        if (btn) {
-          btn.className = (m === nuevoModo)
-            ? 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm'
-            : 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white';
-        }
-      });
+  modoActual = nuevoModo;
+  filtroActivo = '';
+  document.getElementById('inputBusqueda').value = '';
 
-      const subtitulo = document.getElementById('subtituloBarra');
-      const etiqueta = document.getElementById('etiquetaCargo');
-
-      if (modoActual === 'gubernatura') {
-        subtitulo.textContent = 'Partidos / Filtro';
-        etiqueta.textContent = 'GUBERNATURA SINALOA 2027';
-        cargarAspirantesGubernatura();
-      } else if (modoActual === 'municipios') {
-        subtitulo.textContent = 'Municipios';
-        etiqueta.textContent = 'Municipios';
-        actualizarBarraLateral();
-      } else if (modoActual === 'dip_mr') {
-        subtitulo.textContent = 'Distritos Electorales';
-        etiqueta.textContent = 'DIPUTACIONES MAYORÍA RELATIVA';
-        actualizarBarraLateral();
-      } else {
-        subtitulo.textContent = 'Partidos / Listas';
-        etiqueta.textContent = 'DIPUTACIONES PLURINOMINALES';
-        actualizarBarraLateral();
-      }
+  ['gubernatura', 'alcaldias', 'dip_mr', 'dip_rp'].forEach(m => {
+    const btn = document.getElementById(`tab-${m}`);
+    if (btn) {
+      btn.className = (m === nuevoModo)
+        ? 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-white bg-indigo-600 shadow-sm'
+        : 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white';
     }
+  });
+
+  const subtitulo = document.getElementById('subtituloBarra');
+  const etiqueta = document.getElementById('etiquetaCargo');
+
+  if (modoActual === 'gubernatura') {
+    subtitulo.textContent = 'Partidos / Filtro';
+    etiqueta.textContent = 'GUBERNATURA SINALOA 2027';
+    cargarAspirantesGubernatura();
+  } else if (modoActual === 'alcaldias') {
+    subtitulo.textContent = 'Municipios';
+    etiqueta.textContent = 'ALCALDÍAS';
+    actualizarBarraLateral();
+  } else if (modoActual === 'dip_mr') {
+    subtitulo.textContent = 'Distritos Electorales';
+    etiqueta.textContent = 'DIPUTACIONES MAYORÍA RELATIVA';
+    actualizarBarraLateral();
+  } else {
+    subtitulo.textContent = 'Partidos / Listas';
+    etiqueta.textContent = 'DIPUTACIONES PLURINOMINALES';
+    actualizarBarraLateral();
+  }
+}
 
     // ========================================================
     // GUBERNATURA 2027: LECTURA EN TIEMPO REAL DESDE SUPABASE
@@ -1180,7 +1182,7 @@ function renderizarTarjetasGubernatura() {
   contenedor.innerHTML = filtrados.map(c => {
     const foto = sanearUrl(c.fotografia) || 'https://placehold.co/400x500/e2e8f0/64748b?text=Sin+Foto';
     const partidoTexto = c.partido || 'Independiente';
-    const seleccionado = seleccionadosParaComparar.map(String).includes(String(c.id));
+    const seleccionado = seleccionadosParaComparar.includes(`gub_${c.id}`);
     const votos = votosCache[c.id] || { positivos: 0, negativos: 0 };
     const votoEmitido = localStorage.getItem(`ya_voto_${c.id}`);
 
@@ -1346,8 +1348,9 @@ function renderizarTarjetasGubernatura() {
     });
 
 function toggleComparar(id) {
-  const strId = String(id);
-  const idx = seleccionadosParaComparar.map(String).indexOf(strId);
+  // Convertimos a texto con prefijo según el modo para que nunca colisione el ID 1 de Supabase con el ID 1 del JSON
+  const claveUnica = modoActual === 'gubernatura' ? `gub_${id}` : `cand_${id}`;
+  const idx = seleccionadosParaComparar.indexOf(claveUnica);
 
   if (idx > -1) {
     seleccionadosParaComparar.splice(idx, 1);
@@ -1356,7 +1359,7 @@ function toggleComparar(id) {
       alert('Puedes comparar un máximo de 3 candidaturas a la vez.');
       return;
     }
-    seleccionadosParaComparar.push(strId);
+    seleccionadosParaComparar.push(claveUnica);
   }
 
   actualizarBarraComparador();
@@ -2016,12 +2019,25 @@ function toggleComparar(id) {
 
 // MODAL DE COMPARACIÓN LADO A LADO
 function abrirModalComparador() {
-  // Unimos ambos bancos de datos para que encuentre aspirantes de gubernatura o candidatos de alcaldías/distritos
-  const universo = [...listaAspirantesGubernatura, ...todosLosCandidatos];
-  const seleccionadosStrings = seleccionadosParaComparar.map(String);
-  
-  const candidatosAComparar = universo.filter(c => seleccionadosStrings.includes(String(c.id)));
-  if (candidatosAComparar.length < 2) return;
+  // Seleccionar únicamente el banco de datos que corresponde a la vista activa
+  let candidatosAComparar = [];
+
+  if (modoActual === 'gubernatura') {
+    // Solo aspirantes de la gubernatura
+    candidatosAComparar = listaAspirantesGubernatura.filter(c => 
+      seleccionadosParaComparar.includes(`gub_${c.id}`)
+    );
+  } else {
+    // Solo candidatos del proceso local (Alcaldías/Diputaciones)
+    candidatosAComparar = todosLosCandidatos.filter(c => 
+      seleccionadosParaComparar.includes(`cand_${c.id}`)
+    );
+  }
+
+  if (candidatosAComparar.length < 2) {
+    alert('Selecciona al menos 2 perfiles para poder compararlos.');
+    return;
+  }
 
   const contenedor = document.getElementById('comparadorContenido');
   const numCols = candidatosAComparar.length;
@@ -2037,7 +2053,6 @@ function abrirModalComparador() {
         const total = votos.positivos + votos.negativos;
         const pctAprobacion = total > 0 ? Math.round((votos.positivos / total) * 100) : null;
 
-        // Ocultar bloque de semáforo de transparencia si es gubernatura
         const bloqueTransparenciaComp = c.es_gubernatura ? '' : `
           <div class="p-3 ${sem.colorBg} rounded-xl border${sem.colorBorde} flex items-center justify-between">
             <div>
